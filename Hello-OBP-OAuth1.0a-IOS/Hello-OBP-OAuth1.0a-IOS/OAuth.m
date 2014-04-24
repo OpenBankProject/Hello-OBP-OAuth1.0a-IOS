@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Tesobe. All rights reserved.
 //
 // OBP API: https://github.com/OpenBankProject/OBP-API/wiki/OAuth-1.0-Server
+// Sandbox: https://github.com/OpenBankProject/OBP-API/wiki/Sandbox
 
 
 //1. Obtaining a request token: Open request url with consumer token and secret, get request token
@@ -24,7 +25,10 @@
 #define OAUTH_CONSUMER_KEY @"ruvtip1hzcykfgqaz41uogiphyhw54twczqfooqc"
 #define OAUTH_CONSUMER_SECRET_KEY @"nxjxl04tqeuhtg4qh0mt4bh5aycv5klfpucqlzgy"
 #define OAUTH_AUTHENTICATE_URL @"https://apisandbox.openbankproject.com/"
-#define OAUTH_REDIRECT_URI @"hellooauth" // Your Application Name
+#define OAUTH_BASE_URL @"https://apisandbox.openbankproject.com/obp/v1.2/"
+#define OAUTH_CONSUMER_BANK_ID @"rbs" //Account of bank
+#define OAUTH_REDIRECT_URI @"hellooauth" // Your Application Name  helloauth
+
 
 #define kAccessTokenKeyForPreferences @"accessToken"
 #define kAccessSecretKeyForPreferences @"accessTokenSecret"
@@ -70,14 +74,13 @@
 }
 
 
-#pragma mark - Get Request Tokens
+#pragma mark - Request Tokens
 
 - (void)getRequestToken {
     
     NSString *lURL = [OAUTH_AUTHENTICATE_URL stringByAppendingString: @"oauth/initiate"];
     STHTTPRequest *request = [STHTTPRequest requestWithURLString:lURL];
     [request setPOSTDictionary:[NSMutableDictionary dictionary]];  //set method to POST
-    // POST https://apisandbox.openbankproject.com/oauth/initiate
     NSString *header = OAuthorizationHeaderWithCallback([request url],
                                                         [request POSTDictionary]!=nil?@"POST":@"GET",
                                                         [@"" dataUsingEncoding:NSUTF8StringEncoding], //should be httpbody
@@ -100,6 +103,7 @@
         }
     };
     request.errorBlock = ^(NSError *error, NSInteger status) {
+        NSLog(@"status = %ld and Error= %@", (long)status, error);
     };
     
     [request startAsynchronous];
@@ -123,14 +127,14 @@
         NSDictionary* parameters = [self parseQueryString:[request.URL query]];
         if (requestToken && [[parameters valueForKey:@"oauth_token"] isEqualToString:requestToken]) {
             verifier = [parameters valueForKey:@"oauth_verifier"];
-            [self dismissViewControllerAnimated:YES completion:nil];
             [self getAccessToken];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
     return YES;
 }
 
-#pragma mark - Get Access Token
+#pragma mark - Access Token
 
 - (void)getAccessToken {
     
@@ -148,6 +152,7 @@
                                                         [OAUTH_REDIRECT_URI stringByAppendingString: @"://callback"]);
     
     [request setHeaderWithName:@"Authorization" value:header];
+    
     request.completionBlock = ^(NSDictionary *headers, NSInteger status, NSString *body) {
         if (status == 200) {
             NSDictionary *response = [self parseQueryString:[body stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -158,13 +163,46 @@
             [defaults setObject:accessToken forKey:kAccessTokenKeyForPreferences];
             [defaults setObject:accessTokenSecret forKey:kAccessSecretKeyForPreferences];
             [defaults synchronize];
+            
+            [self getResourceWithString];
         }
     };
     request.errorBlock = ^(NSError *error, NSInteger status) {
+        NSLog(@"status = %ld and Error= %@", (long)status, error);
     };
     
     [request startAsynchronous];
 }
+
+#pragma mark - Get Resources
+
+- (void)getResourceWithString {
+
+    NSString *lURL = [NSString stringWithFormat: @"%@banks/%@/accounts/private",OAUTH_BASE_URL, OAUTH_CONSUMER_BANK_ID];
+    STHTTPRequest *request = [STHTTPRequest requestWithURLString:lURL];
+    NSString *header = OAuthorizationHeader([request url],
+                                            [request POSTDictionary]!=nil?@"POST":@"GET",
+                                            [@"" dataUsingEncoding:NSUTF8StringEncoding],
+                                            OAUTH_CONSUMER_KEY,
+                                            OAUTH_CONSUMER_SECRET_KEY,
+                                            accessToken,
+                                            accessTokenSecret,
+                                            nil);
+    
+    [request setHeaderWithName:@"Authorization" value:header];
+    request.completionBlock = ^(NSDictionary *headers, NSInteger status, NSString *body) {
+        if (status == 200) {
+            NSLog(@"body = %@",body);
+        }
+    };
+    
+    request.errorBlock = ^(NSError *error, NSInteger status) {
+        NSLog(@"Status = %ld: Error= %@", (long)status, error);
+    };
+    
+    [request startAsynchronous];
+}
+
 
 #pragma mark - Additions
 

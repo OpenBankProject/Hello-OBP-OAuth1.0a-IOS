@@ -514,6 +514,7 @@
 				74FC9702190910E90028757C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		74FC9703190910E90028757C /* Build configuration list for PBXNativeTarget "Hello-OBP-OAuth1.0a-IOSTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +523,7 @@
 				74FC9705190910E90028757C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
