@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIButton *connect;
+@property (strong, nonatomic) IBOutlet UILabel *message;
 
 - (IBAction)connectToOBP:(id)sender;
 

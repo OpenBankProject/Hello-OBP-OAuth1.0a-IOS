@@ -1,4 +1,4 @@
 Hello-OBP-OAuth1.0a-IOS
 =======================
 
-This is a basic app to demonstrate the integration of the OpenBankProject with OAuth1.0-Authentication into IOS applications.
+The example application is a simple reference for how to use OAuth1.0-Authentication of  OpenBankProject into IOS applications, as well as a basic test to make sure your credentials is working properly.

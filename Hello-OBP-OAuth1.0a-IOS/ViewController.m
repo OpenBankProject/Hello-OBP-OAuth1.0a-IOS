@@ -20,13 +20,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    //check for OBP and authorize
+    //Check if already you are authenticated for OBP
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if(![defaults objectForKey:@"access_token"]){
-		[self.connect setHidden:NO];
-	}
+	if(![defaults valueForKey: kAccessTokenKeyForPreferences]){
+        [self.message setHidden:YES];
+    }
 	else{
-        [self.connect setHidden:YES];
+        [self.message setHidden:NO];
 	}
 
 }
@@ -40,7 +40,6 @@
 - (IBAction)connectToOBP:(id)sender {
 	OAuth *controller = [[OAuth alloc] init];
 	[self presentViewController:controller animated:NO completion:nil];
-    [self.connect setHidden:YES];
 	
 }
 

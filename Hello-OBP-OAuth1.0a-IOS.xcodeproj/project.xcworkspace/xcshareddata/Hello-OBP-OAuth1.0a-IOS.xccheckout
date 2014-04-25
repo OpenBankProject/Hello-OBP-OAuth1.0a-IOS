@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>B8ACA0C3-CF14-4614-8B2B-A7ADC5B70280</string>
+	<string>479DBCA3-FB69-4481-936D-FE25E97FCB60</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Hello-OBP-OAuth1.0a-IOS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Hello-OBP-OAuth1.0a-IOS/Hello-OBP-OAuth1.0a-IOS.xcodeproj/project.xcworkspace</string>
+	<string>Hello-OBP-OAuth1.0a-IOS.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>1D581F65-88EF-4637-9D40-8A5213817859</key>
-		<string>../../..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS.git</string>

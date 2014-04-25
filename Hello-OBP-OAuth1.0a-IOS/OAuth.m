@@ -24,14 +24,13 @@
 
 #define OAUTH_CONSUMER_KEY @"ruvtip1hzcykfgqaz41uogiphyhw54twczqfooqc"
 #define OAUTH_CONSUMER_SECRET_KEY @"nxjxl04tqeuhtg4qh0mt4bh5aycv5klfpucqlzgy"
+#define OAUTH_URL_SCHEME @"hellooauth" // Your Application Name
+
 #define OAUTH_AUTHENTICATE_URL @"https://apisandbox.openbankproject.com/"
 #define OAUTH_BASE_URL @"https://apisandbox.openbankproject.com/obp/v1.2/"
 #define OAUTH_CONSUMER_BANK_ID @"rbs" //Account of bank
-#define OAUTH_REDIRECT_URI @"hellooauth" // Your Application Name  helloauth
 
 
-#define kAccessTokenKeyForPreferences @"accessToken"
-#define kAccessSecretKeyForPreferences @"accessTokenSecret"
 
 @interface OAuth ()
 // 2. create webview property
@@ -89,7 +88,7 @@
                                                         nil,
                                                         nil,
                                                         nil,
-                                                        [OAUTH_REDIRECT_URI stringByAppendingString: @"://callback"]);
+                                                        [OAUTH_URL_SCHEME stringByAppendingString: @"://callback"]);
     
     [request setHeaderWithName:@"Authorization" value:header];
     request.completionBlock = ^(NSDictionary *headers, NSInteger status, NSString *body) {
@@ -122,7 +121,7 @@
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request
  navigationType:(UIWebViewNavigationType)navigationType
 {
-    if ([[request.URL absoluteString] hasPrefix:OAUTH_REDIRECT_URI]) {
+    if ([[request.URL absoluteString] hasPrefix:OAUTH_URL_SCHEME]) {
        
         NSDictionary* parameters = [self parseQueryString:[request.URL query]];
         if (requestToken && [[parameters valueForKey:@"oauth_token"] isEqualToString:requestToken]) {
@@ -149,7 +148,7 @@
                                                         requestToken,
                                                         requestTokenSecret,
                                                         verifier,
-                                                        [OAUTH_REDIRECT_URI stringByAppendingString: @"://callback"]);
+                                                        [OAUTH_URL_SCHEME stringByAppendingString: @"://callback"]);
     
     [request setHeaderWithName:@"Authorization" value:header];
     

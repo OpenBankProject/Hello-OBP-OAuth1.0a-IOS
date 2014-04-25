@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#define kAccessTokenKeyForPreferences @"accessToken"
+#define kAccessSecretKeyForPreferences @"accessTokenSecret"
+
 @interface OAuth : UIViewController <UIWebViewDelegate>  {
     NSMutableString *requestToken;
     NSMutableString *requestTokenSecret;
