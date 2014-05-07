@@ -7,13 +7,18 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
         // Override point for customization after application launch.
-        return YES;
+    
+    UIViewController * appViewController = [[UIViewController alloc] init];
+    UINavigationController * navigation = [[UINavigationController alloc] init];
+    [navigation pushViewController: appViewController animated:NO];
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

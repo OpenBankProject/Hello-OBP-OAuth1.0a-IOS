@@ -1,5 +1,5 @@
 //
-//  OAuth.m
+//  OAuthController.m
 //  Hello-OBP-OAuth1.0a-IOS
 //
 //  Created by comp on 4/22/14.
@@ -15,7 +15,7 @@
 //4. Accessing to protected resources
 
 
-#import "OAuth.h"
+#import "OAuthController.h"
 #import "STHTTPRequest.h"
 #import "OAuthCore.h"
 
@@ -32,12 +32,11 @@
 
 
 
-@interface OAuth ()
-// 2. create webview property
-@property (nonatomic, strong) UIWebView *webView;
+@interface OAuthController ()
 @end
 
-@implementation OAuth
+@implementation OAuthController
+@synthesize webView; // 2. create webview property
 @synthesize accessToken;
 @synthesize accessTokenSecret;
 @synthesize verifier;
@@ -48,6 +47,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -57,14 +57,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = @"Open Bank Project";
+
     // 3. initialize the webview and add it to the view
-	self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
-	self.webView.delegate = self;
+    
+    self.webView.delegate = self;
 	[self.view addSubview:self.webView];
     
-    //4. Create the authenticate string that we will use in our request
+    //4. Create the authenticate string that we will use in the request
     [self getRequestToken];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -72,17 +75,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return NO;
+}
 
 #pragma mark - Request Tokens
 
 - (void)getRequestToken {
-    
+    //NSLog(@"getRequestToken");
     NSString *lURL = [OAUTH_AUTHENTICATE_URL stringByAppendingString: @"oauth/initiate"];
     STHTTPRequest *request = [STHTTPRequest requestWithURLString:lURL];
     [request setPOSTDictionary:[NSMutableDictionary dictionary]];  //set method to POST
     NSString *header = OAuthorizationHeaderWithCallback([request url],
                                                         [request POSTDictionary]!=nil?@"POST":@"GET",
-                                                        [@"" dataUsingEncoding:NSUTF8StringEncoding], //should be httpbody
+                                                        [@"" dataUsingEncoding:NSUTF8StringEncoding],
                                                         OAUTH_CONSUMER_KEY,
                                                         OAUTH_CONSUMER_SECRET_KEY,
                                                         nil,
@@ -111,7 +118,7 @@
 #pragma mark - Open Browser
 
 - (void)openBrowserAuthRequest {
-    
+
     NSString *lAuthenticationURL = [OAUTH_AUTHENTICATE_URL stringByAppendingString: @"oauth/authorize"];
     NSURL *url = [NSURL URLWithString:[self addQueryStringToUrlString:lAuthenticationURL withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:requestToken, @"oauth_token", nil]]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -127,7 +134,6 @@
         if (requestToken && [[parameters valueForKey:@"oauth_token"] isEqualToString:requestToken]) {
             verifier = [parameters valueForKey:@"oauth_verifier"];
             [self getAccessToken];
-            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
     return YES;
@@ -136,7 +142,7 @@
 #pragma mark - Access Token
 
 - (void)getAccessToken {
-    
+    //NSLog(@"getAccessToken");
     NSString *lURL = [OAUTH_AUTHENTICATE_URL stringByAppendingString:@"oauth/token"];
     STHTTPRequest *request = [STHTTPRequest requestWithURLString:lURL];
     [request setPOSTDictionary:[NSMutableDictionary dictionary]];  //set method to POST
@@ -157,12 +163,6 @@
             NSDictionary *response = [self parseQueryString:[body stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             accessToken = [response valueForKey:@"oauth_token"];
             accessTokenSecret = [response valueForKey:@"oauth_token_secret"];
-            //store into user defaults for later access
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:accessToken forKey:kAccessTokenKeyForPreferences];
-            [defaults setObject:accessTokenSecret forKey:kAccessSecretKeyForPreferences];
-            [defaults synchronize];
-            
             [self getResourceWithString];
         }
     };
@@ -179,7 +179,7 @@
 
     NSString *lURL = [NSString stringWithFormat: @"%@banks/%@/accounts/private",OAUTH_BASE_URL, OAUTH_CONSUMER_BANK_ID];
     STHTTPRequest *request = [STHTTPRequest requestWithURLString:lURL];
-    NSString *header = OAuthorizationHeader([request url],
+    NSString *header = OAuthorizationHeader([request url], //set method to GET
                                             [request POSTDictionary]!=nil?@"POST":@"GET",
                                             [@"" dataUsingEncoding:NSUTF8StringEncoding],
                                             OAUTH_CONSUMER_KEY,
@@ -191,14 +191,22 @@
     [request setHeaderWithName:@"Authorization" value:header];
     request.completionBlock = ^(NSDictionary *headers, NSInteger status, NSString *body) {
         if (status == 200) {
-            NSLog(@"body = %@",body);
+            //NSLog(@"body = %@",body);
+            //store into user defaults for later access
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:accessToken forKey:kAccessTokenKeyForPreferences];
+            [defaults setObject:accessTokenSecret forKey:kAccessSecretKeyForPreferences];
+            [defaults setObject:body forKey:kJSON];
+            [defaults synchronize];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+
         }
     };
     
     request.errorBlock = ^(NSError *error, NSInteger status) {
         NSLog(@"Status = %ld: Error= %@", (long)status, error);
     };
-    
+   
     [request startAsynchronous];
 }
 
