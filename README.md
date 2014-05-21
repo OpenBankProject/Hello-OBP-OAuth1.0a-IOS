@@ -5,6 +5,9 @@ This is a basic app to demonstrate the integration of the OpenBankProject with O
 
 You can then use the OBP API to create apps to allow user to access to their bank data, with your Banking, Accounting, ERM, or other financial applications built on this API.
 
+Though this particular API call does not require OAuth, this project uses OAuth to do so anyways, in order to demonstrate the process.
+
+
 Current list of supported banks:  [https://api.openbankproject.com/connectors-status/](https://api.openbankproject.com/connectors-status/)
 
 ## SETUP
