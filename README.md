@@ -1,11 +1,11 @@
 Hello-OBP-OAuth1.0a-IOS
 ========================
 
-This is a basic app to demonstrate the integration of the OpenBankProject with OAuth1.0-Authentication into an IOS application. The app will run through OAuth authentication, and then make an OAuth signed API request that retrieves the list of [private accounts](https://github.com/OpenBankProject/OBP-API/wiki/REST-API-V1.2#accounts-private) on the sandbox API (see below for example accounts). 
+This is a basic app to demonstrate the integration of the OpenBankProject with OAuth1.0-Authentication into an IOS application. The app will run through OAuth authentication, and then make an OAuth signed API request that retrieves the list of [private accounts](https://github.com/OpenBankProject/OBP-API/wiki/REST-API-V1.2#accounts-private) on the sandbox API and show them in the UI (see below for example accounts to log in). 
 
-You can then use the OBP API to create apps to allow user to access to their bank data, with your Banking, Accounting, ERM, or other financial applications built on this API.
+You can then use this demonstration as an example of how to use the Open Bank Project (OBP) API to create apps that allow user to access to their bank data, and create Banking, Accounting, ERM, or other financial applications utilizing this OBP JSON API. Documentation about the latest OBP API specifications here: [Version: 1.2.1](https://github.com/OpenBankProject/OBP-API/wiki/REST-API-V1.2.1)
 
-Though this particular API call does not require OAuth, this project uses OAuth to do so anyways, in order to demonstrate the process.
+Though this particular API call does not require OAuth, this project uses OAuth to do so anyways, in order to demonstrate the process. 
 
 
 Current list of supported banks:  [https://api.openbankproject.com/connectors-status/](https://api.openbankproject.com/connectors-status/)
