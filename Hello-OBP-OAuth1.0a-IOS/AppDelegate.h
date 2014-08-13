@@ -2,7 +2,7 @@
 //  AppDelegate.h
 //  Hello-OBP-OAuth1.0a-IOS
 //
-//  Created by comp on 4/22/14.
+//  Created by comp on 5/14/14.
 //  Copyright (c) 2014 TESOBE. All rights reserved.
 //
 
@@ -11,6 +11,5 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end

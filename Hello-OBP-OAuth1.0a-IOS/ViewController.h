@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ViewController : UIViewController <UIAlertViewDelegate> {
+@interface ViewController : UIViewController <UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     UIBarButtonItem *rightNavButton;
 }
+
+@property (weak, nonatomic) IBOutlet UITableView *tableViewAccounts;
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *rightNavButton;
 @property (strong, nonatomic) IBOutlet UIView *viewConnect;
@@ -19,7 +21,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *connect;
 @property (strong, nonatomic) IBOutlet UIButton *linkOBP;
 @property (strong, nonatomic) IBOutlet UILabel *messageYesAutheticate;
-@property (strong, nonatomic) IBOutlet UITextView *textJSON;
 
 - (IBAction)logOut:(id)sender;
 

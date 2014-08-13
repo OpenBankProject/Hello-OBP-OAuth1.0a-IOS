@@ -22,9 +22,9 @@
 // 1. To get the values for the following fields, please register your client here:
 // https://apisandbox.openbankproject.com/consumer-registration
 
-#define OAUTH_CONSUMER_KEY @"ruvtip1hzcykfgqaz41uogiphyhw54twczqfooqc"
-#define OAUTH_CONSUMER_SECRET_KEY @"nxjxl04tqeuhtg4qh0mt4bh5aycv5klfpucqlzgy"
-#define OAUTH_URL_SCHEME @"hellooauth" // Your Application Name
+#define OAUTH_CONSUMER_KEY @"tzecy5lgatsbrvbt2ttfrxlelertfxywt3whes4q"
+#define OAUTH_CONSUMER_SECRET_KEY @"eusfvy3oizylx11dr420nhxluv1rdan5qjjkgmkh"
+#define OAUTH_URL_SCHEME @"helloobpios" // Your Application Name
 
 #define OAUTH_AUTHENTICATE_URL @"https://apisandbox.openbankproject.com/"
 #define OAUTH_BASE_URL @"https://apisandbox.openbankproject.com/obp/v1.2/"
@@ -41,7 +41,6 @@
 @synthesize accessTokenSecret;
 @synthesize verifier;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -56,12 +55,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.title = @"Open Bank Project";
 
     // 3. initialize the webview and add it to the view
     
     self.webView.delegate = self;
+    self.webView.scalesPageToFit = YES;
+    self.webView.contentMode = UIViewContentModeScaleAspectFit;
 	[self.view addSubview:self.webView];
     
     //4. Create the authenticate string that we will use in the request
@@ -176,7 +176,7 @@
 #pragma mark - Get Resources
 
 - (void)getResourceWithString {
-
+    //NSLog(@"getResourceWithString say Bye");
     NSString *lURL = [NSString stringWithFormat: @"%@banks/%@/accounts/private",OAUTH_BASE_URL, OAUTH_CONSUMER_BANK_ID];
     STHTTPRequest *request = [STHTTPRequest requestWithURLString:lURL];
     NSString *header = OAuthorizationHeader([request url], //set method to GET
@@ -208,6 +208,7 @@
     };
    
     [request startAsynchronous];
+    //NSLog(@"getResourceWithString say Bye");
 }
 
 

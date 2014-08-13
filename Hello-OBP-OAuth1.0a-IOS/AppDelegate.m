@@ -2,22 +2,21 @@
 //  AppDelegate.m
 //  Hello-OBP-OAuth1.0a-IOS
 //
-//  Created by comp on 4/22/14.
+//  Created by comp on 5/14/14.
 //  Copyright (c) 2014 TESOBE. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-        // Override point for customization after application launch.
-    
+    // Override point for customization after application launch.
     UIViewController * appViewController = [[UIViewController alloc] init];
     UINavigationController * navigation = [[UINavigationController alloc] init];
     [navigation pushViewController: appViewController animated:NO];
+
     return YES;
 }
 
