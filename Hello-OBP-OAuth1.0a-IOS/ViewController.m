@@ -37,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"viewDidLoad");
+    //NSLog(@"viewDidLoad");
 
     [self.tableViewAccounts setDataSource:self];
     [self.tableViewAccounts setDelegate:self];
@@ -95,7 +95,7 @@
 
 - (IBAction)connectToGitHub:(id)sender {
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/blob/master/README.md"]];
 }
 
 

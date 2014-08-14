@@ -18,15 +18,15 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEj-NG-THa">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="502"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="logo-obp.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-Te-fBa">
-                                        <rect key="frame" x="81" y="2" width="159" height="110"/>
+                                        <rect key="frame" x="81" y="0.0" width="159" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZqO-Ax-6gw">
-                                        <rect key="frame" x="67" y="336" width="186" height="41"/>
+                                        <rect key="frame" x="67" y="332" width="186" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.92787556475903621" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -40,7 +40,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GI2-Sc-oZV">
-                                        <rect key="frame" x="42" y="295" width="237" height="33"/>
+                                        <rect key="frame" x="42" y="286" width="237" height="33"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Hello-OBP-OAuth1.0a-IOS Read me">
@@ -52,7 +52,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P72-yx-7WP">
-                                        <rect key="frame" x="30" y="111" width="260" height="176"/>
+                                        <rect key="frame" x="30" y="104" width="260" height="176"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <attributedString key="attributedText">
@@ -72,14 +72,14 @@ You are not logged in so there is no data. You must log into Open Bank Project w
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FoC-Ba-DjK">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="502"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo-obp only text.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="ni4-Iy-d17">
                                         <rect key="frame" x="71" y="2" width="179" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You are authenticated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Uh-NI-Fns">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You are logged in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Uh-NI-Fns">
                                         <rect key="frame" x="71" y="48" width="179" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <color key="tintColor" red="0.60784316062927246" green="0.80784320831298828" blue="0.7450980544090271" alpha="1" colorSpace="deviceRGB"/>
@@ -88,7 +88,7 @@ You are not logged in so there is no data. You must log into Open Bank Project w
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="v1B-Lf-OTA">
-                                        <rect key="frame" x="20" y="116" width="280" height="294"/>
+                                        <rect key="frame" x="20" y="116" width="280" height="292"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableView>
@@ -105,14 +105,14 @@ You are not logged in so there is no data. You must log into Open Bank Project w
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FoC-Ba-DjK" firstAttribute="top" secondItem="jai-vN-Wd6" secondAttribute="bottom" id="0sN-FW-Zxl"/>
-                            <constraint firstItem="hEj-NG-THa" firstAttribute="trailing" secondItem="FoC-Ba-DjK" secondAttribute="trailing" id="BSq-CA-RuS"/>
-                            <constraint firstItem="hEj-NG-THa" firstAttribute="top" secondItem="FoC-Ba-DjK" secondAttribute="top" id="KZp-KZ-Wve"/>
-                            <constraint firstAttribute="trailing" secondItem="FoC-Ba-DjK" secondAttribute="trailing" id="L8h-ye-iA3"/>
-                            <constraint firstItem="hEj-NG-THa" firstAttribute="bottom" secondItem="FoC-Ba-DjK" secondAttribute="bottom" id="VpU-RM-rhK"/>
-                            <constraint firstItem="FoC-Ba-DjK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="bKj-BE-2HL"/>
-                            <constraint firstAttribute="bottom" secondItem="FoC-Ba-DjK" secondAttribute="bottom" id="e08-OF-GLZ"/>
-                            <constraint firstItem="hEj-NG-THa" firstAttribute="leading" secondItem="FoC-Ba-DjK" secondAttribute="leading" id="iz3-bp-Uz7"/>
+                            <constraint firstItem="J6C-KR-Y3w" firstAttribute="top" secondItem="FoC-Ba-DjK" secondAttribute="bottom" constant="2" id="2O9-ab-E6S"/>
+                            <constraint firstItem="FoC-Ba-DjK" firstAttribute="top" secondItem="hEj-NG-THa" secondAttribute="top" id="Rte-19-xvS"/>
+                            <constraint firstItem="FoC-Ba-DjK" firstAttribute="top" secondItem="jai-vN-Wd6" secondAttribute="bottom" id="RyK-7C-xyM"/>
+                            <constraint firstItem="FoC-Ba-DjK" firstAttribute="trailing" secondItem="hEj-NG-THa" secondAttribute="trailing" id="fpT-QD-ETU"/>
+                            <constraint firstAttribute="trailing" secondItem="FoC-Ba-DjK" secondAttribute="trailing" id="gz0-rG-0ji"/>
+                            <constraint firstItem="FoC-Ba-DjK" firstAttribute="leading" secondItem="hEj-NG-THa" secondAttribute="leading" id="jth-9E-hit"/>
+                            <constraint firstItem="FoC-Ba-DjK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="uI5-lc-fmz"/>
+                            <constraint firstItem="FoC-Ba-DjK" firstAttribute="bottom" secondItem="hEj-NG-THa" secondAttribute="bottom" id="yue-9q-bQD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ePN-dB-U3k">
@@ -149,13 +149,19 @@ You are not logged in so there is no data. You must log into Open Bank Project w
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jlg-Jo-ntH">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <webView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Jlg-Jo-ntH">
+                                <rect key="frame" x="0.0" y="62" width="320" height="506"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Jlg-Jo-ntH" secondAttribute="trailing" id="Qkx-IA-EuE"/>
+                            <constraint firstItem="Jlg-Jo-ntH" firstAttribute="leading" secondItem="fbV-dJ-7KL" secondAttribute="leading" id="RHS-ey-EH6"/>
+                            <constraint firstItem="Jlg-Jo-ntH" firstAttribute="top" secondItem="fbV-dJ-7KL" secondAttribute="top" constant="62" id="Vd0-gB-tLT"/>
+                            <constraint firstAttribute="bottom" secondItem="Jlg-Jo-ntH" secondAttribute="bottom" id="XsM-rE-j3z"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ibp-r7-yEf"/>
                     <connections>
