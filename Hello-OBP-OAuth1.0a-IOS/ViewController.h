@@ -2,30 +2,36 @@
 //  ViewController.h
 //  Hello-OBP-OAuth1.0a-IOS
 //
-//  Created by comp on 4/22/14.
+//  Created by Dunia Reviriego on 4/22/14.
 //  Copyright (c) 2014 TESOBE. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 
-@interface ViewController : UIViewController <UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource> {
-    UIBarButtonItem *rightNavButton;
+@interface ViewController : UIViewController <UIAlertViewDelegate> {
+    UIBarButtonItem *rightNavButton;    
 }
 
-@property (weak, nonatomic) IBOutlet UITableView *tableViewAccounts;
-
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *rightNavButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *leftNavButton;
 @property (strong, nonatomic) IBOutlet UIView *viewConnect;
-@property (strong, nonatomic) IBOutlet UIView *viewData;
-@property (strong, nonatomic) IBOutlet UIButton *connect;
-@property (strong, nonatomic) IBOutlet UIButton *linkOBP;
-@property (strong, nonatomic) IBOutlet UILabel *messageYesAutheticate;
+@property (strong, nonatomic) IBOutlet UIView *viewLogin;
+@property (strong, nonatomic) IBOutlet UIButton *connectBankAPI;
+@property (strong, nonatomic) IBOutlet UIButton *linkReadme;
+@property (strong, nonatomic) IBOutlet UIButton *linkOBPwebsite;
+
+
+- (IBAction)accountsTableView:(id)sender;
+
+- (IBAction)connectToBankAPI:(id)sender;
+
+- (IBAction)linkToReadme:(id)sender;
+
+- (IBAction)linkToOBPwebsite:(id)sender;
 
 - (IBAction)logOut:(id)sender;
 
-- (IBAction)connectToOBP:(id)sender;
-
-- (IBAction)connectToGitHub:(id)sender;
+- (IBAction)about:(id)sender;
 
 @end

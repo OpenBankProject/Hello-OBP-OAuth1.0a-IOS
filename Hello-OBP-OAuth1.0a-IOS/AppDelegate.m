@@ -2,17 +2,65 @@
 //  AppDelegate.m
 //  Hello-OBP-OAuth1.0a-IOS
 //
-//  Created by comp on 5/14/14.
+//  Created by Dunia Reviriego on 5/14/14.
 //  Copyright (c) 2014 TESOBE. All rights reserved.
 //
 
 #import "AppDelegate.h"
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    // to change the status bar style, also it´s necessary to change in .plist the key named “View controller-based status bar appearance” = NO
+    NSLog(@"iPhone = %@", [[UIDevice currentDevice] systemVersion]);
+    
+    if (![[[UIDevice currentDevice] systemVersion] isEqualToString: @"6.1"]) {
+        
+   
+
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    // to change the background color of navigation bar
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x409d85)]; 
+    //  to change the color of back button
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    // to assign a custom backgroung image
+    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"logo-obp only text.png"] forBarMetrics:UIBarMetricsDefault];
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
+    shadow.shadowOffset = CGSizeMake(0, 1);
+
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName, nil, NSShadowAttributeName,
+                                                           [UIFont fontWithName:@"STHeitiTC-Light" size:14.0], NSFontAttributeName, nil]];
+     }
+    
+    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        
+        if (_window.frame.size.height == 480) {
+            NSLog(@"iPhone");
+            UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main_iPhone4" bundle:Nil];
+            [_window setRootViewController:[story instantiateInitialViewController]];
+        } else {
+            NSLog(@"iPhone5");
+            UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main_iPhone5" bundle:Nil];
+            [_window setRootViewController:[story instantiateInitialViewController]];
+        }
+        
+    } /*else {
+        NSLog(@"iPad");
+        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:Nil];
+        [_window setRootViewController:[story instantiateInitialViewController]];
+    }*/
+    
+    
+    [self.window makeKeyAndVisible];
+
+    
     UIViewController * appViewController = [[UIViewController alloc] init];
     UINavigationController * navigation = [[UINavigationController alloc] init];
     [navigation pushViewController: appViewController animated:NO];

@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>8968E58E-2313-4641-95CA-5E0A435841D2</string>
+	<string>59360E85-3CCD-4417-94FF-2457183774CF</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Hello-OBP-OAuth1.0a-IOS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1D581F65-88EF-4637-9D40-8A5213817859</key>
-		<string>https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS.git</string>
+		<key>54E40145-F62D-44B6-ADE8-84B52040AE81</key>
+		<string>git://10.0.4.5/OpenBankProject/Hello-OBP-OAuth1.0a-IOS</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Hello-OBP-OAuth1.0a-IOS.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1D581F65-88EF-4637-9D40-8A5213817859</key>
+		<key>54E40145-F62D-44B6-ADE8-84B52040AE81</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS.git</string>
+	<string>git://10.0.4.5/OpenBankProject/Hello-OBP-OAuth1.0a-IOS</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1D581F65-88EF-4637-9D40-8A5213817859</string>
+	<string>54E40145-F62D-44B6-ADE8-84B52040AE81</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1D581F65-88EF-4637-9D40-8A5213817859</string>
+			<string>54E40145-F62D-44B6-ADE8-84B52040AE81</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Hello-OBP-OAuth1.0a-IOS</string>
+			<string>develop</string>
 		</dict>
 	</array>
 </dict>

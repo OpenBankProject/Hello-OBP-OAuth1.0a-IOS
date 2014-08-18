@@ -2,7 +2,7 @@
 //  OAuthController.m
 //  Hello-OBP-OAuth1.0a-IOS
 //
-//  Created by comp on 4/22/14.
+//  Created by Dunia Reviriego on 4/22/14.
 //  Copyright (c) 2014 Tesobe. All rights reserved.
 //
 // OBP API: https://github.com/OpenBankProject/OBP-API/wiki/OAuth-1.0-Server
@@ -22,6 +22,8 @@
 // 1. To get the values for the following fields, please register your client here:
 // https://apisandbox.openbankproject.com/consumer-registration
 
+
+/* Declared OAuthController.h
 #define OAUTH_CONSUMER_KEY @"tzecy5lgatsbrvbt2ttfrxlelertfxywt3whes4q"
 #define OAUTH_CONSUMER_SECRET_KEY @"eusfvy3oizylx11dr420nhxluv1rdan5qjjkgmkh"
 #define OAUTH_URL_SCHEME @"helloobpios" // Your Application Name
@@ -29,8 +31,7 @@
 #define OAUTH_AUTHENTICATE_URL @"https://apisandbox.openbankproject.com/"
 #define OAUTH_BASE_URL @"https://apisandbox.openbankproject.com/obp/v1.2/"
 #define OAUTH_CONSUMER_BANK_ID @"rbs" //Account of bank
-
-
+*/
 
 @interface OAuthController ()
 @end
@@ -46,7 +47,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
     }
     return self;
 }
@@ -55,8 +55,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     self.title = @"Open Bank Project";
-
+        
+    
     // 3. initialize the webview and add it to the view
     
     self.webView.delegate = self;
@@ -176,8 +178,9 @@
 #pragma mark - Get Resources
 
 - (void)getResourceWithString {
-    //NSLog(@"getResourceWithString say Bye");
-    NSString *lURL = [NSString stringWithFormat: @"%@banks/%@/accounts/private",OAUTH_BASE_URL, OAUTH_CONSUMER_BANK_ID];
+
+    NSString *lURL = [NSString stringWithFormat: @"%@banks/%@/accounts/private",OAUTH_BASE_URL, OAUTH_CONSUMER_BANK_ID]; //Privates
+    
     STHTTPRequest *request = [STHTTPRequest requestWithURLString:lURL];
     NSString *header = OAuthorizationHeader([request url], //set method to GET
                                             [request POSTDictionary]!=nil?@"POST":@"GET",
@@ -196,8 +199,9 @@
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:accessToken forKey:kAccessTokenKeyForPreferences];
             [defaults setObject:accessTokenSecret forKey:kAccessSecretKeyForPreferences];
-            [defaults setObject:body forKey:kJSON];
+            [defaults setObject:body forKey:kAccountsJSON];
             [defaults synchronize];
+           
             [self.navigationController popToRootViewControllerAnimated:YES];
 
         }
@@ -208,7 +212,6 @@
     };
    
     [request startAsynchronous];
-    //NSLog(@"getResourceWithString say Bye");
 }
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		740692EB19A0EF7C0036CB61 /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740692EA19A0EF7C0036CB61 /* AccountsViewController.m */; };
 		7414C8E91923B78200084BC3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7414C8E81923B78200084BC3 /* Foundation.framework */; };
 		7414C8EB1923B78200084BC3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7414C8EA1923B78200084BC3 /* CoreGraphics.framework */; };
 		7414C8ED1923B78200084BC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7414C8EC1923B78200084BC3 /* UIKit.framework */; };
@@ -14,11 +15,6 @@
 		7414C8F51923B78200084BC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C8F41923B78200084BC3 /* main.m */; };
 		7414C8F91923B78200084BC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C8F81923B78200084BC3 /* AppDelegate.m */; };
 		7414C8FB1923B78300084BC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7414C8FA1923B78300084BC3 /* Images.xcassets */; };
-		7414C9021923B78300084BC3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7414C9011923B78300084BC3 /* XCTest.framework */; };
-		7414C9031923B78300084BC3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7414C8E81923B78200084BC3 /* Foundation.framework */; };
-		7414C9041923B78300084BC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7414C8EC1923B78200084BC3 /* UIKit.framework */; };
-		7414C90C1923B78300084BC3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7414C90A1923B78300084BC3 /* InfoPlist.strings */; };
-		7414C90E1923B78300084BC3 /* Hello_OBP_OAuth1_0a_IOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C90D1923B78300084BC3 /* Hello_OBP_OAuth1_0a_IOSTests.m */; };
 		7414C95F1923C13400084BC3 /* OAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95B1923C13400084BC3 /* OAuthController.m */; };
 		7414C9601923C13400084BC3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95C1923C13400084BC3 /* ViewController.m */; };
 		7414C96D1923C15700084BC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9621923C15700084BC3 /* README.md */; };
@@ -27,22 +23,17 @@
 		7414C9701923C15700084BC3 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C9681923C15700084BC3 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7414C9711923C15700084BC3 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C96A1923C15700084BC3 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7414C9721923C15700084BC3 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C96C1923C15700084BC3 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7414C9741923C20E00084BC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9731923C20E00084BC3 /* Main.storyboard */; };
-		7414C9771923C22F00084BC3 /* logo-obp only text.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9751923C22F00084BC3 /* logo-obp only text.jpeg */; };
 		7414C9781923C22F00084BC3 /* logo-obp.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9761923C22F00084BC3 /* logo-obp.JPG */; };
+		74195CF919A1FD61006E3F63 /* Main_iPhone5.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74195CF819A1FD61006E3F63 /* Main_iPhone5.storyboard */; };
+		74195CFC19A25B0A006E3F63 /* Main_iPhone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74195CFB19A25B0A006E3F63 /* Main_iPhone4.storyboard */; };
+		744B412D199E91C300EBDA6D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744B412C199E91C300EBDA6D /* DetailsViewController.m */; };
+		744B412F199F76A500EBDA6D /* Logo_Text_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 744B412E199F76A500EBDA6D /* Logo_Text_small.png */; };
+		746A94A519A2871000C935BC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A94A419A2871000C935BC /* AboutViewController.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		7414C9051923B78300084BC3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7414C8DD1923B78200084BC3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7414C8E41923B78200084BC3;
-			remoteInfo = "Hello-OBP-OAuth1.0a-IOS";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		740692E919A0EF7C0036CB61 /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
+		740692EA19A0EF7C0036CB61 /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
 		7414C8E51923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hello-OBP-OAuth1.0a-IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7414C8E81923B78200084BC3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7414C8EA1923B78200084BC3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -54,11 +45,7 @@
 		7414C8F71923B78200084BC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7414C8F81923B78200084BC3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7414C8FA1923B78300084BC3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7414C9001923B78300084BC3 /* Hello-OBP-OAuth1.0a-IOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hello-OBP-OAuth1.0a-IOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7414C9011923B78300084BC3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		7414C9091923B78300084BC3 /* Hello-OBP-OAuth1.0a-IOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hello-OBP-OAuth1.0a-IOSTests-Info.plist"; sourceTree = "<group>"; };
-		7414C90B1923B78300084BC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7414C90D1923B78300084BC3 /* Hello_OBP_OAuth1_0a_IOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Hello_OBP_OAuth1_0a_IOSTests.m; sourceTree = "<group>"; };
 		7414C95B1923C13400084BC3 /* OAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthController.m; sourceTree = "<group>"; };
 		7414C95C1923C13400084BC3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7414C95D1923C13400084BC3 /* OAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthController.h; sourceTree = "<group>"; };
@@ -73,9 +60,14 @@
 		7414C96A1923C15700084BC3 /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OAuth+Additions.m"; sourceTree = "<group>"; };
 		7414C96B1923C15700084BC3 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = "<group>"; };
 		7414C96C1923C15700084BC3 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
-		7414C9731923C20E00084BC3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		7414C9751923C22F00084BC3 /* logo-obp only text.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-obp only text.jpeg"; sourceTree = "<group>"; };
 		7414C9761923C22F00084BC3 /* logo-obp.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-obp.JPG"; sourceTree = "<group>"; };
+		74195CF819A1FD61006E3F63 /* Main_iPhone5.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone5.storyboard; sourceTree = "<group>"; };
+		74195CFB19A25B0A006E3F63 /* Main_iPhone4.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone4.storyboard; sourceTree = "<group>"; };
+		744B412B199E91C300EBDA6D /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		744B412C199E91C300EBDA6D /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		744B412E199F76A500EBDA6D /* Logo_Text_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_Text_small.png; sourceTree = "<group>"; };
+		746A94A319A2871000C935BC /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		746A94A419A2871000C935BC /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,16 +81,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7414C8FD1923B78300084BC3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7414C9021923B78300084BC3 /* XCTest.framework in Frameworks */,
-				7414C9041923B78300084BC3 /* UIKit.framework in Frameworks */,
-				7414C9031923B78300084BC3 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -106,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				7414C8EE1923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS */,
-				7414C9071923B78300084BC3 /* Hello-OBP-OAuth1.0a-IOSTests */,
 				7414C8E71923B78200084BC3 /* Frameworks */,
 				7414C8E61923B78200084BC3 /* Products */,
 			);
@@ -116,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				7414C8E51923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS.app */,
-				7414C9001923B78300084BC3 /* Hello-OBP-OAuth1.0a-IOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,11 +115,18 @@
 		7414C8EE1923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS */ = {
 			isa = PBXGroup;
 			children = (
-				7414C9731923C20E00084BC3 /* Main.storyboard */,
+				74195CFB19A25B0A006E3F63 /* Main_iPhone4.storyboard */,
+				74195CF819A1FD61006E3F63 /* Main_iPhone5.storyboard */,
 				7414C95D1923C13400084BC3 /* OAuthController.h */,
 				7414C95B1923C13400084BC3 /* OAuthController.m */,
 				7414C95E1923C13400084BC3 /* ViewController.h */,
 				7414C95C1923C13400084BC3 /* ViewController.m */,
+				740692E919A0EF7C0036CB61 /* AccountsViewController.h */,
+				740692EA19A0EF7C0036CB61 /* AccountsViewController.m */,
+				744B412B199E91C300EBDA6D /* DetailsViewController.h */,
+				744B412C199E91C300EBDA6D /* DetailsViewController.m */,
+				746A94A319A2871000C935BC /* AboutViewController.h */,
+				746A94A419A2871000C935BC /* AboutViewController.m */,
 				7414C8F71923B78200084BC3 /* AppDelegate.h */,
 				7414C8F81923B78200084BC3 /* AppDelegate.m */,
 				7414C8FA1923B78300084BC3 /* Images.xcassets */,
@@ -151,7 +138,7 @@
 		7414C8EF1923B78200084BC3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7414C9751923C22F00084BC3 /* logo-obp only text.jpeg */,
+				744B412E199F76A500EBDA6D /* Logo_Text_small.png */,
 				7414C9761923C22F00084BC3 /* logo-obp.JPG */,
 				7414C9611923C15700084BC3 /* STHTTPRequest */,
 				7414C9651923C15700084BC3 /* OAuthCore */,
@@ -159,24 +146,6 @@
 				7414C8F11923B78200084BC3 /* InfoPlist.strings */,
 				7414C8F41923B78200084BC3 /* main.m */,
 				7414C8F61923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7414C9071923B78300084BC3 /* Hello-OBP-OAuth1.0a-IOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				7414C90D1923B78300084BC3 /* Hello_OBP_OAuth1_0a_IOSTests.m */,
-				7414C9081923B78300084BC3 /* Supporting Files */,
-			);
-			path = "Hello-OBP-OAuth1.0a-IOSTests";
-			sourceTree = "<group>";
-		};
-		7414C9081923B78300084BC3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7414C9091923B78300084BC3 /* Hello-OBP-OAuth1.0a-IOSTests-Info.plist */,
-				7414C90A1923B78300084BC3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -225,24 +194,6 @@
 			productReference = 7414C8E51923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7414C8FF1923B78300084BC3 /* Hello-OBP-OAuth1.0a-IOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7414C9141923B78300084BC3 /* Build configuration list for PBXNativeTarget "Hello-OBP-OAuth1.0a-IOSTests" */;
-			buildPhases = (
-				7414C8FC1923B78300084BC3 /* Sources */,
-				7414C8FD1923B78300084BC3 /* Frameworks */,
-				7414C8FE1923B78300084BC3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7414C9061923B78300084BC3 /* PBXTargetDependency */,
-			);
-			name = "Hello-OBP-OAuth1.0a-IOSTests";
-			productName = "Hello-OBP-OAuth1.0a-IOSTests";
-			productReference = 7414C9001923B78300084BC3 /* Hello-OBP-OAuth1.0a-IOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -251,11 +202,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = TESOBE;
-				TargetAttributes = {
-					7414C8FF1923B78300084BC3 = {
-						TestTargetID = 7414C8E41923B78200084BC3;
-					};
-				};
 			};
 			buildConfigurationList = 7414C8E01923B78200084BC3 /* Build configuration list for PBXProject "Hello-OBP-OAuth1.0a-IOS" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -270,7 +216,6 @@
 			projectRoot = "";
 			targets = (
 				7414C8E41923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS */,
-				7414C8FF1923B78300084BC3 /* Hello-OBP-OAuth1.0a-IOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -281,20 +226,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7414C96D1923C15700084BC3 /* README.md in Resources */,
-				7414C9741923C20E00084BC3 /* Main.storyboard in Resources */,
+				74195CF919A1FD61006E3F63 /* Main_iPhone5.storyboard in Resources */,
 				7414C8F31923B78200084BC3 /* InfoPlist.strings in Resources */,
+				744B412F199F76A500EBDA6D /* Logo_Text_small.png in Resources */,
+				74195CFC19A25B0A006E3F63 /* Main_iPhone4.storyboard in Resources */,
 				7414C96F1923C15700084BC3 /* LICENSE in Resources */,
 				7414C8FB1923B78300084BC3 /* Images.xcassets in Resources */,
 				7414C9781923C22F00084BC3 /* logo-obp.JPG in Resources */,
-				7414C9771923C22F00084BC3 /* logo-obp only text.jpeg in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7414C8FE1923B78300084BC3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7414C90C1923B78300084BC3 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,47 +244,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				7414C9721923C15700084BC3 /* OAuthCore.m in Sources */,
+				744B412D199E91C300EBDA6D /* DetailsViewController.m in Sources */,
 				7414C9711923C15700084BC3 /* OAuth+Additions.m in Sources */,
 				7414C8F91923B78200084BC3 /* AppDelegate.m in Sources */,
 				7414C8F51923B78200084BC3 /* main.m in Sources */,
 				7414C9601923C13400084BC3 /* ViewController.m in Sources */,
 				7414C96E1923C15700084BC3 /* STHTTPRequest.m in Sources */,
 				7414C95F1923C13400084BC3 /* OAuthController.m in Sources */,
+				746A94A519A2871000C935BC /* AboutViewController.m in Sources */,
+				740692EB19A0EF7C0036CB61 /* AccountsViewController.m in Sources */,
 				7414C9701923C15700084BC3 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7414C8FC1923B78300084BC3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7414C90E1923B78300084BC3 /* Hello_OBP_OAuth1_0a_IOSTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7414C9061923B78300084BC3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7414C8E41923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS */;
-			targetProxy = 7414C9051923B78300084BC3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7414C8F11923B78200084BC3 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7414C8F21923B78200084BC3 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		7414C90A1923B78300084BC3 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7414C90B1923B78300084BC3 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -434,6 +351,7 @@
 				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOS/Hello-OBP-OAuth1.0a-IOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "F6A61B20-D6BD-46E2-B610-3F92B6E2A881";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -448,47 +366,8 @@
 				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOS/Hello-OBP-OAuth1.0a-IOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "F6A61B20-D6BD-46E2-B610-3F92B6E2A881";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		7414C9151923B78300084BC3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hello-OBP-OAuth1.0a-IOS.app/Hello-OBP-OAuth1.0a-IOS";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Hello-OBP-OAuth1.0a-IOS/Hello-OBP-OAuth1.0a-IOS-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOSTests/Hello-OBP-OAuth1.0a-IOSTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		7414C9161923B78300084BC3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hello-OBP-OAuth1.0a-IOS.app/Hello-OBP-OAuth1.0a-IOS";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Hello-OBP-OAuth1.0a-IOS/Hello-OBP-OAuth1.0a-IOS-Prefix.pch";
-				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOSTests/Hello-OBP-OAuth1.0a-IOSTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -509,15 +388,6 @@
 			buildConfigurations = (
 				7414C9121923B78300084BC3 /* Debug */,
 				7414C9131923B78300084BC3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7414C9141923B78300084BC3 /* Build configuration list for PBXNativeTarget "Hello-OBP-OAuth1.0a-IOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7414C9151923B78300084BC3 /* Debug */,
-				7414C9161923B78300084BC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

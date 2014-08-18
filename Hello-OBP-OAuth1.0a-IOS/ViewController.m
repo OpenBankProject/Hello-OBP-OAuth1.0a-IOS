@@ -3,18 +3,13 @@
 //  ViewController.m
 //  Hello-OBP-OAuth1.0a-IOS
 //
-//  Created by comp on 4/22/14.
+//  Created by Dunia Reviriego on 4/22/14.
 //  Copyright (c) 2014 TESOBE. All rights reserved.
 //
 
 #import "ViewController.h"
 #import "OAuthController.h"
 
-@interface ViewController () {
-    NSDictionary *accounts;
-    NSArray *account;
-}
-@end
 
 @implementation ViewController
 
@@ -25,11 +20,11 @@
     if (!rightNavButton) {
         rightNavButton = [[UIBarButtonItem alloc] init];
         //configure the button here
-        self.rightNavButton.title = @"Log out";
+        self.rightNavButton.title = @"Accounts";
     }
     [rightNavButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                            [UIFont fontWithName:@"Helvetica-Bold" size:14.0], NSFontAttributeName,
-                                            [UIColor grayColor], NSForegroundColorAttributeName,
+                                            [UIFont fontWithName:@"STHeitiJ-Medium" size:12.0], NSFontAttributeName,
+                                            [UIColor whiteColor], NSForegroundColorAttributeName,
                                             nil] forState:UIControlStateNormal];
     return rightNavButton;
 }
@@ -37,15 +32,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //NSLog(@"viewDidLoad");
-
-    [self.tableViewAccounts setDataSource:self];
-    [self.tableViewAccounts setDelegate:self];
-    
     self.navigationItem.title = @"Hello-OBP-OAuth1.0a";
+    
+    if (![[[UIDevice currentDevice] systemVersion] isEqualToString: @"6.1"]) {
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"Home"
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:nil
+                                                                action:nil];
+    [backItem setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                        [UIFont fontWithName:@"STHeitiJ-Medium" size:13.0], NSFontAttributeName,
+                                        [UIColor whiteColor], NSForegroundColorAttributeName,
+                                        nil] forState:UIControlStateNormal];
+    
+    [self.navigationItem setBackBarButtonItem:backItem];
+    
+    [self.leftNavButton setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                              [UIFont fontWithName:@"STHeitiJ-Medium" size:13.0], NSFontAttributeName,
+                                                              [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                              nil] forState:UIControlStateNormal];
+
+    
     [self.navigationItem setRightBarButtonItem:nil];
-    
-    
+    self.linkOBPwebsite.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    self.linkOBPwebsite.titleLabel.numberOfLines = 2;
+    self.navigationController.navigationBar.translucent = NO;
+    [self.linkOBPwebsite setTitle:@"Hello-OBP-OAuth1.0a is demo for app designers.\nTo find out more visit the Open Bank Project." forState:UIControlStateNormal];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -54,29 +66,18 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-    //NSLog(@"viewWillAppear");
-
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    	//check for OBP and authorize
+	//check for OBP and authorize
     if([defaults valueForKey: kAccessTokenKeyForPreferences]){
         self.navigationItem.rightBarButtonItem = self.rightNavButton;
         [self.viewConnect setHidden:YES];
-        [self.viewData setHidden:NO];
-        
-        //Parse JSON to take the names of Accounts
-        NSString *json = [defaults valueForKey:kJSON];
-        //NSLog(@"viewWillAppear say json = %@", json);
-        NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-        NSError *error = nil;
-        accounts = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        account = [accounts objectForKey: @"accounts"];
-        [self.tableViewAccounts reloadData];
-
-    }
-	else {
+        [self.viewLogin setHidden:NO];
+            }
+	else{
         self.navigationItem.rightBarButtonItem = nil;
         [self.viewConnect setHidden:NO];
-        [self.viewData setHidden:YES];
+        [self.viewLogin setHidden:YES];
         //NSLog(@"Ups not connect");
     }
 }
@@ -87,15 +88,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)connectToOBP:(id)sender {
+
+- (IBAction)connectToBankAPI:(id)sender {
    
-    [self performSegueWithIdentifier:@"webViewSegue" sender:sender];
+    [self performSegueWithIdentifier:@"webView" sender:sender];
     
 }
+- (IBAction)linkToReadme:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/blob/master/README.md#login-credentials"]];
+}
 
-- (IBAction)connectToGitHub:(id)sender {
-    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/blob/master/README.md"]];
+- (IBAction)accountsTableView:(id)sender {
+    [self performSegueWithIdentifier:@"Accounts" sender:sender];
+}
+
+- (IBAction)about:(id)sender {
+    [self performSegueWithIdentifier:@"About" sender:sender];
 }
 
 
@@ -111,50 +119,51 @@
     }
 }
 
+- (IBAction)linkToOBPwebsite:(id)sender {
+    
+        UIAlertView *message1 = [[UIAlertView alloc] initWithTitle:@"Open Bank Project"
+                                                          message:@"You are leaving the app demo to go the OBP websites."
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancel"
+                                                otherButtonTitles:@"www.openbankproject.com", @"www.tesobe.com", @"github/openbankproject", @"Readme (with users)", nil];
+        [message1 show];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    // Clear the Data if click OK
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if([title isEqualToString:@"OK"])
     {
         [defaults removeObjectForKey: kAccessSecretKeyForPreferences];
         [defaults removeObjectForKey: kAccessTokenKeyForPreferences];
         [defaults synchronize];
-        [self.viewConnect setHidden:NO];
-        [self.viewData setHidden:YES];
         self.navigationItem.rightBarButtonItem = nil;
+        [self.viewConnect setHidden:NO];
+        [self.viewLogin setHidden:YES];
     }
-    
-}
-
-
-#pragma TableView
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return account.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
-    
-    if (!cell)
+    else if([title isEqualToString:@"www.openbankproject.com"])
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:@"myCell"];
-    }
-    NSString *idAccount= [[[accounts objectForKey: @"accounts"]objectAtIndex:indexPath.row] objectForKey:@"id"];
-    cell.textLabel.text = idAccount;
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
-    return cell;
-}
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://openbankproject.com/en/about/"]];
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"Selected row: %li", (long)indexPath.row);
+    }
+    else if
+        ([title isEqualToString:@"www.tesobe.com"])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://tesobe.com/en/projects/open-bank-project/"]];
+        
+    }
+    else if
+        ([title isEqualToString:@"github/openbankproject"])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.github.com/OpenBankProject"]];
+        
+    }
+    else if
+        ([title isEqualToString:@"Readme (with users)"])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/blob/master/README.md#login-credentials"]];
+    }
 }
 
 @end
