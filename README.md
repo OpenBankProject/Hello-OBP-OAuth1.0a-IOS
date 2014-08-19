@@ -7,10 +7,34 @@ You can then use this demonstration as an example of how to use the Open Bank Pr
 
 Though this particular API call does not require OAuth, this project uses OAuth to do so anyways, in order to demonstrate the process. 
 
+## Login credentials using apisandbox.openbankproject.com
 
-Current list of supported banks:  [https://api.openbankproject.com/connectors-status/](https://api.openbankproject.com/connectors-status/)
+You will need to login to the OBP Sandbox API when running the app. (unless you setup your own instance of the API change the API to point to your instance in this demo).  This can be done using any the following credentials:
 
-## SETUP
+username: joe.bloggs@example.com
+password: qwerty
+
+username: jane.bloggs@example.com
+password: qwerty
+
+username: john.bloggs@example.com
+password: qwerty
+
+## Screenshots
+
+Login page
+
+<img src="https://raw.githubusercontent.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/master/images/hello-obp-login.png" />
+
+Accounts page
+
+<img src="https://raw.githubusercontent.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/master/images/hello-obp-accounts.png" />
+
+Transactions page
+
+<img src="https://raw.githubusercontent.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/master/images/hello-obp-transactions.png" />
+
+## Setup of API on own server
 
 If you want to work with your own credentials, there are a couple of things you need to do to get this project set up.
 
@@ -22,19 +46,8 @@ If you want to work with your own credentials, there are a couple of things you 
 
 3. Add your callback URL scheme to your app's (yourappname) `Info.plist` file (in the URL types field).
 
-## Login credentials
-
-You will need to login to the OBP Sandbox API (unless you change the API instance) when running the app. This can be done using any the following credentials:
-
-username: joe.bloggs@example.com
-password: qwerty
-
-username: jane.bloggs@example.com
-password: qwerty
-
-username: john.bloggs@example.com
-password: qwerty
+Current list of supported banks:  [https://api.openbankproject.com/connectors-status/](https://api.openbankproject.com/connectors-status/)
 
 ## LICENSE
 
-This project is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
+This demo app, and other software in this project is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
