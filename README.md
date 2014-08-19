@@ -5,20 +5,25 @@ This is a basic app to demonstrate the integration of the OpenBankProject with O
 
 You can then use this demonstration as an example of how to use the Open Bank Project (OBP) API to create apps that allow user to access to their bank data, and create Banking, Accounting, ERM, or other financial applications utilizing this OBP JSON API. Documentation about the latest OBP API specifications here: [Version: 1.2.1](https://github.com/OpenBankProject/OBP-API/wiki/REST-API-V1.2.1)
 
-Though this particular API call does not require OAuth, this project uses OAuth to do so anyways, in order to demonstrate the process. 
+Though the OBI API does not require OAuth, this project uses OAuth to do so, in order to demonstrate the process. 
 
-## Login credentials using apisandbox.openbankproject.com
+## Login credentials
 
-You will need to login to the OBP Sandbox API when running the app. (unless you setup your own instance of the API change the API to point to your instance in this demo).  This can be done using any the following credentials:
+You will need to login to the OBP Sandbox API when running the app (using apisandbox.openbankproject.com).This can be done using any the following test credentials:
 
 username: joe.bloggs@example.com
 password: qwerty
+(contains various bank accounts including blank accounts, and accounts with errors) 
 
 username: jane.bloggs@example.com
 password: qwerty
+(contains two bank accounts)
 
 username: john.bloggs@example.com
 password: qwerty
+(contains one bank account)
+
+You can also setup your own instance of the API and point this app to your instance in this demo, instrucations to do this below.
 
 ## Screenshots
 
