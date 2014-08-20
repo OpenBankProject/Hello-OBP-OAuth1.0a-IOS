@@ -9,7 +9,7 @@ Though the OBI API does not require OAuth, this project uses OAuth to do so, in 
 
 ## Login credentials
 
-You will need to login to the OBP Sandbox API when running the app (using apisandbox.openbankproject.com).This can be done using any the following test credentials:
+You will need to login to the OBP Sandbox API when running the app (which talks to the server apisandbox.openbankproject.com), just download install and click login. (If you are using iTimeBalance you will need to select "OBP Sandbox" as the login API from the selection). Then you can use following test login credentials:
 
 username: joe.bloggs@example.com
 password: qwerty
@@ -23,7 +23,7 @@ username: john.bloggs@example.com
 password: qwerty
 (contains one bank account)
 
-You can also setup your own instance of the API and point this app to your instance in this demo, instrucations to do this below.
+You can also setup your own instance of the API and point this app to your instance in this demo, instructions to do this below.
 
 ## Screenshots
 
