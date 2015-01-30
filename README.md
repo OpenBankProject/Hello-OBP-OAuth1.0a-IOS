@@ -55,4 +55,4 @@ Current list of supported banks:  [https://api.openbankproject.com/connectors-st
 
 ## LICENSE
 
-This demo app, and other software in this project is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
+This demo app is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
