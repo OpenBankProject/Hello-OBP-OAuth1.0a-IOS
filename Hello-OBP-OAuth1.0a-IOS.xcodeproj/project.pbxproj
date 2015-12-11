@@ -18,7 +18,7 @@
 		7414C95F1923C13400084BC3 /* OAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95B1923C13400084BC3 /* OAuthController.m */; };
 		7414C9601923C13400084BC3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95C1923C13400084BC3 /* ViewController.m */; };
 		7414C96D1923C15700084BC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9621923C15700084BC3 /* README.md */; };
-		7414C96E1923C15700084BC3 /* STHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C9641923C15700084BC3 /* STHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-checker"; }; };
+		7414C96E1923C15700084BC3 /* STHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C9641923C15700084BC3 /* STHTTPRequest.m */; };
 		7414C96F1923C15700084BC3 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9661923C15700084BC3 /* LICENSE */; };
 		7414C9701923C15700084BC3 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C9681923C15700084BC3 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7414C9711923C15700084BC3 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C96A1923C15700084BC3 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };

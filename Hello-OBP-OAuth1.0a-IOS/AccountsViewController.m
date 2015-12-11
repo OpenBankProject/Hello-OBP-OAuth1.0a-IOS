@@ -200,7 +200,11 @@
     
     
     [request setHeaderWithName:@"Authorization" value:header];
-    request.completionBlock = ^(NSDictionary *headers, NSInteger status, NSString *body) {
+
+	STHTTPRequest __weak *request_ifStillAround = request;
+    request.completionBlock = ^(NSDictionary *headers, NSString *body) {
+		STHTTPRequest *request = request_ifStillAround;
+		NSInteger status = request.responseStatus;
         if (status == 200) {
             //store into user defaults for later access
             //NSLog(@"in getResourceWithString json=%@", body);
@@ -213,8 +217,8 @@
         }
     };
     
-    request.errorBlock = ^(NSError *error, NSInteger status) {
-        NSLog(@"Status = %ld: Error= %@", (long)status, error);
+    request.errorBlock = ^(NSError *error) {
+        NSLog(@"getResourceWithString got error %@", error);
     };
     
     [request startAsynchronous];

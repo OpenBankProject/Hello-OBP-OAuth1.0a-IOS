@@ -6,26 +6,57 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
+#if __has_feature(objc_arc)
+#else
+// see http://www.codeography.com/2011/10/10/making-arc-and-non-arc-play-nice.html
+#error This file must be compiled with ARC. Either turn on ARC for the project or use -fobjc-arc flag
+#endif
+
 #import "STHTTPRequest.h"
 
 NSUInteger const kSTHTTPRequestCancellationError = 1;
-NSUInteger const kSTHTTPRequestDefaultTimeout = 60;
+NSUInteger const kSTHTTPRequestDefaultTimeout = 30;
 
-static NSMutableDictionary *sharedCredentialsStorage = nil;
+static NSMutableDictionary *localCredentialsStorage = nil;
+static NSMutableArray *localCookiesStorage = nil;
+
+static BOOL globalIgnoreCache = NO;
+static STHTTPRequestCookiesStorage globalCookiesStoragePolicy = STHTTPRequestCookiesStorageShared;
+
+/**/
+
+@interface STHTTPRequestFileUpload : NSObject
+@property (nonatomic, retain) NSString *path;
+@property (nonatomic, retain) NSString *parameterName;
+@property (nonatomic, retain) NSString *mimeType;
+
++ (instancetype)fileUploadWithPath:(NSString *)path parameterName:(NSString *)parameterName mimeType:(NSString *)mimeType;
++ (instancetype)fileUploadWithPath:(NSString *)path parameterName:(NSString *)parameterName;
+@end
+
+@interface STHTTPRequestDataUpload : NSObject
+@property (nonatomic, retain) NSData *data;
+@property (nonatomic, retain) NSString *parameterName;
+@property (nonatomic, retain) NSString *mimeType; // can be nil
+@property (nonatomic, retain) NSString *fileName; // can be nil
++ (instancetype)dataUploadWithData:(NSData *)data parameterName:(NSString *)parameterName mimeType:(NSString *)mimeType fileName:(NSString *)fileName;
+@end
+
+/**/
 
 @interface STHTTPRequest ()
+
 @property (nonatomic) NSInteger responseStatus;
-@property (nonatomic, retain) NSURLConnection *connection;
-@property (nonatomic, retain) NSMutableData *responseData;
-@property (nonatomic, retain) NSString *responseStringEncodingName;
-@property (nonatomic, retain) NSDictionary *responseHeaders;
-@property (nonatomic, retain) NSURL *url;
-@property (nonatomic, retain) NSError *error;
-@property (nonatomic, retain) NSString *POSTFilePath;
-@property (nonatomic, retain) NSData *POSTFileData;
-@property (nonatomic, retain) NSString *POSTFileMimeType;
-@property (nonatomic, retain) NSString *POSTFileName;
-@property (nonatomic, retain) NSString *POSTFileParameter;
+@property (nonatomic, strong) NSURLConnection *connection;
+@property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic, strong) NSString *responseStringEncodingName;
+@property (nonatomic, strong) NSDictionary *responseHeaders;
+@property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong) NSError *error;
+@property (nonatomic, strong) NSMutableArray *filesToUpload; // STHTTPRequestFileUpload instances
+@property (nonatomic, strong) NSMutableArray *dataToUpload; // STHTTPRequestDataUpload instances
+@property (nonatomic, strong) NSURLRequest *request;
+@property (nonatomic, strong) NSMutableArray *ephemeralRequestCookies;
 @end
 
 @interface NSData (Base64)
@@ -34,36 +65,11 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
 
 @implementation STHTTPRequest
 
-@synthesize connection = _connection;
-@synthesize responseData = _responseData;
-@synthesize responseStringEncodingName = _responseStringEncodingName;
-@synthesize responseHeaders = _responseHeaders;
-@synthesize url = _url;
-@synthesize error = _error;
-@synthesize POSTData = _POSTData;
-@synthesize POSTFilePath = _POSTFilePath;
-@synthesize POSTFileMimeType = _POSTFileMimeType;
-@synthesize POSTFileName = _POSTFileName;
-@synthesize POSTFileParameter = _POSTFileParameter;
-@synthesize POSTFileData = _POSTFileData;
-@synthesize POSTDictionary = _POSTDictionary;
-@synthesize requestHeaders = _requestHeaders;
-@synthesize responseString = _responseString;
-@synthesize postDataEncoding = _postDataEncoding;
-@synthesize encodePOSTDictionary = _encodePOSTDictionary;
-@synthesize addCredentialsToURL = _addCredentialsToURL;
-@synthesize timeoutSeconds = _timeoutSeconds;
-@synthesize completionBlock = _completionBlock;
-@synthesize errorBlock = _errorBlock;
-@synthesize uploadProgressBlock = _uploadProgressBlock;
-@synthesize responseStatus = _responseStatus;
-@synthesize forcedResponseEncoding = _forcedResponseEncoding;
-
 #pragma mark Initializers
 
 + (STHTTPRequest *)requestWithURL:(NSURL *)url {
     if(url == nil) return nil;
-    return [[[self alloc] initWithURL:url] autorelease];
+    return [(STHTTPRequest *)[self alloc] initWithURL:url];
 }
 
 + (STHTTPRequest *)requestWithURLString:(NSString *)urlString {
@@ -71,52 +77,48 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
     return [self requestWithURL:url];
 }
 
++ (void)setGlobalIgnoreCache:(BOOL)ignoreCache {
+    globalIgnoreCache = ignoreCache;
+}
+
++ (void)setGlobalCookiesStoragePolicy:(STHTTPRequestCookiesStorage)cookieStoragePolicy {
+    globalCookiesStoragePolicy = cookieStoragePolicy;
+}
+
 - (STHTTPRequest *)initWithURL:(NSURL *)theURL {
     
     if (self = [super init]) {
-        _url = [theURL retain];
-        _responseData = [[NSMutableData alloc] init];
-        _requestHeaders = [[NSMutableDictionary dictionary] retain];
-        _postDataEncoding = NSUTF8StringEncoding;
-        _encodePOSTDictionary = YES;
-        _addCredentialsToURL = NO;
-        _timeoutSeconds = kSTHTTPRequestDefaultTimeout;
+        self.url = theURL;
+        self.responseData = [[NSMutableData alloc] init];
+        self.requestHeaders = [NSMutableDictionary dictionary];
+        self.POSTDataEncoding = NSUTF8StringEncoding;
+        self.encodePOSTDictionary = YES;
+        self.encodeGETDictionary = YES;
+        self.addCredentialsToURL = NO;
+        self.timeoutSeconds = kSTHTTPRequestDefaultTimeout;
+        self.filesToUpload = [NSMutableArray array];
+        self.dataToUpload = [NSMutableArray array];
+        self.HTTPMethod = @"GET"; // default
+        self.cookieStoragePolicyForInstance = STHTTPRequestCookiesStorageUndefined; // globalCookiesStoragePolicy will be used
+        self.ephemeralRequestCookies = [NSMutableArray array];
     }
     
     return self;
 }
 
-- (void)dealloc {
-    if(_completionBlock) [_completionBlock release];
-    if(_errorBlock) [_errorBlock release];
-    if(_uploadProgressBlock) [_uploadProgressBlock release];
-    
-    [_connection release];
-    [_responseStringEncodingName release];
-    [_requestHeaders release];
-    [_url release];
-    [_responseData release];
-    [_responseHeaders release];
-    [_responseString release];
-    [_POSTDictionary release];
-    [_POSTData release];
-    [_POSTFilePath release];
-    [_POSTFileData release];
-    [_POSTFileMimeType release];
-    [_POSTFileName release];
-    [_POSTFileParameter release];
-    [_error release];
-    
-    [super dealloc];
++ (void)clearSession {
+    [[self class] deleteAllCookiesFromSharedCookieStorage];
+    [[self class] deleteAllCookiesFromLocalCookieStorage];
+    [[self class] deleteAllCredentials];
 }
 
 #pragma mark Credentials
 
 + (NSMutableDictionary *)sharedCredentialsStorage {
-    if(sharedCredentialsStorage == nil) {
-        sharedCredentialsStorage = [[NSMutableDictionary dictionary] retain];
+    if(localCredentialsStorage == nil) {
+        localCredentialsStorage = [NSMutableDictionary dictionary];
     }
-    return sharedCredentialsStorage;
+    return localCredentialsStorage;
 }
 
 + (NSURLCredential *)sessionAuthenticationCredentialsForURL:(NSURL *)requestURL {
@@ -124,8 +126,7 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
 }
 
 + (void)deleteAllCredentials {
-    [sharedCredentialsStorage autorelease];
-    sharedCredentialsStorage = [[NSMutableDictionary dictionary] retain];
+    localCredentialsStorage = [NSMutableDictionary dictionary];
 }
 
 - (void)setCredentialForCurrentHost:(NSURLCredential *)c {
@@ -157,38 +158,118 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
 
 #pragma mark Cookies
 
-+ (NSArray *)sessionCookies {
-    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    return [cookieStorage cookies];
+- (STHTTPRequestCookiesStorage)cookieStoragePolicy {
+    if(_cookieStoragePolicyForInstance != STHTTPRequestCookiesStorageUndefined) {
+        return _cookieStoragePolicyForInstance;
+    }
+    
+    return globalCookiesStoragePolicy;
 }
 
-+ (void)deleteSessionCookies {
++ (NSMutableArray *)localCookiesStorage {
+    if(localCookiesStorage == nil) {
+        localCookiesStorage = [NSMutableArray array];
+    }
+    return localCookiesStorage;
+}
+
++ (NSArray *)sessionCookiesInSharedCookiesStorage {
+    NSArray *allCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    
+    NSArray *sessionCookies = [allCookies filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        NSHTTPCookie *cookie = (NSHTTPCookie *)evaluatedObject;
+        return [cookie isSessionOnly];
+    }]];
+    
+    return sessionCookies;
+}
+
+- (NSArray *)sessionCookies {
+    
+    NSArray *allCookies = nil;
+    
+    if([self cookieStoragePolicy] == STHTTPRequestCookiesStorageShared) {
+        allCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    } else if ([self cookieStoragePolicy] == STHTTPRequestCookiesStorageLocal) {
+        allCookies = [[self class] localCookiesStorage];
+    }
+    
+    NSArray *sessionCookies = [allCookies filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        NSHTTPCookie *cookie = (NSHTTPCookie *)evaluatedObject;
+        return [cookie isSessionOnly];
+    }]];
+    
+    return sessionCookies;
+}
+
+- (void)deleteSessionCookies {
+    
     for(NSHTTPCookie *cookie in [self sessionCookies]) {
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+        if([self cookieStoragePolicy] == STHTTPRequestCookiesStorageShared) {
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+        } else if ([self cookieStoragePolicy] == STHTTPRequestCookiesStorageLocal) {
+            [[[self class] localCookiesStorage] removeObject:cookie];
+        }
     }
 }
 
-+ (void)deleteAllCookies {
-    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray *cookies = [cookieStorage cookies];
++ (void)deleteAllCookiesFromSharedCookieStorage {
+    NSHTTPCookieStorage *sharedCookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray *cookies = [sharedCookieStorage cookies];
     for (NSHTTPCookie *cookie in cookies) {
-        [cookieStorage deleteCookie:cookie];
+        [sharedCookieStorage deleteCookie:cookie];
     }
 }
 
-+ (void)addCookie:(NSHTTPCookie *)cookie forURL:(NSURL *)url {
-    NSArray *cookies = [NSArray arrayWithObject:cookie];
-	
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:cookies forURL:url mainDocumentURL:nil];
++ (void)deleteAllCookiesFromLocalCookieStorage {
+    localCookiesStorage = nil;
 }
 
-+ (void)addCookieWithName:(NSString *)name value:(NSString *)value url:(NSURL *)url {
+- (void)deleteAllCookies {
+    if([self cookieStoragePolicy] == STHTTPRequestCookiesStorageShared) {
+        [[self class] deleteAllCookiesFromSharedCookieStorage];
+    } else if ([self cookieStoragePolicy] == STHTTPRequestCookiesStorageLocal) {
+        [[[self class] localCookiesStorage] removeAllObjects];
+    }
+}
+
++ (void)addCookieToSharedCookiesStorage:(NSHTTPCookie *)cookie {
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    
+#if DEBUG
+    NSHTTPCookie *readCookie = [[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies] lastObject];
+    NSAssert(readCookie, @"cannot read any cookie after adding one");
+#endif
+}
+
+- (void)addCookie:(NSHTTPCookie *)cookie {
+    
+    NSParameterAssert(cookie);
+    if(cookie == nil) return;
+    
+    if([self cookieStoragePolicy] == STHTTPRequestCookiesStorageShared) {
+        [[self class] addCookieToSharedCookiesStorage:cookie];
+    } else if ([self cookieStoragePolicy] == STHTTPRequestCookiesStorageLocal) {
+        [[[self class] localCookiesStorage] addObject:cookie];
+    } else if ([self cookieStoragePolicy] == STHTTPRequestCookiesStorageNoStorage) { // ephemeral cookie, only for this request
+        [_ephemeralRequestCookies addObject:cookie];
+    }
+}
+
++ (void)addCookieToSharedCookiesStorageWithName:(NSString *)name value:(NSString *)value url:(NSURL *)url {
+    NSHTTPCookie *cookie = [[self class] createCookieWithName:name value:value url:url];
+    
+    [self addCookieToSharedCookiesStorage:cookie];
+}
+
++ (NSHTTPCookie *)createCookieWithName:(NSString *)name value:(NSString *)value url:(NSURL *)url {
+    NSParameterAssert(url);
+    if(url == nil) return nil;
     
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                              name, NSHTTPCookieName,
                                              value, NSHTTPCookieValue,
-                                             [url host], NSHTTPCookieDomain,
-                                             [url host], NSHTTPCookieOriginURL,
+                                             url, NSHTTPCookieOriginURL,
                                              @"FALSE", NSHTTPCookieDiscard,
                                              @"/", NSHTTPCookiePath,
                                              @"0", NSHTTPCookieVersion,
@@ -197,24 +278,34 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
     
     NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
     
-    [[self class] addCookie:cookie forURL:url];
+    return cookie;
+}
+
+- (void)addCookieWithName:(NSString *)name value:(NSString *)value url:(NSURL *)url {
+    NSHTTPCookie *cookie = [[self class] createCookieWithName:name value:value url:url];
+    
+    [self addCookie:cookie];
 }
 
 - (NSArray *)requestCookies {
-    return [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[_url absoluteURL]];
-}
-
-- (void)addCookie:(NSHTTPCookie *)cookie {
-    [[self class] addCookie:cookie forURL:_url];
+    
+    if([self cookieStoragePolicy] == STHTTPRequestCookiesStorageShared) {
+        return [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[_url absoluteURL]];
+    } else if ([self cookieStoragePolicy] == STHTTPRequestCookiesStorageLocal) {
+        NSArray *filteredCookies = [[[self class] localCookiesStorage] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            NSHTTPCookie *cookie = (NSHTTPCookie *)evaluatedObject;
+            return [[cookie domain] isEqualToString:[self.url host]];
+        }]];
+        return filteredCookies;
+    } else if ([self cookieStoragePolicy] == STHTTPRequestCookiesStorageNoStorage) {
+        return _ephemeralRequestCookies;
+    }
+    
+    return nil;
 }
 
 - (void)addCookieWithName:(NSString *)name value:(NSString *)value {
-    [[self class] addCookieWithName:name value:value url:_url];
-}
-
-+ (void)clearSession {
-    [self deleteAllCookies];
-    [self deleteAllCredentials];
+    [self addCookieWithName:name value:value url:_url];
 }
 
 #pragma mark Headers
@@ -239,7 +330,7 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
     BOOL hostAlreadyContainsCredentials = [host rangeOfString:@"@"].location != NSNotFound;
     if(hostAlreadyContainsCredentials) return url;
     
-    NSMutableString *resourceSpecifier = [[[url resourceSpecifier] mutableCopy] autorelease];
+    NSMutableString *resourceSpecifier = [[url resourceSpecifier] mutableCopy];
     
     if([resourceSpecifier hasPrefix:@"//"] == NO) return nil;
     
@@ -252,11 +343,55 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
     return [NSURL URLWithString:urlString];
 }
 
-- (NSURLRequest *)requestByAddingCredentialsToURL:(BOOL)useCredentialsInURL {
+// {k2:v2, k1:v1} -> [{k1:v1}, {k2:v2}]
++ (NSArray *)dictionariesSortedByKey:(NSDictionary *)dictionary {
+    
+    NSArray *keys = [dictionary allKeys];
+    NSArray *sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSComparisonResult result = [obj1 compare:obj2];
+        return result;
+    }];
+    
+    NSMutableArray *sortedDictionaries = [NSMutableArray arrayWithCapacity:[dictionary count]];
+    
+    for(NSString *key in sortedKeys) {
+        NSDictionary *d = @{ key : dictionary[key] };
+        [sortedDictionaries addObject:d];
+    }
+    return sortedDictionaries;
+}
+
++ (NSData *)multipartContentWithBoundary:(NSString *)boundary data:(NSData *)someData fileName:(NSString *)fileName parameterName:(NSString *)parameterName mimeType:(NSString *)aMimeType {
+    
+    NSString *mimeType = aMimeType ? aMimeType : @"application/octet-stream";
+    
+    NSMutableData *data = [[NSMutableData alloc] init];
+    
+    [data appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSString *fileNameContentDisposition = fileName ? [NSString stringWithFormat:@"filename=\"%@\"", fileName] : @"";
+    NSString *contentDisposition = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; %@\r\n", parameterName, fileNameContentDisposition];
+    
+    [data appendData:[contentDisposition dataUsingEncoding:NSUTF8StringEncoding]];
+    [data appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimeType] dataUsingEncoding:NSUTF8StringEncoding]];
+    [data appendData:someData];
+    
+    return data;
+}
+
++ (NSURL *)appendURL:(NSURL *)url withGETParameters:(NSDictionary *)parameters doApplyURLEncoding:(BOOL)doApplyURLEncoding {
+    NSMutableString *urlString = [[NSMutableString alloc] initWithString:[url absoluteString]];
+    
+    NSString *s = [urlString st_stringByAppendingGETParameters:parameters doApplyURLEncoding:doApplyURLEncoding];
+    
+    return [NSURL URLWithString:s];
+}
+
+- (NSURLRequest *)prepareURLRequest {
     
     NSURL *theURL = nil;
     
-    if(useCredentialsInURL) {
+    if(_addCredentialsToURL) {
         NSURLCredential *credential = [self credentialForCurrentHost];
         if(credential == nil) return nil;
         theURL = [[self class] urlByAddingCredentials:credential toURL:_url];
@@ -265,48 +400,44 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
         theURL = _url;
     }
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:theURL];
+    theURL = [[self class] appendURL:theURL withGETParameters:_GETDictionary doApplyURLEncoding:_encodeGETDictionary];
     
-    // Set properties
-    request.timeoutInterval = self.timeoutSeconds;
-//    if (self.requestMethod)
-//        request.HTTPMethod = self.requestMethod;
+    if([_HTTPMethod isEqualToString:@"GET"]) {
+        if(_POSTDictionary || _rawPOSTData || [self.filesToUpload count] > 0 || [self.dataToUpload count] > 0) {
+            self.HTTPMethod = @"POST";
+        }
+    }
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:theURL];
+    [request setHTTPMethod:_HTTPMethod];
+    
+    if(globalIgnoreCache || _ignoreCache) {
+        request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
+    }
+    
+    if(self.timeoutSeconds != 0.0) {
+        request.timeoutInterval = self.timeoutSeconds;
+    }
+    
+    NSArray *cookies = [self requestCookies];
+    NSDictionary *d = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
+    [request setAllHTTPHeaderFields:d];
     
     // escape POST dictionary keys and values if needed
     if(_encodePOSTDictionary) {
         NSMutableDictionary *escapedPOSTDictionary = _POSTDictionary ? [NSMutableDictionary dictionary] : nil;
         [_POSTDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            NSString *k = [key st_stringByAddingRFC3986PercentEscapesUsingEncoding:_postDataEncoding];
-            NSString *v = [[obj description] st_stringByAddingRFC3986PercentEscapesUsingEncoding:_postDataEncoding];
+            NSString *k = [key st_stringByAddingRFC3986PercentEscapesUsingEncoding:self.POSTDataEncoding];
+            NSString *v = [[obj description] st_stringByAddingRFC3986PercentEscapesUsingEncoding:self.POSTDataEncoding];
             [escapedPOSTDictionary setValue:v forKey:k];
         }];
         self.POSTDictionary = escapedPOSTDictionary;
     }
     
-    if(_POSTFileParameter && (_POSTFilePath || _POSTFileData)) {        
-        if(_POSTDictionary == nil) self.POSTDictionary = [[NSDictionary alloc] init];
-
-        NSData *fileData = nil;
-        NSString *mimeType = nil;
-        NSString *fileName = nil;
-
-        if (_POSTFilePath) {
-            NSError *readingError = nil;
-            fileData = [NSData dataWithContentsOfFile:_POSTFilePath options:0 error:&readingError];
-            if(fileData == nil ) {
-                //NSLog(@"-- %@", [readingError localizedDescription]);
-                return nil;
-            }
-            
-            fileName = [_POSTFilePath lastPathComponent];
-        } else {
-            fileData = _POSTFileData;
-            if (_POSTFileName) {
-                fileName = _POSTFileName;
-            }
-        }
-        
-        mimeType = _POSTFileMimeType ? _POSTFileMimeType : @"application/octet-stream";
+    // sort POST parameters in order to get deterministic, unit testable requests
+    NSArray *sortedPOSTDictionaries = [[self class] dictionariesSortedByKey:_POSTDictionary];
+    
+    if([self.filesToUpload count] > 0 || [self.dataToUpload count] > 0) {
         
         NSString *boundary = @"----------kStHtTpReQuEsTbOuNdArY";
         
@@ -315,63 +446,88 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
         
         NSMutableData *body = [NSMutableData data];
         
-        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        /**/
         
-        NSString *fileNameContentDisposition = fileName ? [NSString stringWithFormat:@"filename=\"%@\"", fileName] : @"";
-        NSString *contentDisposition = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; %@\r\n", _POSTFileParameter, fileNameContentDisposition];
+        for(STHTTPRequestFileUpload *fileToUpload in self.filesToUpload) {
+            
+            NSData *data = [NSData dataWithContentsOfFile:fileToUpload.path];
+            if(data == nil) continue;
+            NSString *fileName = [fileToUpload.path lastPathComponent];
+            
+            NSData *multipartData = [[self class] multipartContentWithBoundary:boundary
+                                                                          data:data
+                                                                      fileName:fileName
+                                                                 parameterName:fileToUpload.parameterName
+                                                                      mimeType:fileToUpload.mimeType];
+            [body appendData:multipartData];
+        }
         
-        [body appendData:[contentDisposition dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimeType] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:fileData];
+        /**/
         
-        [_POSTDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        for(STHTTPRequestDataUpload *dataToUpload in self.dataToUpload) {
+            NSData *multipartData = [[self class] multipartContentWithBoundary:boundary
+                                                                          data:dataToUpload.data
+                                                                      fileName:dataToUpload.fileName
+                                                                 parameterName:dataToUpload.parameterName
+                                                                      mimeType:dataToUpload.mimeType];
+            
+            [body appendData:multipartData];
+        }
+        
+        /**/
+        
+        [sortedPOSTDictionaries enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *d = (NSDictionary *)obj;
+            NSString *key = [[d allKeys] lastObject];
+            NSObject *value = [[d allValues] lastObject];
+            
             [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
             [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-            [body appendData:[[obj description] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[value description] dataUsingEncoding:NSUTF8StringEncoding]];
         }];
+        
+        /**/
         
         [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         
-        [request setHTTPMethod:@"POST"];
-        [request setValue:[NSString stringWithFormat:@"%ld", [body length]] forHTTPHeaderField:@"Content-Length"];
+        [request setValue:[NSString stringWithFormat:@"%u", (unsigned int)[body length]] forHTTPHeaderField:@"Content-Length"];
         [request setHTTPBody:body];
         
-    } else if(_POSTDictionary != nil) { // may be empty (POST request without body)
+    } else if (_rawPOSTData) {
+        
+        [request setValue:[NSString stringWithFormat:@"%u", (unsigned int)[_rawPOSTData length]] forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:_rawPOSTData];
+        
+    } else if (_POSTDictionary != nil) { // may be empty (POST request without body)
         
         if(_encodePOSTDictionary) {
             
-            CFStringEncoding cfStringEncoding = CFStringConvertNSStringEncodingToEncoding(_postDataEncoding);
+            CFStringEncoding cfStringEncoding = CFStringConvertNSStringEncodingToEncoding(_POSTDataEncoding);
             NSString *encodingName = (NSString *)CFStringConvertEncodingToIANACharSetName(cfStringEncoding);
             
             if(encodingName) {
-                NSString *contentTypeValue = [NSString stringWithFormat:@"application/x-www-form-urlencoded ; charset=%@", encodingName];
+                NSString *contentTypeValue = [NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@", encodingName];
                 [self setHeaderWithName:@"Content-Type" value:contentTypeValue];
             }
         }
         
         NSMutableArray *ma = [NSMutableArray arrayWithCapacity:[_POSTDictionary count]];
         
-        for(NSString *k in _POSTDictionary) {
-            NSString *kv = [NSString stringWithFormat:@"%@=%@", k, [_POSTDictionary objectForKey:k]];
+        [sortedPOSTDictionaries enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *d = (NSDictionary *)obj;
+            NSString *key = [[d allKeys] lastObject];
+            NSObject *value = [[d allValues] lastObject];
+            
+            NSString *kv = [NSString stringWithFormat:@"%@=%@", key, value];
             [ma addObject:kv];
-        }
-        
-        // we sort POST parameters in order to get deterministric requests, hence unit testable
-        [ma sortUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
-            return [obj1 compare:obj2];
         }];
         
         NSString *s = [ma componentsJoinedByString:@"&"];
         
-        NSData *data = [s dataUsingEncoding:_postDataEncoding allowLossyConversion:YES];
+        NSData *data = [s dataUsingEncoding:_POSTDataEncoding allowLossyConversion:YES];
         
-        [request setHTTPMethod:@"POST"];
-        [request setValue:[NSString stringWithFormat:@"%lu", [data length]] forHTTPHeaderField:@"Content-Length"];
+        [request setValue:[NSString stringWithFormat:@"%u", (unsigned int)[data length]] forHTTPHeaderField:@"Content-Length"];
         [request setHTTPBody:data];
-    } else if (_POSTData != nil) {
-        [request setHTTPMethod:@"POST"];
-        [request setValue:[NSString stringWithFormat:@"%lu", [_POSTData length]] forHTTPHeaderField:@"Content-Length"];
-        [request setHTTPBody:_POSTData];
     }
     
     [_requestHeaders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
@@ -387,44 +543,43 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
         [request addValue:authValue forHTTPHeaderField:@"Authorization"];
     }
     
+    request.HTTPShouldHandleCookies = ([self cookieStoragePolicy] == STHTTPRequestCookiesStorageShared);
+    
     return request;
-}
-
-- (NSURLRequest *)request {
-    return [self requestByAddingCredentialsToURL:NO];
-}
-
-- (NSURLRequest *)requestByAddingCredentialsToURL {
-    return [self requestByAddingCredentialsToURL:YES];
 }
 
 #pragma mark Upload
 
-- (void)setFileToUpload:(NSString *)path parameterName:(NSString *)param {
-    self.POSTFilePath = path;
-    self.POSTFileParameter = param;
+- (void)addFileToUpload:(NSString *)path parameterName:(NSString *)parameterName {
+    
+    STHTTPRequestFileUpload *fu = [STHTTPRequestFileUpload fileUploadWithPath:path parameterName:parameterName];
+    [self.filesToUpload addObject:fu];
 }
 
-- (void)setDataToUpload:(NSData *)data parameterName:(NSString *)param {
-    self.POSTFileData = data;
-    self.POSTFileParameter = param;
+- (void)addDataToUpload:(NSData *)data parameterName:(NSString *)param {
+    STHTTPRequestDataUpload *du = [STHTTPRequestDataUpload dataUploadWithData:data parameterName:param mimeType:nil fileName:nil];
+    [self.dataToUpload addObject:du];
 }
 
-- (void)setDataToUpload:(NSData *)data parameterName:(NSString *)param mimeType:(NSString *)mimeType fileName:(NSString *)fileName
-{
-    self.POSTFileData = data;
-    self.POSTFileParameter = param;
-    self.POSTFileMimeType = mimeType;
-    self.POSTFileName = fileName;
+- (void)addDataToUpload:(NSData *)data parameterName:(NSString *)param mimeType:(NSString *)mimeType fileName:(NSString *)fileName {
+    STHTTPRequestDataUpload *du = [STHTTPRequestDataUpload dataUploadWithData:data parameterName:param mimeType:mimeType fileName:fileName];
+    [self.dataToUpload addObject:du];
 }
 
 #pragma mark Response
+
+- (NSString *)responseString {
+    if(_responseString == nil) {
+        self.responseString = [self stringWithData:_responseData encodingName:_responseStringEncodingName];
+    }
+    return _responseString;
+}
 
 - (NSString *)stringWithData:(NSData *)data encodingName:(NSString *)encodingName {
     if(data == nil) return nil;
     
     if(_forcedResponseEncoding > 0) {
-        return [[[NSString alloc] initWithData:data encoding:_forcedResponseEncoding] autorelease];
+        return [[NSString alloc] initWithData:data encoding:_forcedResponseEncoding];
     }
     
     NSStringEncoding encoding = NSUTF8StringEncoding;
@@ -440,80 +595,239 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
         }
     }
     
-    return [[[NSString alloc] initWithData:data encoding:encoding] autorelease];
+    return [[NSString alloc] initWithData:data encoding:encoding];
 }
 
-- (void)logRequest:(NSURLRequest *)request {
+#pragma mark HTTP Error Codes
+
++ (NSString *)descriptionForHTTPStatus:(NSUInteger)status {
+    NSString *s = [NSString stringWithFormat:@"HTTP Status %@", @(status)];
     
-    NSLog(@"--------------------------------------");
+    NSString *description = nil;
+    // http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+    if(status == 400) description = @"Bad Request";
+    if(status == 401) description = @"Unauthorized";
+    if(status == 402) description = @"Payment Required";
+    if(status == 403) description = @"Forbidden";
+    if(status == 404) description = @"Not Found";
+    if(status == 405) description = @"Method Not Allowed";
+    if(status == 406) description = @"Not Acceptable";
+    if(status == 407) description = @"Proxy Authentication Required";
+    if(status == 408) description = @"Request Timeout";
+    if(status == 409) description = @"Conflict";
+    if(status == 410) description = @"Gone";
+    if(status == 411) description = @"Length Required";
+    if(status == 412) description = @"Precondition Failed";
+    if(status == 413) description = @"Payload Too Large";
+    if(status == 414) description = @"URI Too Long";
+    if(status == 415) description = @"Unsupported Media Type";
+    if(status == 416) description = @"Requested Range Not Satisfiable";
+    if(status == 417) description = @"Expectation Failed";
+    if(status == 422) description = @"Unprocessable Entity";
+    if(status == 423) description = @"Locked";
+    if(status == 424) description = @"Failed Dependency";
+    if(status == 425) description = @"Unassigned";
+    if(status == 426) description = @"Upgrade Required";
+    if(status == 427) description = @"Unassigned";
+    if(status == 428) description = @"Precondition Required";
+    if(status == 429) description = @"Too Many Requests";
+    if(status == 430) description = @"Unassigned";
+    if(status == 431) description = @"Request Header Fields Too Large";
+    if(status == 432) description = @"Unassigned";
+    if(status == 500) description = @"Internal Server Error";
+    if(status == 501) description = @"Not Implemented";
+    if(status == 502) description = @"Bad Gateway";
+    if(status == 503) description = @"Service Unavailable";
+    if(status == 504) description = @"Gateway Timeout";
+    if(status == 505) description = @"HTTP Version Not Supported";
+    if(status == 506) description = @"Variant Also Negotiates";
+    if(status == 507) description = @"Insufficient Storage";
+    if(status == 508) description = @"Loop Detected";
+    if(status == 509) description = @"Unassigned";
+    if(status == 510) description = @"Not Extended";
+    if(status == 511) description = @"Network Authentication Required";
     
-    NSString *method = _POSTDictionary ? @"POST" : @"GET";
+    if(description) {
+        s = [s stringByAppendingFormat:@": %@", description];
+    }
     
-    NSLog(@"%@ %@", method, [request URL]);
+    return s;
+}
+
++ (NSDictionary *)userInfoWithErrorDescriptionForHTTPStatus:(NSUInteger)status {
+    NSString *s = [self descriptionForHTTPStatus:status];
+    if(s == nil) return nil;
+    return @{ NSLocalizedDescriptionKey : s };
+}
+
+#pragma mark Descriptions
+
+- (NSString *)curlDescription {
     
-    NSMutableDictionary *headers = [[[self requestHeaders] mutableCopy] autorelease];
+    //[self prepareURLRequest];
     
-    [headers addEntriesFromDictionary:[request allHTTPHeaderFields]];
+    NSMutableArray *ma = [NSMutableArray array];
+    [ma addObject:@"\U0001F300 curl -i"];
     
-    if([headers count]) NSLog(@"HEADERS");
+    if([_HTTPMethod isEqualToString:@"GET"] == NO) { // GET is optional in curl
+        NSString *s = [NSString stringWithFormat:@"-X %@", _HTTPMethod];
+        [ma addObject:s];
+    }
+    
+    // -u username:password
+    
+    NSURLCredential *credential = [[self class] sessionAuthenticationCredentialsForURL:[self url]];
+    if(credential) {
+        NSString *s = [NSString stringWithFormat:@"-u \"%@:%@\"", credential.user, credential.password];
+        [ma addObject:s];
+    }
+    
+    // -d "k1=v1&k2=v2"                                             // POST, url encoded params
+    
+    if(_POSTDictionary) {
+        NSMutableArray *postParameters = [NSMutableArray array];
+        [_POSTDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            NSString *s = [NSString stringWithFormat:@"%@=%@", key, obj];
+            [postParameters addObject:s];
+        }];
+        NSString *ss = [postParameters componentsJoinedByString:@"&"];
+        [ma addObject:[NSString stringWithFormat:@"-d \"%@\"", ss]];
+    }
+    
+    if(_rawPOSTData) {
+        // try JSON
+        id jsonObject = [NSJSONSerialization JSONObjectWithData:_rawPOSTData options:NSJSONReadingMutableContainers error:nil];
+        if(jsonObject) {
+            NSString *jsonString = [[NSString alloc] initWithData:_rawPOSTData encoding:NSUTF8StringEncoding];
+            //            [ma addObject:@"-X POST"];
+            [ma addObject:[NSString stringWithFormat:@"-d \'%@\'", jsonString]];
+        }
+    }
+    
+    // -F "coolfiles=@fil1.gif;type=image/gif,fil2.txt,fil3.html"   // file upload
+    
+    for(STHTTPRequestFileUpload *f in _filesToUpload) {
+        NSString *s = [NSString stringWithFormat:@"%@=@%@", f.parameterName, f.path];
+        [ma addObject:[NSString stringWithFormat:@"-F \"%@\"", s]];
+    }
+        
+    // -H "X-you-and-me: yes"                                       // extra headers
+    
+    NSMutableDictionary *headers = [[_request allHTTPHeaderFields] mutableCopy];
+//    [headers removeObjectForKey:@"Cookie"];
+    
+    NSMutableArray *headersStrings = [NSMutableArray array];
+    [headers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSString *s = [NSString stringWithFormat:@"-H \"%@: %@\"", key, obj];
+        [headersStrings addObject:s];
+    }];
+    
+    if([headersStrings count] > 0) {
+        [ma addObject:[headersStrings componentsJoinedByString:@" \\\n"]];
+    }
+    
+    // url
+    
+    NSURL *url = [_request URL] ? [_request URL] : _url;
+    [ma addObject:[NSString stringWithFormat:@"\"%@\"", url]];
+    
+    return [ma componentsJoinedByString:@" \\\n"];
+}
+
+- (NSString *)debugDescription {
+    
+    NSMutableString *ms = [NSMutableString string];
+    
+    NSString *method = (self.POSTDictionary || [self.filesToUpload count] || [self.dataToUpload count]) ? @"POST" : @"GET";
+    
+    [ms appendFormat:@"%@ %@\n", method, [_request URL]];
+    
+    NSMutableDictionary *headers = [[_request allHTTPHeaderFields] mutableCopy];
+    
+    if([headers count]) [ms appendString:@"HEADERS\n"];
     
     [headers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSLog(@"\t %@ = %@", key, obj);
+        [ms appendFormat:@"\t %@ = %@\n", key, obj];
     }];
     
-    NSArray *cookies = [self requestCookies];
+    NSArray *kvDictionaries = [[self class] dictionariesSortedByKey:_POSTDictionary];
     
-    if([cookies count]) NSLog(@"COOKIES");
+    if([kvDictionaries count]) [ms appendString:@"POST DATA\n"];
     
-    for(NSHTTPCookie *cookie in cookies) {
-        NSLog(@"\t %@ = %@", [cookie name], [cookie value]);
+    for(NSDictionary *kv in kvDictionaries) {
+        NSString *k = [[kv allKeys] lastObject];
+        NSString *v = [[kv allValues] lastObject];
+        [ms appendFormat:@"\t %@ = %@\n", k, v];
     }
     
-    NSDictionary *d = [self POSTDictionary];
-    
-    if([d count]) NSLog(@"POST DATA");
-    
-    [d enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSLog(@"\t %@ = %@", key, obj);
-    }];
-    
-    if (_POSTFileParameter && _POSTFilePath) {
-        NSLog(@"UPLOAD FILE");
-        NSLog(@"\t %@ = %@", _POSTFileParameter, _POSTFilePath);
-    } else if (_POSTFileParameter && _POSTFileData) {
-        NSLog(@"UPLOAD DATA");
-        NSLog(@"\t %@ = [%lu bytes]", _POSTFileParameter, [_POSTFileData length]);
-    } else if (_POSTData) {
-        NSLog(@"UPLOAD DATA");
-        NSLog(@"\t [%lu bytes]", [_POSTData length]);
+    for(STHTTPRequestFileUpload *f in self.filesToUpload) {
+        [ms appendString:@"UPLOAD FILE\n"];
+        [ms appendFormat:@"\t %@ = %@\n", f.parameterName, f.path];
     }
     
-    NSLog(@"--------------------------------------");
+    for(STHTTPRequestDataUpload *d in self.dataToUpload) {
+        [ms appendString:@"UPLOAD DATA\n"];
+        [ms appendFormat:@"\t %@ = [%u bytes]\n", d.parameterName, (unsigned int)[d.data length]];
+    }
+    
+    return ms;
 }
 
 #pragma mark Start Request
 
 - (void)startAsynchronous {
     
-    NSURLRequest *request = [self requestByAddingCredentialsToURL:_addCredentialsToURL];
+    NSAssert((self.completionBlock || self.completionDataBlock), @"a completion block is mandatory");
+    NSAssert(self.errorBlock, @"the error block is mandatory");
     
-#if DEBUG
-    [self logRequest:request];
-#endif
+    NSURLRequest *request = [self prepareURLRequest];
     
-    // NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
-    // http://www.pixeldock.com/blog/how-to-avoid-blocked-downloads-during-scrolling/
-    self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO] autorelease];
-    [_connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
+    [_connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     [_connection start];
+    
+    self.request = [_connection currentRequest];
+    
+    self.requestHeaders = [[_request allHTTPHeaderFields] mutableCopy];
+    
+    /**/
+    
+    BOOL showDebugDescription = [[NSUserDefaults standardUserDefaults] boolForKey:@"STHTTPRequestShowDebugDescription"];
+    BOOL showCurlDescription = [[NSUserDefaults standardUserDefaults] boolForKey:@"STHTTPRequestShowCurlDescription"];
+    
+    NSMutableString *logString = nil;
+    
+    if(showDebugDescription || showCurlDescription) {
+        logString = [NSMutableString stringWithString:@"\n----------\n"];
+    }
+    
+    if(showDebugDescription) {
+        [logString appendString:[self debugDescription]];
+    }
+    
+    if(showDebugDescription && showCurlDescription) {
+        [logString appendString:@"\n"];
+    }
+    
+    if(showCurlDescription) {
+        [logString appendString:[self curlDescription]];
+    }
+    
+    if(showDebugDescription || showCurlDescription) {
+        [logString appendString:@"\n----------\n"];
+    }
+    
+    if(logString) NSLog(@"%@", logString);
+    
+    /**/
     
     if(_connection == nil) {
         NSString *s = @"can't create connection";
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:s forKey:NSLocalizedDescriptionKey];
         self.error = [NSError errorWithDomain:NSStringFromClass([self class])
                                          code:0
-                                     userInfo:userInfo];
-        _errorBlock(_error, -1);
+                                     userInfo:@{NSLocalizedDescriptionKey: s}];
+        
+        self.errorBlock(self.error);
     }
 }
 
@@ -522,12 +836,11 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
     self.responseHeaders = nil;
     self.responseStatus = 0;
     
-    NSURLRequest *request = [self requestByAddingCredentialsToURL:_addCredentialsToURL];
+    NSURLRequest *request = [self prepareURLRequest];
     
     NSURLResponse *urlResponse = nil;
     
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:e];
-    if(data == nil) return nil;
     
     self.responseData = [NSMutableData dataWithData:data];
     
@@ -543,7 +856,8 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
     self.responseString = [self stringWithData:_responseData encodingName:_responseStringEncodingName];
     
     if(_responseStatus >= 400) {
-        if(e) *e = [NSError errorWithDomain:NSStringFromClass([self class]) code:_responseStatus userInfo:nil];
+        NSDictionary *userInfo = [[self class] userInfoWithErrorDescriptionForHTTPStatus:_responseStatus];
+        if(e) *e = [NSError errorWithDomain:NSStringFromClass([self class]) code:_responseStatus userInfo:userInfo];
     }
     
     return _responseString;
@@ -553,70 +867,51 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
     [_connection cancel];
     
     NSString *s = @"Connection was cancelled.";
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:s forKey:NSLocalizedDescriptionKey];
     self.error = [NSError errorWithDomain:NSStringFromClass([self class])
                                      code:kSTHTTPRequestCancellationError
-                                 userInfo:userInfo];
-    _errorBlock(_error, -1);
+                                 userInfo:@{NSLocalizedDescriptionKey: s}];
+    
+    self.errorBlock(self.error);
+}
+
+#pragma mark NSURLConnectionDataDelegate
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse {
+    if(globalIgnoreCache || _ignoreCache) return nil;
+    
+    return cachedResponse;
 }
 
 #pragma mark NSURLConnectionDelegate
 
--(BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
-{
-    //return YES to say that we have the necessary credentials to access the requested resource
-    return YES;
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse {
+    
+    if(_preventRedirections && redirectResponse) {
+        return nil;
+    }
+    
+    return request;
 }
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
     
-    // Server Trust authentication
-    if ([[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        NSURLCredential *serverTrustCredential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-        [challenge.sender useCredential:serverTrustCredential forAuthenticationChallenge:challenge];
-        return;
-    }
+    NSURLProtectionSpace *protectionSpace = [challenge protectionSpace];
+    NSString *authenticationMethod = [protectionSpace authenticationMethod];
     
-    // Digest authentication
-    else if ([[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodHTTPDigest]) {
+    if ([authenticationMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest] ||
+        [authenticationMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic]) {
         
         if([challenge previousFailureCount] == 0) {
             NSURLCredential *credential = [self credentialForCurrentHost];
             [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
         } else {
             [[[self class] sharedCredentialsStorage] removeObjectForKey:[_url host]];
-            [connection cancel];
-            [[challenge sender] cancelAuthenticationChallenge:challenge];
+            [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
         }
+    } else {
+        [[challenge sender] performDefaultHandlingForAuthenticationChallenge:challenge];
     }
-    
-    // Basic authentication
-    else if ([[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodHTTPBasic]) {
-        
-        // We proactively add authentication into headers.
-        // At this point, the credentials we provided are wrong,
-        // so we delete them and cancel the connection.
-        [[[self class] sharedCredentialsStorage] removeObjectForKey:[_url host]];
-        [connection cancel];
-        [[challenge sender] cancelAuthenticationChallenge:challenge];
-        
-    }
-    
-    // Unhandled
-    else
-    {
-        NSLog(@"Unhandled authentication challenge type - %@", [[challenge protectionSpace] authenticationMethod]);
-        [connection cancel];
-        [[challenge sender] cancelAuthenticationChallenge:challenge];
-    }
-    
 }
-
-
-
-//- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection {
-//    return NO;
-//}
 
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
     if (_uploadProgressBlock) {
@@ -631,30 +926,48 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
         self.responseHeaders = [r allHeaderFields];
         self.responseStatus = [r statusCode];
         self.responseStringEncodingName = [r textEncodingName];
+        self.responseExpectedContentLength = [r expectedContentLength];
+        
+        NSArray *responseCookies = [NSHTTPCookie cookiesWithResponseHeaderFields:_responseHeaders forURL:connection.currentRequest.URL];
+        for(NSHTTPCookie *cookie in responseCookies) {
+            [self addCookie:cookie]; // won't store anything when STHTTPRequestCookiesStorageNoStorage
+        }
     }
     
     [_responseData setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)theData {
+    
     [_responseData appendData:theData];
+    
+    if (_downloadProgressBlock) {
+        _downloadProgressBlock(theData, [_responseData length], self.responseExpectedContentLength);
+    }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    self.responseString = [self stringWithData:_responseData encodingName:_responseStringEncodingName];
     
     if(_responseStatus >= 400) {
-        self.error = [NSError errorWithDomain:NSStringFromClass([self class]) code:_responseStatus userInfo:[NSDictionary dictionaryWithObjectsAndKeys:_responseString, NSLocalizedDescriptionKey, nil]];
-        _errorBlock(_error, _responseStatus);
+        NSDictionary *userInfo = [[self class] userInfoWithErrorDescriptionForHTTPStatus:_responseStatus];
+        self.error = [NSError errorWithDomain:NSStringFromClass([self class]) code:_responseStatus userInfo:userInfo];
+        _errorBlock(_error);
         return;
     }
     
-    _completionBlock(_responseHeaders, _responseStatus, [self responseString]);
+    if(_completionDataBlock) {
+        _completionDataBlock(_responseHeaders,_responseData);
+    }
+    
+    if(_completionBlock) {
+        NSString *responseString = [self stringWithData:_responseData encodingName:_responseStringEncodingName];
+        _completionBlock(_responseHeaders, responseString);
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)e {
     self.error = e;
-    _errorBlock(_error, -1);
+    _errorBlock(_error);
 }
 
 @end
@@ -664,15 +977,16 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
 @implementation NSError (STHTTPRequest)
 
 - (BOOL)st_isAuthenticationError {
-    if([[self domain] isEqualToString:NSURLErrorDomain] == NO) return NO;
     
-    return ([self code] == kCFURLErrorUserCancelledAuthentication || [self code] == kCFURLErrorUserAuthenticationRequired);
+    if ([[self domain] isEqualToString:@"STHTTPRequest"] && ([self code] == 401)) return YES;
+    
+    if ([[self domain] isEqualToString:NSURLErrorDomain] && ([self code] == kCFURLErrorUserCancelledAuthentication || [self code] == kCFURLErrorUserAuthenticationRequired)) return YES;
+    
+    return NO;
 }
 
 - (BOOL)st_isCancellationError {
-    if([[self domain] isEqualToString:@"STHTTPRequest"] == NO) return NO;
-    
-    return ([self code] == kSTHTTPRequestCancellationError);
+    return ([[self domain] isEqualToString:@"STHTTPRequest"] && [self code] == kSTHTTPRequestCancellationError);
 }
 
 @end
@@ -680,13 +994,49 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
 @implementation NSString (RFC3986)
 - (NSString *)st_stringByAddingRFC3986PercentEscapesUsingEncoding:(NSStringEncoding)encoding {
     
-    NSString *s = (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                      (CFStringRef)self,
-                                                                      NULL,
-                                                                      CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                      kCFStringEncodingUTF8);
-    return [s autorelease];
+    NSString *s = (__bridge_transfer NSString *)(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                         (CFStringRef)self,
+                                                                                         NULL,
+                                                                                         CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                                         kCFStringEncodingUTF8));
+    return s;
 }
+@end
+
+/**/
+
+@implementation NSString (STUtilities)
+
+- (NSString *)st_stringByAppendingGETParameters:(NSDictionary *)parameters doApplyURLEncoding:(BOOL)doApplyURLEncoding {
+    
+    NSMutableString *ms = [self mutableCopy];
+    
+    __block BOOL questionMarkFound = NO;
+    
+    NSArray *sortedParameters = [STHTTPRequest dictionariesSortedByKey:parameters];
+    
+    [sortedParameters enumerateObjectsUsingBlock:^(NSDictionary *d, NSUInteger idx, BOOL *stop) {
+        
+        NSString *key = [[d allKeys] lastObject];
+        NSString *value = [[[d allValues] lastObject] description];
+        
+        if(questionMarkFound == NO) {
+            questionMarkFound = [ms rangeOfString:@"?"].location != NSNotFound;
+        }
+        
+        [ms appendString: (questionMarkFound ? @"&" : @"?") ];
+        
+        if(doApplyURLEncoding) {
+            key = [key st_stringByAddingRFC3986PercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            value = [value st_stringByAddingRFC3986PercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        }
+        
+        [ms appendFormat:@"%@=%@", key, value];
+    }];
+    
+    return ms;
+}
+
 @end
 
 /**/
@@ -700,3 +1050,34 @@ static NSMutableDictionary *sharedCredentialsStorage = nil;
 
 @end
 #endif
+
+/**/
+
+@implementation STHTTPRequestFileUpload
+
++ (instancetype)fileUploadWithPath:(NSString *)path parameterName:(NSString *)parameterName mimeType:(NSString *)mimeType {
+    STHTTPRequestFileUpload *fu = [[self alloc] init];
+    fu.path = path;
+    fu.parameterName = parameterName;
+    fu.mimeType = mimeType;
+    return fu;
+}
+
++ (instancetype)fileUploadWithPath:(NSString *)path parameterName:(NSString *)fileName {
+    return [self fileUploadWithPath:path parameterName:fileName mimeType:@"application/octet-stream"];
+}
+
+@end
+
+@implementation STHTTPRequestDataUpload
+
++ (instancetype)dataUploadWithData:(NSData *)data parameterName:(NSString *)parameterName mimeType:(NSString *)mimeType fileName:(NSString *)fileName {
+    STHTTPRequestDataUpload *du = [[self alloc] init];
+    du.data = data;
+    du.parameterName = parameterName;
+    du.mimeType = mimeType;
+    du.fileName = fileName;
+    return du;
+}
+
+@end
