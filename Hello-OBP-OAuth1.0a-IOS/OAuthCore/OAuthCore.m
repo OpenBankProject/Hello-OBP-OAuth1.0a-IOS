@@ -21,26 +21,51 @@ static NSInteger SortParameter(NSString *key1, NSString *key2, void *context) {
 	return r;
 }
 
-/*static NSData *HMAC_SHA1(NSString *data, NSString *key) {
+static NSData *HMAC_SHA1(NSString *data, NSString *key) {
 	unsigned char buf[CC_SHA1_DIGEST_LENGTH];
 	CCHmac(kCCHmacAlgSHA1, [key UTF8String], [key length], [data UTF8String], [data length], buf);
 	return [NSData dataWithBytes:buf length:CC_SHA1_DIGEST_LENGTH];
-}*/ //DERP
+}
 
+#ifndef OAUTHCORE_NO_TESOBE_ADDITIONS
 static NSData *HMAC_SHA256(NSString *data, NSString *key) {
 	unsigned char buf[CC_SHA256_DIGEST_LENGTH];
 	CCHmac(kCCHmacAlgSHA256, [key UTF8String], [key length], [data UTF8String], [data length], buf);
 	return [NSData dataWithBytes:buf length:CC_SHA256_DIGEST_LENGTH];
 }
+#endif
 
-NSString *OAuthorizationHeader(NSURL *url, NSString *method, NSData *body, NSString *_oAuthConsumerKey, NSString *_oAuthConsumerSecret, NSString *_oAuthToken, NSString *_oAuthTokenSecret, NSString *_oAuthVerifier) {
-	return OAuthorizationHeaderWithCallback(url, method, body, _oAuthConsumerKey, _oAuthConsumerSecret, _oAuthToken, _oAuthTokenSecret, _oAuthVerifier, nil);
+NSString *OAuthorizationHeader(NSURL *url, NSString *method, NSData *body, NSString *_oAuthConsumerKey, NSString *_oAuthConsumerSecret, NSString *_oAuthToken, NSString *_oAuthTokenSecret) {
+	return OAuthorizationHeaderWithCallback(url, method, body, _oAuthConsumerKey, _oAuthConsumerSecret, _oAuthToken, _oAuthTokenSecret, nil);
 }
 
-NSString *OAuthorizationHeaderWithCallback(NSURL *url, NSString *method, NSData *body, NSString *_oAuthConsumerKey, NSString *_oAuthConsumerSecret, NSString *_oAuthToken, NSString *_oAuthTokenSecret, NSString *_oAuthVerifier, NSString *_oAuthCallback) {
+NSString *OAuthorizationHeaderWithCallback(NSURL *url, NSString *method, NSData *body, NSString *_oAuthConsumerKey, NSString *_oAuthConsumerSecret, NSString *_oAuthToken, NSString *_oAuthTokenSecret, NSString *_oAuthCallback) {
+#ifndef OAUTHCORE_NO_TESOBE_ADDITIONS
+	return OAuthHeader(url, method, body, _oAuthConsumerKey, _oAuthConsumerSecret, _oAuthToken, _oAuthTokenSecret,
+		nil,
+		OAuthCoreSignatureMethod_HMAC_SHA1,
+		nil);
+}
+
+NSString *OAuthHeader(
+	NSURL *url,
+	NSString *method,
+	NSData *body,
+	NSString *_oAuthConsumerKey,
+	NSString *_oAuthConsumerSecret,
+	NSString *_oAuthToken,
+	NSString *_oAuthTokenSecret,
+	NSString *_oAuthVerifier,
+	OAuthCoreSignatureMethod sigMethod,
+	NSString *_oAuthCallback) {
+#endif
 	NSString *_oAuthNonce = [NSString ab_GUID];
 	NSString *_oAuthTimestamp = [NSString stringWithFormat:@"%d", (int)[[NSDate date] timeIntervalSince1970]];
-	NSString *_oAuthSignatureMethod = @"HMAC-SHA256";
+	NSString *_oAuthSignatureMethod = @"HMAC-SHA1";
+#ifndef OAUTHCORE_NO_TESOBE_ADDITIONS
+	if (sigMethod == OAuthCoreSignatureMethod_HMAC_SHA256)
+		_oAuthSignatureMethod = @"HMAC-SHA256";
+#endif
 	NSString *_oAuthVersion = @"1.0";
 	
 	NSMutableDictionary *oAuthAuthorizationParameters = [NSMutableDictionary dictionary];
@@ -53,9 +78,11 @@ NSString *OAuthorizationHeaderWithCallback(NSURL *url, NSString *method, NSData 
 		[oAuthAuthorizationParameters setObject:_oAuthToken forKey:@"oauth_token"];
 	if (_oAuthCallback)
 		[oAuthAuthorizationParameters setObject:_oAuthCallback forKey:@"oauth_callback"];
+#ifndef OAUTHCORE_NO_TESOBE_ADDITIONS
     if (_oAuthVerifier)
 		[oAuthAuthorizationParameters setObject:_oAuthVerifier forKey:@"oauth_verifier"];
-    
+#endif
+
 	// get query and body parameters
 	NSDictionary *additionalQueryParameters = [NSURL ab_parseURLQueryString:[url query]];
 	NSDictionary *additionalBodyParameters = nil;
@@ -97,18 +124,20 @@ NSString *OAuthorizationHeaderWithCallback(NSURL *url, NSString *method, NSData 
 									 [method ab_RFC3986EncodedString],
 									 [normalizedURLString ab_RFC3986EncodedString],
 									 [normalizedParameterString ab_RFC3986EncodedString]];
-	NSString *key = @"";    
-    //if (_oAuthTokenSecret != nil){
-        key = [NSString stringWithFormat:@"%@&%@",
+	
+	NSString *key = [NSString stringWithFormat:@"%@&%@",
 					 [_oAuthConsumerSecret ab_RFC3986EncodedString],
 					 [_oAuthTokenSecret ab_RFC3986EncodedString] ?: @""];
-/*    } else {
-        key = [_oAuthConsumerSecret ab_RFC3986EncodedString];
-    }*/
 	
-	NSData *signature = HMAC_SHA256(signatureBaseString, key);
+#ifndef OAUTHCORE_NO_TESOBE_ADDITIONS
+	NSData *signature = sigMethod == OAuthCoreSignatureMethod_HMAC_SHA256
+					  ? HMAC_SHA256(signatureBaseString, key)
+					  : HMAC_SHA1(signatureBaseString, key);
+#else
+	NSData *signature = HMAC_SHA1(signatureBaseString, key);
+#endif
 	NSString *base64Signature = [signature base64EncodedString];
-    
+	
 	NSMutableDictionary *authorizationHeaderDictionary = [[oAuthAuthorizationParameters mutableCopy] autorelease];
 	[authorizationHeaderDictionary setObject:base64Signature forKey:@"oauth_signature"];
 	

@@ -187,14 +187,16 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     STHTTPRequest *request = [STHTTPRequest requestWithURLString:transactionURL];
-    NSString *header = OAuthorizationHeader([request url], //set method to GET
-                                            [request POSTDictionary]!=nil?@"POST":@"GET",
-                                            [@"" dataUsingEncoding:NSUTF8StringEncoding],
-                                            OAUTH_CONSUMER_KEY,
-                                            OAUTH_CONSUMER_SECRET_KEY,
-                                            [defaults valueForKey: kAccessTokenKeyForPreferences],
-                                            [defaults valueForKey: kAccessSecretKeyForPreferences],
-                                            nil);
+	NSString *header = OAuthHeader([request url], //set method to GET
+								   [request POSTDictionary]!=nil?@"POST":@"GET",
+								   [@"" dataUsingEncoding:NSUTF8StringEncoding],
+								   OAUTH_CONSUMER_KEY,
+								   OAUTH_CONSUMER_SECRET_KEY,
+								   [defaults valueForKey: kAccessTokenKeyForPreferences],
+								   [defaults valueForKey: kAccessSecretKeyForPreferences],
+								   nil, // oauth_verifier
+								   OAuthCoreSignatureMethod_HMAC_SHA256,
+								   nil); // callback
     
     
     [request setHeaderWithName:@"Authorization" value:header];
