@@ -29,6 +29,7 @@
 		744B412D199E91C300EBDA6D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744B412C199E91C300EBDA6D /* DetailsViewController.m */; };
 		744B412F199F76A500EBDA6D /* Logo_Text_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 744B412E199F76A500EBDA6D /* Logo_Text_small.png */; };
 		746A94A519A2871000C935BC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A94A419A2871000C935BC /* AboutViewController.m */; };
+		AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		744B412E199F76A500EBDA6D /* Logo_Text_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_Text_small.png; sourceTree = "<group>"; };
 		746A94A319A2871000C935BC /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		746A94A419A2871000C935BC /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				7414C8F11923B78200084BC3 /* InfoPlist.strings */,
 				74195CFB19A25B0A006E3F63 /* Main_iPhone4.storyboard */,
 				74195CF819A1FD61006E3F63 /* Main_iPhone5.storyboard */,
+				AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */,
 				7414C8FA1923B78300084BC3 /* Images.xcassets */,
 				744B412E199F76A500EBDA6D /* Logo_Text_small.png */,
 				7414C9761923C22F00084BC3 /* logo-obp.JPG */,
@@ -280,6 +283,7 @@
 				74195CFC19A25B0A006E3F63 /* Main_iPhone4.storyboard in Resources */,
 				7414C96F1923C15700084BC3 /* LICENSE in Resources */,
 				7414C8FB1923B78300084BC3 /* Images.xcassets in Resources */,
+				AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */,
 				7414C9781923C22F00084BC3 /* logo-obp.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,8 +396,7 @@
 		7414C9121923B78300084BC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Prefix.pch";
 				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Info.plist";
@@ -407,8 +410,7 @@
 		7414C9131923B78300084BC3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Prefix.pch";
 				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Info.plist";
