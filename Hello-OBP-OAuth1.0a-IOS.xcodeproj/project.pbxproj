@@ -88,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				7414C8EE1923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS */,
+				AE87F3761C56506900D09FBC /* OBPKit */,
 				7414C8E71923B78200084BC3 /* Frameworks */,
 				7414C8E61923B78200084BC3 /* Products */,
 			);
@@ -115,39 +116,11 @@
 		7414C8EE1923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS */ = {
 			isa = PBXGroup;
 			children = (
-				74195CFB19A25B0A006E3F63 /* Main_iPhone4.storyboard */,
-				74195CF819A1FD61006E3F63 /* Main_iPhone5.storyboard */,
-				7414C95D1923C13400084BC3 /* OAuthController.h */,
-				7414C95B1923C13400084BC3 /* OAuthController.m */,
-				7414C95E1923C13400084BC3 /* ViewController.h */,
-				7414C95C1923C13400084BC3 /* ViewController.m */,
-				740692E919A0EF7C0036CB61 /* AccountsViewController.h */,
-				740692EA19A0EF7C0036CB61 /* AccountsViewController.m */,
-				744B412B199E91C300EBDA6D /* DetailsViewController.h */,
-				744B412C199E91C300EBDA6D /* DetailsViewController.m */,
-				746A94A319A2871000C935BC /* AboutViewController.h */,
-				746A94A419A2871000C935BC /* AboutViewController.m */,
-				7414C8F71923B78200084BC3 /* AppDelegate.h */,
-				7414C8F81923B78200084BC3 /* AppDelegate.m */,
-				7414C8FA1923B78300084BC3 /* Images.xcassets */,
-				7414C8EF1923B78200084BC3 /* Supporting Files */,
+				AE87F3701C56502B00D09FBC /* Main */,
+				AE87F3721C56503B00D09FBC /* UI */,
+				AE87F3741C56504900D09FBC /* Res */,
 			);
 			path = "Hello-OBP-OAuth1.0a-IOS";
-			sourceTree = "<group>";
-		};
-		7414C8EF1923B78200084BC3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				744B412E199F76A500EBDA6D /* Logo_Text_small.png */,
-				7414C9761923C22F00084BC3 /* logo-obp.JPG */,
-				7414C9611923C15700084BC3 /* STHTTPRequest */,
-				7414C9651923C15700084BC3 /* OAuthCore */,
-				7414C8F01923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS-Info.plist */,
-				7414C8F11923B78200084BC3 /* InfoPlist.strings */,
-				7414C8F41923B78200084BC3 /* main.m */,
-				7414C8F61923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		7414C9611923C15700084BC3 /* STHTTPRequest */ = {
@@ -172,6 +145,81 @@
 				7414C96C1923C15700084BC3 /* OAuthCore.m */,
 			);
 			path = OAuthCore;
+			sourceTree = "<group>";
+		};
+		AE87F3701C56502B00D09FBC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7414C8F01923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS-Info.plist */,
+				7414C8F61923B78200084BC3 /* Hello-OBP-OAuth1.0a-IOS-Prefix.pch */,
+				7414C8F41923B78200084BC3 /* main.m */,
+				7414C8F71923B78200084BC3 /* AppDelegate.h */,
+				7414C8F81923B78200084BC3 /* AppDelegate.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		AE87F3721C56503B00D09FBC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7414C95D1923C13400084BC3 /* OAuthController.h */,
+				7414C95B1923C13400084BC3 /* OAuthController.m */,
+				7414C95E1923C13400084BC3 /* ViewController.h */,
+				7414C95C1923C13400084BC3 /* ViewController.m */,
+				740692E919A0EF7C0036CB61 /* AccountsViewController.h */,
+				740692EA19A0EF7C0036CB61 /* AccountsViewController.m */,
+				744B412B199E91C300EBDA6D /* DetailsViewController.h */,
+				744B412C199E91C300EBDA6D /* DetailsViewController.m */,
+				746A94A319A2871000C935BC /* AboutViewController.h */,
+				746A94A419A2871000C935BC /* AboutViewController.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		AE87F3741C56504900D09FBC /* Res */ = {
+			isa = PBXGroup;
+			children = (
+				7414C8F11923B78200084BC3 /* InfoPlist.strings */,
+				74195CFB19A25B0A006E3F63 /* Main_iPhone4.storyboard */,
+				74195CF819A1FD61006E3F63 /* Main_iPhone5.storyboard */,
+				7414C8FA1923B78300084BC3 /* Images.xcassets */,
+				744B412E199F76A500EBDA6D /* Logo_Text_small.png */,
+				7414C9761923C22F00084BC3 /* logo-obp.JPG */,
+			);
+			path = Res;
+			sourceTree = "<group>";
+		};
+		AE87F3761C56506900D09FBC /* OBPKit */ = {
+			isa = PBXGroup;
+			children = (
+				AE87F37C1C56506900D09FBC /* Connection */,
+				AE87F37E1C56506900D09FBC /* Util */,
+				AE87F3771C56506900D09FBC /* External */,
+			);
+			path = OBPKit;
+			sourceTree = "<group>";
+		};
+		AE87F3771C56506900D09FBC /* External */ = {
+			isa = PBXGroup;
+			children = (
+				7414C9651923C15700084BC3 /* OAuthCore */,
+				7414C9611923C15700084BC3 /* STHTTPRequest */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		AE87F37C1C56506900D09FBC /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		AE87F37E1C56506900D09FBC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,8 +395,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Hello-OBP-OAuth1.0a-IOS/Hello-OBP-OAuth1.0a-IOS-Prefix.pch";
-				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOS/Hello-OBP-OAuth1.0a-IOS-Info.plist";
+				GCC_PREFIX_HEADER = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Prefix.pch";
+				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F6A61B20-D6BD-46E2-B610-3F92B6E2A881";
@@ -362,8 +410,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Hello-OBP-OAuth1.0a-IOS/Hello-OBP-OAuth1.0a-IOS-Prefix.pch";
-				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOS/Hello-OBP-OAuth1.0a-IOS-Info.plist";
+				GCC_PREFIX_HEADER = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Prefix.pch";
+				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F6A61B20-D6BD-46E2-B610-3F92B6E2A881";
