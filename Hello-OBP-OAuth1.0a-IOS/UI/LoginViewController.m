@@ -1,5 +1,5 @@
 //
-//  OAuthController.m
+//  LoginViewController.m
 //  Hello-OBP-OAuth1.0a-IOS
 //
 //  Created by Dunia Reviriego on 4/22/14.
@@ -15,7 +15,7 @@
 //4. Accessing to protected resources
 
 
-#import "OAuthController.h"
+#import "LoginViewController.h"
 #import "STHTTPRequest.h"
 #import "OAuthCore.h"
 
@@ -33,10 +33,10 @@
 #define OAUTH_CONSUMER_BANK_ID @"rbs" //Account of bank
 */
 
-@interface OAuthController ()
+@interface LoginViewController ()
 @end
 
-@implementation OAuthController
+@implementation LoginViewController
 @synthesize webView; // 2. create webview property
 @synthesize accessToken;
 @synthesize accessTokenSecret;

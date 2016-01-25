@@ -7,7 +7,6 @@
 //
 
 #import "DetailsViewController.h"
-#import "OAuthController.h"
 
 @interface DetailsViewController (){
     

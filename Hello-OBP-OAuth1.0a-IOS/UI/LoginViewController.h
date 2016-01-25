@@ -1,5 +1,5 @@
 //
-//  OAuthController.h
+//  LoginViewController.h
 //  Hello-OBP-OAuth1.0a-IOS
 //
 //  Created by Dunia Reviriego on 4/22/14.
@@ -22,7 +22,7 @@
 #define OAUTH_CONSUMER_BANK_ID @"rbs" //Account of bank
 
 
-@interface OAuthController : UIViewController <UIWebViewDelegate>  {
+@interface LoginViewController : UIViewController <UIWebViewDelegate>  {
     NSMutableString *requestToken;
     NSMutableString *requestTokenSecret;
     UIWebView *webView;
