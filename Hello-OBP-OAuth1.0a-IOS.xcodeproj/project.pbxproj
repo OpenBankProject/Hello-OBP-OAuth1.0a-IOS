@@ -248,7 +248,7 @@
 		7414C8DD1923B78200084BC3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = TESOBE;
 			};
 			buildConfigurationList = 7414C8E01923B78200084BC3 /* Build configuration list for PBXProject "Hello-OBP-OAuth1.0a-IOS" */;
@@ -337,6 +337,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -397,6 +398,7 @@
 				GCC_PREFIX_HEADER = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Prefix.pch";
 				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tesobe.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F6A61B20-D6BD-46E2-B610-3F92B6E2A881";
 				WRAPPER_EXTENSION = app;
@@ -411,6 +413,7 @@
 				GCC_PREFIX_HEADER = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Prefix.pch";
 				INFOPLIST_FILE = "Hello-OBP-OAuth1.0a-IOS/Main/Hello-OBP-OAuth1.0a-IOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tesobe.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F6A61B20-D6BD-46E2-B610-3F92B6E2A881";
 				WRAPPER_EXTENSION = app;
