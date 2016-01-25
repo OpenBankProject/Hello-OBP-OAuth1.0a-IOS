@@ -24,11 +24,10 @@
 		7414C9711923C15700084BC3 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C96A1923C15700084BC3 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7414C9721923C15700084BC3 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C96C1923C15700084BC3 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7414C9781923C22F00084BC3 /* logo-obp.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9761923C22F00084BC3 /* logo-obp.JPG */; };
-		74195CF919A1FD61006E3F63 /* Main_iPhone5.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74195CF819A1FD61006E3F63 /* Main_iPhone5.storyboard */; };
-		74195CFC19A25B0A006E3F63 /* Main_iPhone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74195CFB19A25B0A006E3F63 /* Main_iPhone4.storyboard */; };
 		744B412D199E91C300EBDA6D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744B412C199E91C300EBDA6D /* DetailsViewController.m */; };
 		744B412F199F76A500EBDA6D /* Logo_Text_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 744B412E199F76A500EBDA6D /* Logo_Text_small.png */; };
 		746A94A519A2871000C935BC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A94A419A2871000C935BC /* AboutViewController.m */; };
+		AE87F3811C5673F700D09FBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3801C5673F700D09FBC /* Main.storyboard */; };
 		AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -62,13 +61,12 @@
 		7414C96B1923C15700084BC3 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = "<group>"; };
 		7414C96C1923C15700084BC3 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
 		7414C9761923C22F00084BC3 /* logo-obp.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-obp.JPG"; sourceTree = "<group>"; };
-		74195CF819A1FD61006E3F63 /* Main_iPhone5.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone5.storyboard; sourceTree = "<group>"; };
-		74195CFB19A25B0A006E3F63 /* Main_iPhone4.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone4.storyboard; sourceTree = "<group>"; };
 		744B412B199E91C300EBDA6D /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		744B412C199E91C300EBDA6D /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		744B412E199F76A500EBDA6D /* Logo_Text_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_Text_small.png; sourceTree = "<group>"; };
 		746A94A319A2871000C935BC /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		746A94A419A2871000C935BC /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		AE87F3801C5673F700D09FBC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,9 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				7414C8F11923B78200084BC3 /* InfoPlist.strings */,
-				74195CFB19A25B0A006E3F63 /* Main_iPhone4.storyboard */,
-				74195CF819A1FD61006E3F63 /* Main_iPhone5.storyboard */,
 				AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */,
+				AE87F3801C5673F700D09FBC /* Main.storyboard */,
 				7414C8FA1923B78300084BC3 /* Images.xcassets */,
 				744B412E199F76A500EBDA6D /* Logo_Text_small.png */,
 				7414C9761923C22F00084BC3 /* logo-obp.JPG */,
@@ -277,11 +274,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7414C96D1923C15700084BC3 /* README.md in Resources */,
-				74195CF919A1FD61006E3F63 /* Main_iPhone5.storyboard in Resources */,
 				7414C8F31923B78200084BC3 /* InfoPlist.strings in Resources */,
 				744B412F199F76A500EBDA6D /* Logo_Text_small.png in Resources */,
-				74195CFC19A25B0A006E3F63 /* Main_iPhone4.storyboard in Resources */,
 				7414C96F1923C15700084BC3 /* LICENSE in Resources */,
+				AE87F3811C5673F700D09FBC /* Main.storyboard in Resources */,
 				7414C8FB1923B78300084BC3 /* Images.xcassets in Resources */,
 				AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */,
 				7414C9781923C22F00084BC3 /* logo-obp.JPG in Resources */,

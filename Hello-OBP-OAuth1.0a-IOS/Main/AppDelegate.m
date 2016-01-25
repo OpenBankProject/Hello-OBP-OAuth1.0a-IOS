@@ -38,26 +38,10 @@
      }
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        
-        if (_window.frame.size.height == 480) {
-            NSLog(@"iPhone");
-            UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main_iPhone4" bundle:Nil];
-            [_window setRootViewController:[story instantiateInitialViewController]];
-        } else {
-            NSLog(@"iPhone5");
-            UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main_iPhone5" bundle:Nil];
-            [_window setRootViewController:[story instantiateInitialViewController]];
-        }
-        
-    } /*else {
-        NSLog(@"iPad");
-        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:Nil];
-        [_window setRootViewController:[story instantiateInitialViewController]];
-    }*/
-    
-    
+
+	UIStoryboard *story = [UIStoryboard storyboardWithName: @"Main" bundle: Nil];
+	[_window setRootViewController:[story instantiateInitialViewController]];
+
     [self.window makeKeyAndVisible];
 
     
