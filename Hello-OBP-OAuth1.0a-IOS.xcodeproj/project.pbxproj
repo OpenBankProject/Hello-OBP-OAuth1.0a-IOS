@@ -15,8 +15,8 @@
 		7414C8F51923B78200084BC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C8F41923B78200084BC3 /* main.m */; };
 		7414C8F91923B78200084BC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C8F81923B78200084BC3 /* AppDelegate.m */; };
 		7414C8FB1923B78300084BC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7414C8FA1923B78300084BC3 /* Images.xcassets */; };
-		7414C95F1923C13400084BC3 /* OAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95B1923C13400084BC3 /* OAuthController.m */; };
-		7414C9601923C13400084BC3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95C1923C13400084BC3 /* ViewController.m */; };
+		7414C95F1923C13400084BC3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95B1923C13400084BC3 /* LoginViewController.m */; };
+		7414C9601923C13400084BC3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95C1923C13400084BC3 /* MainViewController.m */; };
 		7414C96D1923C15700084BC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9621923C15700084BC3 /* README.md */; };
 		7414C96E1923C15700084BC3 /* STHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C9641923C15700084BC3 /* STHTTPRequest.m */; };
 		7414C96F1923C15700084BC3 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9661923C15700084BC3 /* LICENSE */; };
@@ -46,10 +46,10 @@
 		7414C8F81923B78200084BC3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7414C8FA1923B78300084BC3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7414C9011923B78300084BC3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		7414C95B1923C13400084BC3 /* OAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthController.m; sourceTree = "<group>"; };
-		7414C95C1923C13400084BC3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		7414C95D1923C13400084BC3 /* OAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthController.h; sourceTree = "<group>"; };
-		7414C95E1923C13400084BC3 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7414C95B1923C13400084BC3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		7414C95C1923C13400084BC3 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		7414C95D1923C13400084BC3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		7414C95E1923C13400084BC3 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7414C9621923C15700084BC3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		7414C9631923C15700084BC3 /* STHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPRequest.h; sourceTree = "<group>"; };
 		7414C9641923C15700084BC3 /* STHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHTTPRequest.m; sourceTree = "<group>"; };
@@ -162,10 +162,10 @@
 		AE87F3721C56503B00D09FBC /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				7414C95D1923C13400084BC3 /* OAuthController.h */,
-				7414C95B1923C13400084BC3 /* OAuthController.m */,
-				7414C95E1923C13400084BC3 /* ViewController.h */,
-				7414C95C1923C13400084BC3 /* ViewController.m */,
+				7414C95D1923C13400084BC3 /* LoginViewController.h */,
+				7414C95B1923C13400084BC3 /* LoginViewController.m */,
+				7414C95E1923C13400084BC3 /* MainViewController.h */,
+				7414C95C1923C13400084BC3 /* MainViewController.m */,
 				740692E919A0EF7C0036CB61 /* AccountsViewController.h */,
 				740692EA19A0EF7C0036CB61 /* AccountsViewController.m */,
 				744B412B199E91C300EBDA6D /* DetailsViewController.h */,
@@ -296,9 +296,9 @@
 				7414C9711923C15700084BC3 /* OAuth+Additions.m in Sources */,
 				7414C8F91923B78200084BC3 /* AppDelegate.m in Sources */,
 				7414C8F51923B78200084BC3 /* main.m in Sources */,
-				7414C9601923C13400084BC3 /* ViewController.m in Sources */,
+				7414C9601923C13400084BC3 /* MainViewController.m in Sources */,
 				7414C96E1923C15700084BC3 /* STHTTPRequest.m in Sources */,
-				7414C95F1923C13400084BC3 /* OAuthController.m in Sources */,
+				7414C95F1923C13400084BC3 /* LoginViewController.m in Sources */,
 				746A94A519A2871000C935BC /* AboutViewController.m in Sources */,
 				740692EB19A0EF7C0036CB61 /* AccountsViewController.m in Sources */,
 				7414C9701923C15700084BC3 /* NSData+Base64.m in Sources */,

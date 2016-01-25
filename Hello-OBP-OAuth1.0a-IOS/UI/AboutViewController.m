@@ -7,7 +7,6 @@
 //
 
 #import "AboutViewController.h"
-#import "OAuthController.h"
 
 @interface AboutViewController ()
 

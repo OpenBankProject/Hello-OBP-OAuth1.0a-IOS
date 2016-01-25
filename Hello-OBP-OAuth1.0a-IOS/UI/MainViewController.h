@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  Hello-OBP-OAuth1.0a-IOS
 //
 //  Created by Dunia Reviriego on 4/22/14.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ViewController : UIViewController <UIAlertViewDelegate> {
+@interface MainViewController : UIViewController <UIAlertViewDelegate> {
     UIBarButtonItem *rightNavButton;    
 }
 

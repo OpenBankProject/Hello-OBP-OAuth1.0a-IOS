@@ -10,7 +10,7 @@
 #import "STHTTPRequest.h"
 #import "OAuthCore.h"
 
-#import "OAuthController.h"
+#import "LoginViewController.h"
 #import "DetailsViewController.h"
 
 @interface AccountsViewController ()
