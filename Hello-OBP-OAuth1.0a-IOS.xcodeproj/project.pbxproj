@@ -29,6 +29,10 @@
 		746A94A519A2871000C935BC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A94A419A2871000C935BC /* AboutViewController.m */; };
 		AE87F3811C5673F700D09FBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3801C5673F700D09FBC /* Main.storyboard */; };
 		AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */; };
+		AEC08DE01C57DB51002E2AA7 /* OBPSessionAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC08DDA1C57DB51002E2AA7 /* OBPSessionAuth.m */; };
+		AEC08DE11C57DB51002E2AA7 /* OBPAccessData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC08DDD1C57DB51002E2AA7 /* OBPAccessData.m */; };
+		AEC08DE21C57DB51002E2AA7 /* OBPWebViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC08DDE1C57DB51002E2AA7 /* OBPWebViewProvider.m */; };
+		AEC08DE61C57DB62002E2AA7 /* NSString+OBP.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC08DE41C57DB62002E2AA7 /* NSString+OBP.m */; };
 		AEC08DEB1C57DB96002E2AA7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC08DEA1C57DB96002E2AA7 /* KeychainItemWrapper.m */; };
 		AEC08DED1C57DBE5002E2AA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC08DEC1C57DBE5002E2AA7 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +74,15 @@
 		746A94A419A2871000C935BC /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		AE87F3801C5673F700D09FBC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		AEC08DDA1C57DB51002E2AA7 /* OBPSessionAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBPSessionAuth.m; sourceTree = "<group>"; };
+		AEC08DDB1C57DB51002E2AA7 /* OBPSessionAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBPSessionAuth.h; sourceTree = "<group>"; };
+		AEC08DDC1C57DB51002E2AA7 /* OBPAccessData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBPAccessData.h; sourceTree = "<group>"; };
+		AEC08DDD1C57DB51002E2AA7 /* OBPAccessData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBPAccessData.m; sourceTree = "<group>"; };
+		AEC08DDE1C57DB51002E2AA7 /* OBPWebViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBPWebViewProvider.m; sourceTree = "<group>"; };
+		AEC08DDF1C57DB51002E2AA7 /* OBPWebViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBPWebViewProvider.h; sourceTree = "<group>"; };
+		AEC08DE31C57DB62002E2AA7 /* NSString+OBP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+OBP.h"; sourceTree = "<group>"; };
+		AEC08DE41C57DB62002E2AA7 /* NSString+OBP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+OBP.m"; sourceTree = "<group>"; };
+		AEC08DE51C57DB62002E2AA7 /* OBPLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBPLogging.h; sourceTree = "<group>"; };
 		AEC08DE91C57DB96002E2AA7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		AEC08DEA1C57DB96002E2AA7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		AEC08DEC1C57DBE5002E2AA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -219,6 +232,12 @@
 		AE87F37C1C56506900D09FBC /* Connection */ = {
 			isa = PBXGroup;
 			children = (
+				AEC08DDA1C57DB51002E2AA7 /* OBPSessionAuth.m */,
+				AEC08DDB1C57DB51002E2AA7 /* OBPSessionAuth.h */,
+				AEC08DDC1C57DB51002E2AA7 /* OBPAccessData.h */,
+				AEC08DDD1C57DB51002E2AA7 /* OBPAccessData.m */,
+				AEC08DDE1C57DB51002E2AA7 /* OBPWebViewProvider.m */,
+				AEC08DDF1C57DB51002E2AA7 /* OBPWebViewProvider.h */,
 			);
 			path = Connection;
 			sourceTree = "<group>";
@@ -226,6 +245,9 @@
 		AE87F37E1C56506900D09FBC /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				AEC08DE31C57DB62002E2AA7 /* NSString+OBP.h */,
+				AEC08DE41C57DB62002E2AA7 /* NSString+OBP.m */,
+				AEC08DE51C57DB62002E2AA7 /* OBPLogging.h */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -321,7 +343,10 @@
 				7414C9711923C15700084BC3 /* OAuth+Additions.m in Sources */,
 				7414C8F91923B78200084BC3 /* AppDelegate.m in Sources */,
 				7414C8F51923B78200084BC3 /* main.m in Sources */,
+				AEC08DE11C57DB51002E2AA7 /* OBPAccessData.m in Sources */,
 				7414C9601923C13400084BC3 /* MainViewController.m in Sources */,
+				AEC08DE01C57DB51002E2AA7 /* OBPSessionAuth.m in Sources */,
+				AEC08DE21C57DB51002E2AA7 /* OBPWebViewProvider.m in Sources */,
 				7414C96E1923C15700084BC3 /* STHTTPRequest.m in Sources */,
 				7414C95F1923C13400084BC3 /* LoginViewController.m in Sources */,
 				AEC08DEB1C57DB96002E2AA7 /* KeychainItemWrapper.m in Sources */,
