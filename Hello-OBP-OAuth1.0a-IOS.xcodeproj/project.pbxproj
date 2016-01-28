@@ -29,6 +29,8 @@
 		746A94A519A2871000C935BC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A94A419A2871000C935BC /* AboutViewController.m */; };
 		AE87F3811C5673F700D09FBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3801C5673F700D09FBC /* Main.storyboard */; };
 		AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */; };
+		AEC08DEB1C57DB96002E2AA7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC08DEA1C57DB96002E2AA7 /* KeychainItemWrapper.m */; };
+		AEC08DED1C57DBE5002E2AA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC08DEC1C57DBE5002E2AA7 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,9 @@
 		746A94A419A2871000C935BC /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		AE87F3801C5673F700D09FBC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		AEC08DE91C57DB96002E2AA7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		AEC08DEA1C57DB96002E2AA7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		AEC08DEC1C57DBE5002E2AA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEC08DED1C57DBE5002E2AA7 /* Security.framework in Frameworks */,
 				7414C8EB1923B78200084BC3 /* CoreGraphics.framework in Frameworks */,
 				7414C8ED1923B78200084BC3 /* UIKit.framework in Frameworks */,
 				7414C8E91923B78200084BC3 /* Foundation.framework in Frameworks */,
@@ -105,6 +111,7 @@
 		7414C8E71923B78200084BC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEC08DEC1C57DBE5002E2AA7 /* Security.framework */,
 				7414C8E81923B78200084BC3 /* Foundation.framework */,
 				7414C8EA1923B78200084BC3 /* CoreGraphics.framework */,
 				7414C8EC1923B78200084BC3 /* UIKit.framework */,
@@ -202,6 +209,7 @@
 		AE87F3771C56506900D09FBC /* External */ = {
 			isa = PBXGroup;
 			children = (
+				AEC08DE71C57DB96002E2AA7 /* GenericKeychain */,
 				7414C9651923C15700084BC3 /* OAuthCore */,
 				7414C9611923C15700084BC3 /* STHTTPRequest */,
 			);
@@ -220,6 +228,23 @@
 			children = (
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		AEC08DE71C57DB96002E2AA7 /* GenericKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				AEC08DE81C57DB96002E2AA7 /* Classes */,
+			);
+			path = GenericKeychain;
+			sourceTree = "<group>";
+		};
+		AEC08DE81C57DB96002E2AA7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				AEC08DE91C57DB96002E2AA7 /* KeychainItemWrapper.h */,
+				AEC08DEA1C57DB96002E2AA7 /* KeychainItemWrapper.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,6 +324,7 @@
 				7414C9601923C13400084BC3 /* MainViewController.m in Sources */,
 				7414C96E1923C15700084BC3 /* STHTTPRequest.m in Sources */,
 				7414C95F1923C13400084BC3 /* LoginViewController.m in Sources */,
+				AEC08DEB1C57DB96002E2AA7 /* KeychainItemWrapper.m in Sources */,
 				746A94A519A2871000C935BC /* AboutViewController.m in Sources */,
 				740692EB19A0EF7C0036CB61 /* AccountsViewController.m in Sources */,
 				7414C9701923C15700084BC3 /* NSData+Base64.m in Sources */,
