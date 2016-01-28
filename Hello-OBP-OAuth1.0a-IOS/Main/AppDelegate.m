@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+//
+#import "OBPAccessData.h"
+// prj
+#import "DefaultServerDetails.h"
 
 
 @implementation AppDelegate
@@ -44,10 +48,12 @@
 
     [self.window makeKeyAndVisible];
 
-    
-    UIViewController * appViewController = [[UIViewController alloc] init];
-    UINavigationController * navigation = [[UINavigationController alloc] init];
-    [navigation pushViewController: appViewController animated:NO];
+	if (nil == [OBPAccessData firstEntryForAPIServer: kDefaultServer_APIBase])
+	{
+		OBPAccessData*	accessData;
+		accessData = [OBPAccessData addEntryForAPIServer: kDefaultServer_APIBase];
+		accessData.data = DefaultServerDetails();
+	}
 
     return YES;
 }

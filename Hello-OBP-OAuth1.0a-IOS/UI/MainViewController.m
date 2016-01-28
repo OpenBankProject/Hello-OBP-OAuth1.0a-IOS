@@ -9,9 +9,14 @@
 
 #import "MainViewController.h"
 #import "LoginViewController.h"
+#import "OBPAccessData.h"
+#import "OBPSessionAuth.h"
 
 
 @implementation MainViewController
+{
+	OBPSessionAuth*		_sessionAuth;
+}
 
 @synthesize rightNavButton;
 
@@ -67,9 +72,13 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (_sessionAuth == nil)
+	{
+		OBPAccessData*	accessData = [OBPAccessData defaultEntry];
+		_sessionAuth = [OBPSessionAuth sessionAuthWithAccessData: accessData];
+	}
 	//check for OBP and authorize
-    if([defaults valueForKey: kAccessTokenKeyForPreferences]){
+    if([_sessionAuth valid]){
         self.navigationItem.rightBarButtonItem = self.rightNavButton;
         [self.viewConnect setHidden:YES];
         [self.viewLogin setHidden:NO];
@@ -108,8 +117,7 @@
 
 
 - (IBAction)logOut:(id)sender {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults valueForKey: kAccessTokenKeyForPreferences]) {
+    if ([_sessionAuth valid]) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Log out"
                                                           message:@"Are you sure you want to clear Data?"
                                                          delegate:self
@@ -131,13 +139,10 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if([title isEqualToString:@"OK"])
     {
-        [defaults removeObjectForKey: kAccessSecretKeyForPreferences];
-        [defaults removeObjectForKey: kAccessTokenKeyForPreferences];
-        [defaults synchronize];
+        [_sessionAuth invalidate];
         self.navigationItem.rightBarButtonItem = nil;
         [self.viewConnect setHidden:NO];
         [self.viewLogin setHidden:YES];

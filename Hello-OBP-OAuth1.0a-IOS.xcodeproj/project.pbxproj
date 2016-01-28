@@ -86,6 +86,7 @@
 		AEC08DE91C57DB96002E2AA7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		AEC08DEA1C57DB96002E2AA7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		AEC08DEC1C57DBE5002E2AA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AEC15E581C57FC3200E5FA59 /* DefaultServerDetails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultServerDetails.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +176,7 @@
 				7414C8F41923B78200084BC3 /* main.m */,
 				7414C8F71923B78200084BC3 /* AppDelegate.h */,
 				7414C8F81923B78200084BC3 /* AppDelegate.m */,
+				AEC15E581C57FC3200E5FA59 /* DefaultServerDetails.h */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -340,6 +342,7 @@
 			files = (
 				7414C9721923C15700084BC3 /* OAuthCore.m in Sources */,
 				744B412D199E91C300EBDA6D /* DetailsViewController.m in Sources */,
+				AEC08DE61C57DB62002E2AA7 /* NSString+OBP.m in Sources */,
 				7414C9711923C15700084BC3 /* OAuth+Additions.m in Sources */,
 				7414C8F91923B78200084BC3 /* AppDelegate.m in Sources */,
 				7414C8F51923B78200084BC3 /* main.m in Sources */,
