@@ -7,6 +7,8 @@ You can then use this demonstration as an example of how to use the Open Bank Pr
 
 Though the OBI API does not require OAuth, this project uses OAuth to do so, in order to demonstrate the process. 
 
+> **Note:** If you need to integrate OpenBankProject into you existing app, check out the 'experimental' branch in the Hello-OBP-OAuth1.0a-iOS git repository: this has been refactored and extended into an 'OBPKit' (in progress) to be quick and easy to integrate with your existing iOS app. It will also work with your OSX app. Instructions are in the START_HERE.md file in that branch.
+
 ## Login credentials
 
 You will need to login to the OBP Sandbox API when running the app (which talks to the server apisandbox.openbankproject.com), just download install and click login. (If you are using iTimeBalance you will need to select "OBP Sandbox" as the login API from the selection). Then you can use following test login credentials:
