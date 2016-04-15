@@ -7,3 +7,8 @@ xcuserdata/
 *.zip
 (*)/
 .DS_Store
+Carthage/
+Pods/
+
+Config/*(dynamic).xcconfig
+# ...duplicate either carthage or cocoapods versions from repo, according to script choice at start of build

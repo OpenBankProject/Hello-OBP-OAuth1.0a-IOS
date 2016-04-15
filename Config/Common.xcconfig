@@ -1,0 +1,14 @@
+//
+//  Common.xcconfig
+//  HelloOBP-iOS
+//
+//  Created by Torsten Louland on 02/04/2016.
+//  Copyright © 2016 TESOBE. All rights reserved.
+//
+
+CARTHAGE_BUILD_DIR = $(SRCROOT)/Carthage/Build
+CARTHAGE_BUILD_PLATFORM_DIR = $(CARTHAGE_BUILD_DIR)/iOS
+
+DEPENDENCY_MANAGER_BUILD_DIR = $($(DEPENDENCY_MANAGER)_BUILD_PLATFORM_DIR)
+
+FRAMEWORK_SEARCH_PATHS = $(inherited) $(BUILT_PRODUCTS_DIR) $(DEPENDENCY_MANAGER_BUILD_DIR)

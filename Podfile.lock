@@ -1,0 +1,34 @@
+PODS:
+  - OAuthCore (0.0.2)
+  - OBPKit (1.0.0):
+    - OAuthCore (~> 0.0.1)
+    - STHTTPRequest (~> 1.1.0)
+    - UICKeyChainStore (~> 2.1.0)
+  - STHTTPRequest (1.1.0)
+  - UICKeyChainStore (2.1.0)
+
+DEPENDENCIES:
+  - OAuthCore (from `https://github.com/t0rst/OAuthCore.git`)
+  - OBPKit (from `https://github.com/OpenBankProject/OBPKit-iOSX.git`)
+
+EXTERNAL SOURCES:
+  OAuthCore:
+    :git: https://github.com/t0rst/OAuthCore.git
+  OBPKit:
+    :git: https://github.com/OpenBankProject/OBPKit-iOSX.git
+
+CHECKOUT OPTIONS:
+  OAuthCore:
+    :commit: 03121e6b8bc7ba3dea07df1289546134b192b494
+    :git: https://github.com/t0rst/OAuthCore.git
+  OBPKit:
+    :commit: bb55d0add08e7da87844bfc3108d88a9e8b467a7
+    :git: https://github.com/OpenBankProject/OBPKit-iOSX.git
+
+SPEC CHECKSUMS:
+  OAuthCore: d5c164805aa31eb2cc4b65866d74eec6a9393efd
+  OBPKit: 8cc4508e189e1f22b206fd7955717eaaab930abf
+  STHTTPRequest: e7e5e4aacaeb2eaa3e27af1d86533f803b3cdb74
+  UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
+
+COCOAPODS: 0.39.0

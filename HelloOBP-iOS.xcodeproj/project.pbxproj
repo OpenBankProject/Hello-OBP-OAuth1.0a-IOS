@@ -23,7 +23,29 @@
 		746A94A519A2871000C935BC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A94A419A2871000C935BC /* AboutViewController.m */; };
 		AE87F3811C5673F700D09FBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3801C5673F700D09FBC /* Main.storyboard */; };
 		AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */; };
+		AEBAD2DC1C8EE66D00165DB0 /* OAuthCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD1FC1C8EE34C00165DB0 /* OAuthCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AEBAD2DE1C8EE66D00165DB0 /* OBPKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD1FE1C8EE34C00165DB0 /* OBPKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AEBAD2E01C8EE66D00165DB0 /* STHTTPRequest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD2001C8EE34D00165DB0 /* STHTTPRequest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AEBAD2E21C8EE66D00165DB0 /* UICKeyChainStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD2021C8EE34D00165DB0 /* UICKeyChainStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AEC08DED1C57DBE5002E2AA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC08DEC1C57DBE5002E2AA7 /* Security.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AEBAD2E31C8EE66D00165DB0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AEBAD2E21C8EE66D00165DB0 /* UICKeyChainStore.framework in Embed Frameworks */,
+				AEBAD2E01C8EE66D00165DB0 /* STHTTPRequest.framework in Embed Frameworks */,
+				AEBAD2DC1C8EE66D00165DB0 /* OAuthCore.framework in Embed Frameworks */,
+				AEBAD2DE1C8EE66D00165DB0 /* OBPKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		740692E919A0EF7C0036CB61 /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
@@ -49,8 +71,28 @@
 		744B412E199F76A500EBDA6D /* Logo_Text_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_Text_small.png; sourceTree = "<group>"; };
 		746A94A319A2871000C935BC /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		746A94A419A2871000C935BC /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		AE2820371CC1114100BC0AAC /* copy-carthage-built-frameworks-to-built-products.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "copy-carthage-built-frameworks-to-built-products.sh"; sourceTree = "<group>"; };
+		AE2820381CC1114100BC0AAC /* create-dynamic-xcconfigs.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "create-dynamic-xcconfigs.sh"; sourceTree = "<group>"; };
+		AE2820391CC1114100BC0AAC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		AE28203A1CC1114100BC0AAC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AE28203B1CC1396600BC0AAC /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		AE28203C1CC1396600BC0AAC /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		AE28203D1CC1396600BC0AAC /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		AE28203E1CC1396600BC0AAC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AE3B29501CB5913C0012E56E /* Debug(dynamic).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug(dynamic).xcconfig"; sourceTree = "<group>"; };
+		AE3B29511CB5913C0012E56E /* Release(dynamic).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release(dynamic).xcconfig"; sourceTree = "<group>"; };
+		AE3B29521CB5913C0012E56E /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		AE87F3801C5673F700D09FBC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		AE982B231CB78EB40020D935 /* Debug(carthage).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug(carthage).xcconfig"; sourceTree = "<group>"; };
+		AE982B241CB78EB50020D935 /* Release(carthage).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release(carthage).xcconfig"; sourceTree = "<group>"; };
+		AE982B251CB78EC30020D935 /* Debug(cocoapods).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug(cocoapods).xcconfig"; sourceTree = "<group>"; };
+		AE982B261CB78EC30020D935 /* Release(cocoapods).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release(cocoapods).xcconfig"; sourceTree = "<group>"; };
+		AEBAD1FC1C8EE34C00165DB0 /* OAuthCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OAuthCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEBAD1FE1C8EE34C00165DB0 /* OBPKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OBPKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEBAD2001C8EE34D00165DB0 /* STHTTPRequest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = STHTTPRequest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEBAD2021C8EE34D00165DB0 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEC08DEC1C57DBE5002E2AA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEC08DED1C57DBE5002E2AA7 /* Security.framework in Frameworks */,
 				7414C8EB1923B78200084BC3 /* CoreGraphics.framework in Frameworks */,
 				7414C8ED1923B78200084BC3 /* UIKit.framework in Frameworks */,
 				7414C8E91923B78200084BC3 /* Foundation.framework in Frameworks */,
@@ -71,6 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				7414C8EE1923B78200084BC3 /* HelloOBP-iOS */,
+				AE3B294E1CB5913C0012E56E /* Config */,
+				AE3B29531CB593180012E56E /* Scripts */,
+				AE2820401CC1397700BC0AAC /* Supporting */,
 				7414C8E71923B78200084BC3 /* Frameworks */,
 				7414C8E61923B78200084BC3 /* Products */,
 			);
@@ -87,6 +133,11 @@
 		7414C8E71923B78200084BC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEBAD1FC1C8EE34C00165DB0 /* OAuthCore.framework */,
+				AEBAD1FE1C8EE34C00165DB0 /* OBPKit.framework */,
+				AEBAD2001C8EE34D00165DB0 /* STHTTPRequest.framework */,
+				AEBAD2021C8EE34D00165DB0 /* UICKeyChainStore.framework */,
+				AEC08DEC1C57DBE5002E2AA7 /* Security.framework */,
 				7414C8E81923B78200084BC3 /* Foundation.framework */,
 				7414C8EA1923B78200084BC3 /* CoreGraphics.framework */,
 				7414C8EC1923B78200084BC3 /* UIKit.framework */,
@@ -104,14 +155,48 @@
 			path = "HelloOBP-iOS";
 			sourceTree = "<group>";
 		};
+		AE2820361CC1114100BC0AAC /* CCPScripts */ = {
 			isa = PBXGroup;
 			children = (
+				AE2820371CC1114100BC0AAC /* copy-carthage-built-frameworks-to-built-products.sh */,
+				AE2820381CC1114100BC0AAC /* create-dynamic-xcconfigs.sh */,
+				AE2820391CC1114100BC0AAC /* LICENSE */,
+				AE28203A1CC1114100BC0AAC /* README.md */,
 			);
+			path = CCPScripts;
 			sourceTree = "<group>";
 		};
+		AE2820401CC1397700BC0AAC /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				AE28203E1CC1396600BC0AAC /* README.md */,
+				AE28203C1CC1396600BC0AAC /* LICENSE.txt */,
+				AE28203B1CC1396600BC0AAC /* Cartfile */,
+				AE28203D1CC1396600BC0AAC /* Podfile */,
 			);
+			name = Supporting;
+			sourceTree = "<group>";
+		};
+		AE3B294E1CB5913C0012E56E /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				AE3B29501CB5913C0012E56E /* Debug(dynamic).xcconfig */,
+				AE3B29511CB5913C0012E56E /* Release(dynamic).xcconfig */,
+				AE3B29521CB5913C0012E56E /* Common.xcconfig */,
+				AE982B231CB78EB40020D935 /* Debug(carthage).xcconfig */,
+				AE982B241CB78EB50020D935 /* Release(carthage).xcconfig */,
+				AE982B251CB78EC30020D935 /* Debug(cocoapods).xcconfig */,
+				AE982B261CB78EC30020D935 /* Release(cocoapods).xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		AE3B29531CB593180012E56E /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				AE2820361CC1114100BC0AAC /* CCPScripts */,
+			);
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 		AE87F3701C56502B00D09FBC /* Main */ = {
@@ -163,8 +248,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7414C9111923B78300084BC3 /* Build configuration list for PBXNativeTarget "HelloOBP-iOS" */;
 			buildPhases = (
+				AE85F24D1CB59C3400FAC628 /* Make Carthage Build Directory */,
 				7414C8E11923B78200084BC3 /* Sources */,
+				AE3B29551CB593520012E56E /* Copy Frameworks built by Carthage */,
 				7414C8E21923B78200084BC3 /* Frameworks */,
+				AEBAD2E31C8EE66D00165DB0 /* Embed Frameworks */,
 				7414C8E31923B78200084BC3 /* Resources */,
 			);
 			buildRules = (
@@ -217,6 +305,41 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AE3B29551CB593520012E56E /* Copy Frameworks built by Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(CARTHAGE_BUILD_PLATFORM_DIR)/OAuthCore.framework",
+				"$(CARTHAGE_BUILD_PLATFORM_DIR)/OBPKit.framework",
+				"$(CARTHAGE_BUILD_PLATFORM_DIR)/STHTTPRequest.framework",
+				"$(CARTHAGE_BUILD_PLATFORM_DIR)/UICKeyChainStore.framework",
+			);
+			name = "Copy Frameworks built by Carthage";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "Scripts/CCPScripts/copy-carthage-built-frameworks-to-built-products.sh";
+		};
+		AE85F24D1CB59C3400FAC628 /* Make Carthage Build Directory */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Make Carthage Build Directory";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if ! [[ -e \"${CARTHAGE_BUILD_PLATFORM_DIR}\" ]] ; then\n    mkdir -p \"${CARTHAGE_BUILD_PLATFORM_DIR}\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7414C8E11923B78200084BC3 /* Sources */ = {
@@ -320,12 +443,14 @@
 		};
 		7414C9121923B78300084BC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE3B29501CB5913C0012E56E /* Debug(dynamic).xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelloOBP-iOS/Main/HelloOBP-iOS-Prefix.pch";
 				INFOPLIST_FILE = "HelloOBP-iOS/Main/HelloOBP-iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tesobe.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F6A61B20-D6BD-46E2-B610-3F92B6E2A881";
@@ -335,12 +460,14 @@
 		};
 		7414C9131923B78300084BC3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE3B29511CB5913C0012E56E /* Release(dynamic).xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelloOBP-iOS/Main/HelloOBP-iOS-Prefix.pch";
 				INFOPLIST_FILE = "HelloOBP-iOS/Main/HelloOBP-iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tesobe.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F6A61B20-D6BD-46E2-B610-3F92B6E2A881";

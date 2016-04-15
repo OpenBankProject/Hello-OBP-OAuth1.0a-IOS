@@ -1,0 +1,11 @@
+//
+//  Release.xcconfig
+//  HelloOBP-iOS
+//
+//  Created by Torsten Louland on 02/04/2016.
+//  Copyright © 2016 TESOBE. All rights reserved.
+//
+
+DEPENDENCY_MANAGER = CARTHAGE
+
+#include "Common.xcconfig"

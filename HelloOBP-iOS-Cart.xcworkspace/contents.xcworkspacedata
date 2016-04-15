@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:HelloOBP-iOS.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Carthage/Checkouts/OBPKit-iOSX/OBPKit.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Carthage/Checkouts/OAuthCore/OAuthCore.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Carthage/Checkouts/STHTTPRequest/Demo Project/STHTTPRequest.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Carthage/Checkouts/UICKeyChainStore/Lib/UICKeyChainStore.xcodeproj">
+   </FileRef>
+</Workspace>
