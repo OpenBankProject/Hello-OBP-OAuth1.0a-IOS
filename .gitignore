@@ -1,6 +1,7 @@
 xcuserdata/
 *.xctimeline
 *.xccheckout
+*.xcscmblueprint
 *.mode2v3
 *.pbxuser
 *.zip
