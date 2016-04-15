@@ -1,6 +1,6 @@
 //
 //  main.m
-//  Hello-OBP-OAuth1.0a-IOS
+//  HelloOBP-iOS
 //
 //  Created by Dunia Reviriego on 5/14/14.
 //  Copyright (c) 2014 TESOBE. All rights reserved.

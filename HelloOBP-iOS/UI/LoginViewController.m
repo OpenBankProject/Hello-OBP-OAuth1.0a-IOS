@@ -1,6 +1,6 @@
 //
 //  LoginViewController.m
-//  Hello-OBP-OAuth1.0a-IOS
+//  HelloOBP-iOS
 //
 //  Created by Dunia Reviriego on 4/22/14.
 //  Copyright (c) 2014 Tesobe. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  DetailsViewController.m
-//  Hello-OBP-OAuth1.0a-IOS
+//  HelloOBP-iOS
 //
 //  Created by Dunia Reviriego on 8/15/14.
 //  Copyright (c) 2014 TESOBE. All rights reserved.

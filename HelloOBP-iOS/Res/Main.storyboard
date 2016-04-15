@@ -657,7 +657,7 @@ To find out more visit the openbankproject.</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="114" id="ayX-jd-DJr"/>
                                         </constraints>
-                                        <string key="text">Hello-OBP-OAuth1.0a-IOS is an app to show you how the OBP API works. 
+                                        <string key="text">HelloOBP-iOS is an app to show you how the OBP API works. 
 
 This demo is connected to sandboxapi.openbankproject.com as a demo, but this can be connect to any bank supporting the OBP API</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
