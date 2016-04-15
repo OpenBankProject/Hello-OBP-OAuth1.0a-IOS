@@ -17,12 +17,6 @@
 		7414C8FB1923B78300084BC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7414C8FA1923B78300084BC3 /* Images.xcassets */; };
 		7414C95F1923C13400084BC3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95B1923C13400084BC3 /* LoginViewController.m */; };
 		7414C9601923C13400084BC3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95C1923C13400084BC3 /* MainViewController.m */; };
-		7414C96D1923C15700084BC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9621923C15700084BC3 /* README.md */; };
-		7414C96E1923C15700084BC3 /* STHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C9641923C15700084BC3 /* STHTTPRequest.m */; };
-		7414C96F1923C15700084BC3 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9661923C15700084BC3 /* LICENSE */; };
-		7414C9701923C15700084BC3 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C9681923C15700084BC3 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7414C9711923C15700084BC3 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C96A1923C15700084BC3 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7414C9721923C15700084BC3 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C96C1923C15700084BC3 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7414C9781923C22F00084BC3 /* logo-obp.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9761923C22F00084BC3 /* logo-obp.JPG */; };
 		744B412D199E91C300EBDA6D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744B412C199E91C300EBDA6D /* DetailsViewController.m */; };
 		744B412F199F76A500EBDA6D /* Logo_Text_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 744B412E199F76A500EBDA6D /* Logo_Text_small.png */; };
@@ -45,21 +39,10 @@
 		7414C8F71923B78200084BC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7414C8F81923B78200084BC3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7414C8FA1923B78300084BC3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7414C9011923B78300084BC3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7414C95B1923C13400084BC3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		7414C95C1923C13400084BC3 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7414C95D1923C13400084BC3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		7414C95E1923C13400084BC3 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		7414C9621923C15700084BC3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		7414C9631923C15700084BC3 /* STHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPRequest.h; sourceTree = "<group>"; };
-		7414C9641923C15700084BC3 /* STHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHTTPRequest.m; sourceTree = "<group>"; };
-		7414C9661923C15700084BC3 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		7414C9671923C15700084BC3 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		7414C9681923C15700084BC3 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		7414C9691923C15700084BC3 /* OAuth+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OAuth+Additions.h"; sourceTree = "<group>"; };
-		7414C96A1923C15700084BC3 /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OAuth+Additions.m"; sourceTree = "<group>"; };
-		7414C96B1923C15700084BC3 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = "<group>"; };
-		7414C96C1923C15700084BC3 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
 		7414C9761923C22F00084BC3 /* logo-obp.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-obp.JPG"; sourceTree = "<group>"; };
 		744B412B199E91C300EBDA6D /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		744B412C199E91C300EBDA6D /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
@@ -88,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				7414C8EE1923B78200084BC3 /* HelloOBP-iOS */,
-				AE87F3761C56506900D09FBC /* OBPKit */,
 				7414C8E71923B78200084BC3 /* Frameworks */,
 				7414C8E61923B78200084BC3 /* Products */,
 			);
@@ -108,7 +90,6 @@
 				7414C8E81923B78200084BC3 /* Foundation.framework */,
 				7414C8EA1923B78200084BC3 /* CoreGraphics.framework */,
 				7414C8EC1923B78200084BC3 /* UIKit.framework */,
-				7414C9011923B78300084BC3 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,28 +104,14 @@
 			path = "HelloOBP-iOS";
 			sourceTree = "<group>";
 		};
-		7414C9611923C15700084BC3 /* STHTTPRequest */ = {
 			isa = PBXGroup;
 			children = (
-				7414C9621923C15700084BC3 /* README.md */,
-				7414C9631923C15700084BC3 /* STHTTPRequest.h */,
-				7414C9641923C15700084BC3 /* STHTTPRequest.m */,
 			);
-			path = STHTTPRequest;
 			sourceTree = "<group>";
 		};
-		7414C9651923C15700084BC3 /* OAuthCore */ = {
 			isa = PBXGroup;
 			children = (
-				7414C9661923C15700084BC3 /* LICENSE */,
-				7414C9671923C15700084BC3 /* NSData+Base64.h */,
-				7414C9681923C15700084BC3 /* NSData+Base64.m */,
-				7414C9691923C15700084BC3 /* OAuth+Additions.h */,
-				7414C96A1923C15700084BC3 /* OAuth+Additions.m */,
-				7414C96B1923C15700084BC3 /* OAuthCore.h */,
-				7414C96C1923C15700084BC3 /* OAuthCore.m */,
 			);
-			path = OAuthCore;
 			sourceTree = "<group>";
 		};
 		AE87F3701C56502B00D09FBC /* Main */ = {
@@ -187,39 +154,6 @@
 				7414C9761923C22F00084BC3 /* logo-obp.JPG */,
 			);
 			path = Res;
-			sourceTree = "<group>";
-		};
-		AE87F3761C56506900D09FBC /* OBPKit */ = {
-			isa = PBXGroup;
-			children = (
-				AE87F37C1C56506900D09FBC /* Connection */,
-				AE87F37E1C56506900D09FBC /* Util */,
-				AE87F3771C56506900D09FBC /* External */,
-			);
-			path = OBPKit;
-			sourceTree = "<group>";
-		};
-		AE87F3771C56506900D09FBC /* External */ = {
-			isa = PBXGroup;
-			children = (
-				7414C9651923C15700084BC3 /* OAuthCore */,
-				7414C9611923C15700084BC3 /* STHTTPRequest */,
-			);
-			path = External;
-			sourceTree = "<group>";
-		};
-		AE87F37C1C56506900D09FBC /* Connection */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Connection;
-			sourceTree = "<group>";
-		};
-		AE87F37E1C56506900D09FBC /* Util */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,10 +207,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7414C96D1923C15700084BC3 /* README.md in Resources */,
 				7414C8F31923B78200084BC3 /* InfoPlist.strings in Resources */,
 				744B412F199F76A500EBDA6D /* Logo_Text_small.png in Resources */,
-				7414C96F1923C15700084BC3 /* LICENSE in Resources */,
 				AE87F3811C5673F700D09FBC /* Main.storyboard in Resources */,
 				7414C8FB1923B78300084BC3 /* Images.xcassets in Resources */,
 				AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */,
@@ -291,17 +223,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7414C9721923C15700084BC3 /* OAuthCore.m in Sources */,
 				744B412D199E91C300EBDA6D /* DetailsViewController.m in Sources */,
-				7414C9711923C15700084BC3 /* OAuth+Additions.m in Sources */,
 				7414C8F91923B78200084BC3 /* AppDelegate.m in Sources */,
 				7414C8F51923B78200084BC3 /* main.m in Sources */,
 				7414C9601923C13400084BC3 /* MainViewController.m in Sources */,
-				7414C96E1923C15700084BC3 /* STHTTPRequest.m in Sources */,
 				7414C95F1923C13400084BC3 /* LoginViewController.m in Sources */,
 				746A94A519A2871000C935BC /* AboutViewController.m in Sources */,
 				740692EB19A0EF7C0036CB61 /* AccountsViewController.m in Sources */,
-				7414C9701923C15700084BC3 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
