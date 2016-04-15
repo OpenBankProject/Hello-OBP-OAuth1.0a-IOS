@@ -93,6 +93,7 @@
 		AEBAD2001C8EE34D00165DB0 /* STHTTPRequest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = STHTTPRequest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEBAD2021C8EE34D00165DB0 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC08DEC1C57DBE5002E2AA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AEC15E581C57FC3200E5FA59 /* DefaultServerDetails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultServerDetails.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +208,7 @@
 				7414C8F41923B78200084BC3 /* main.m */,
 				7414C8F71923B78200084BC3 /* AppDelegate.h */,
 				7414C8F81923B78200084BC3 /* AppDelegate.m */,
+				AEC15E581C57FC3200E5FA59 /* DefaultServerDetails.h */,
 			);
 			path = Main;
 			sourceTree = "<group>";

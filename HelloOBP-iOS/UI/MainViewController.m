@@ -8,10 +8,16 @@
 //
 
 #import "MainViewController.h"
+#import <OBPKit/OBPKit.h>
+#import <STHTTPRequest/STHTTPRequest.h>
 #import "LoginViewController.h"
+#import "DefaultServerDetails.h"
 
 
 @implementation MainViewController
+{
+	OBPSession*			_session;
+}
 
 @synthesize rightNavButton;
 
@@ -67,9 +73,14 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (_session == nil)
+	{
+		OBPServerInfo*	serverInfo = [OBPServerInfo defaultEntry];
+		_session = [OBPSession sessionWithServerInfo: serverInfo];
+	}
 	//check for OBP and authorize
-    if([defaults valueForKey: kAccessTokenKeyForPreferences]){
+    if([_session valid]){
+		[self fetchAccounts];
         self.navigationItem.rightBarButtonItem = self.rightNavButton;
         [self.viewConnect setHidden:YES];
         [self.viewLogin setHidden:NO];
@@ -91,6 +102,24 @@
 
 - (IBAction)connectToBankAPI:(id)sender {
    
+	if (USE_EXTERNAL_WEBVIEW)
+	{
+		//	Test auth with default web view provider...
+		//	_session.webViewProvider = [OBPWebViewProvider defaultProvider];
+		//	...unnecessary if never changed.
+		[_session validate:
+			^(NSError * error)
+			{
+				BOOL connected = !error && _session.valid;
+				if (connected)
+					[self fetchAccounts];
+				self.navigationItem.rightBarButtonItem = connected ? self.rightNavButton : nil;
+				[self.viewConnect setHidden: connected];
+				[self.viewLogin setHidden: !connected];
+			}
+		];
+	}
+	else
     [self performSegueWithIdentifier:@"webView" sender:sender];
     
 }
@@ -108,8 +137,7 @@
 
 
 - (IBAction)logOut:(id)sender {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults valueForKey: kAccessTokenKeyForPreferences]) {
+    if ([_session valid]) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Log out"
                                                           message:@"Are you sure you want to clear Data?"
                                                          delegate:self
@@ -131,13 +159,10 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if([title isEqualToString:@"OK"])
     {
-        [defaults removeObjectForKey: kAccessSecretKeyForPreferences];
-        [defaults removeObjectForKey: kAccessTokenKeyForPreferences];
-        [defaults synchronize];
+        [_session invalidate];
         self.navigationItem.rightBarButtonItem = nil;
         [self.viewConnect setHidden:NO];
         [self.viewLogin setHidden:YES];
@@ -164,6 +189,23 @@
     {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/blob/master/README.md#login-credentials"]];
     }
+}
+
+- (void)fetchAccounts {
+
+    NSString *path = [NSString stringWithFormat: @"banks/%@/accounts/private", OAUTH_CONSUMER_BANK_ID]; //Privates
+
+	[_session.marshal getResourceAtAPIPath: path
+							   withOptions: @{OBPMarshalOptionDeserializeJSON : @NO}
+								forHandler:
+		^(id deserializedJSONObject, NSString* body) {
+            //NSLog(@"body = %@",body);
+            //store into user defaults for later access
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:body forKey:kAccountsJSON];
+            [defaults synchronize];
+        }
+	];
 }
 
 @end

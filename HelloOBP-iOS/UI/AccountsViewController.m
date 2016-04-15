@@ -7,10 +7,11 @@
 //
 
 #import "AccountsViewController.h"
-#import "STHTTPRequest.h"
-#import "OAuthCore.h"
 
-#import "LoginViewController.h"
+#import <STHTTPRequest/STHTTPRequest.h>
+#import <OBPKit/OBPKit.h>
+#import "DefaultServerDetails.h"
+
 #import "DetailsViewController.h"
 
 @interface AccountsViewController ()
@@ -19,7 +20,6 @@
     NSArray *account;
     
     NSString *accountSelected;
-    NSString *transactionURL;
 
 }
 @end
@@ -174,38 +174,20 @@
     
     accountSelected= [[[accounts objectForKey: @"accounts"]objectAtIndex:indexPath.row] objectForKey:@"id"];
     
-    NSString *lURL = [NSString stringWithFormat: @"%@banks/%@/accounts/%@/owner/transactions",OAUTH_BASE_URL, OAUTH_CONSUMER_BANK_ID, accountSelected];
-    transactionURL = lURL;
-    [self getResourceWithString];
+    NSString *lURL = [NSString stringWithFormat: @"banks/%@/accounts/%@/owner/transactions", OAUTH_CONSUMER_BANK_ID, accountSelected];
+    [self getTransactionsAtPath: lURL];
     
     
 }
 
 
-- (void)getResourceWithString {
+- (void)getTransactionsAtPath:(NSString*)transactionPath  {
     //NSLog(@"getResourceWithString says Hi");
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    STHTTPRequest *request = [STHTTPRequest requestWithURLString:transactionURL];
-	NSString *header = OAuthHeader([request url], //set method to GET
-								   [request POSTDictionary]!=nil?@"POST":@"GET",
-								   [@"" dataUsingEncoding:NSUTF8StringEncoding],
-								   OAUTH_CONSUMER_KEY,
-								   OAUTH_CONSUMER_SECRET_KEY,
-								   [defaults valueForKey: kAccessTokenKeyForPreferences],
-								   [defaults valueForKey: kAccessSecretKeyForPreferences],
-								   nil, // oauth_verifier
-								   OAuthCoreSignatureMethod_HMAC_SHA256,
-								   nil); // callback
-    
-    
-    [request setHeaderWithName:@"Authorization" value:header];
-
-	STHTTPRequest __weak *request_ifStillAround = request;
-    request.completionBlock = ^(NSDictionary *headers, NSString *body) {
-		STHTTPRequest *request = request_ifStillAround;
-		NSInteger status = request.responseStatus;
-        if (status == 200) {
+	[[OBPSession currentSession].marshal getResourceAtAPIPath: transactionPath
+												  withOptions: @{OBPMarshalOptionDeserializeJSON : @NO}
+												   forHandler:
+		^(id deserializedJSONObject, NSString* body) {
             //store into user defaults for later access
             //NSLog(@"in getResourceWithString json=%@", body);
             
@@ -215,13 +197,7 @@
             [self.navigationController pushViewController:dvc animated:YES];
 
         }
-    };
-    
-    request.errorBlock = ^(NSError *error) {
-        NSLog(@"getResourceWithString got error %@", error);
-    };
-    
-    [request startAsynchronous];
+	];
 }
 
 

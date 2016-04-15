@@ -7,6 +7,11 @@
 //
 
 #import "AppDelegate.h"
+//
+#import <OBPKit/OBPServerInfo.h>
+#import <OBPKit/OBPWebViewProvider.h>
+// prj
+#import "DefaultServerDetails.h"
 
 
 @implementation AppDelegate
@@ -44,10 +49,17 @@
 
     [self.window makeKeyAndVisible];
 
-    
-    UIViewController * appViewController = [[UIViewController alloc] init];
-    UINavigationController * navigation = [[UINavigationController alloc] init];
-    [navigation pushViewController: appViewController animated:NO];
+	if (USE_EXTERNAL_WEBVIEW)
+		[OBPDefaultWebViewProvider configureToUseExternalWebViewer: YES
+											withCallbackSchemeName: @"callback"
+											andInstallCallbackHook: YES];
+
+	if (nil == [OBPServerInfo firstEntryForAPIServer: kDefaultServer_APIBase])
+	{
+		OBPServerInfo*	serverInfo;
+		serverInfo = [OBPServerInfo addEntryForAPIServer: kDefaultServer_APIBase];
+		serverInfo.data = DefaultServerDetails();
+	}
 
     return YES;
 }
@@ -77,6 +89,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication*)a openURL:(NSURL*)u sourceApplication:(NSString*)s annotation:(id)n
+{
+	return [OBPDefaultWebViewProvider handleCallbackURL: u];
 }
 
 @end
