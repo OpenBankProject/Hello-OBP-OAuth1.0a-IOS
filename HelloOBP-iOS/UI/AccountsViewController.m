@@ -16,12 +16,9 @@
 
 @interface AccountsViewController ()
 {
-    NSDictionary *accounts;
-    NSArray *account;
-    
-    NSString *accountSelected;
-
+    NSArray*		_accountsList;
 }
+@property (nonatomic, strong) NSDictionary* accountsDict;
 @end
 
 @implementation AccountsViewController
@@ -65,15 +62,6 @@
     [self.navigationItem setBackBarButtonItem:backItem];
     }
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *json = [defaults valueForKey:kAccountsJSON];
-    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    
-    accounts = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-    account = [accounts objectForKey: @"accounts"]; 
-    
-    self.accountsJSON.text = [accounts description];
     
     if (_accountsTypeToShow.selectedSegmentIndex == 0 ){
         [self.viewTable setHidden:NO];
@@ -83,6 +71,89 @@
         [self.viewTable setHidden:YES];
         [self.viewJSON setHidden:NO];
     }
+
+	[self fetchAccounts];
+}
+
+- (void)setAccountsDict:(NSDictionary*)accountsDict
+{
+	if (_accountsDict ? ![accountsDict isEqualToDictionary: _accountsDict] : !!accountsDict)
+	{
+		_accountsDict = accountsDict;
+		_accountsList = accountsDict[@"accounts"];
+		[self.tableViewAccounts reloadData];
+		self.accountsJSON.text = [_accountsDict description];
+	}
+}
+
+- (void)fetchAccounts
+{
+	OBPSession*		session = [OBPSession currentSession];
+	NSString*		APIBase = session.serverInfo.APIBase;
+	HandleOBPMarshalError errorHandler =
+		^(NSError* error, NSString* path)
+		{
+			if (error.code == 404) // => optional call "accounts/private" is not supported on this server
+				[self fetchAccountsByBank];
+			else
+				OBP_LOG(@"Request for resource at path %@ served by %@ got error %@", path, APIBase, error);
+		};
+
+	self.accountsDict = nil;
+
+	[session.marshal getResourceAtAPIPath: @"accounts/private"
+							  withOptions: @{OBPMarshalOptionExpectClass : [NSDictionary class],
+											OBPMarshalOptionErrorHandler : errorHandler}
+							   forHandler:
+		^(id deserializedJSONObject, NSString* body) {
+			self.accountsDict = deserializedJSONObject;
+        }
+	];
+}
+
+- (void)fetchAccountsByBank
+{
+	NSMutableArray*	bankIDs = [[_banksDict valueForKeyPath: @"banks.id"] mutableCopy];
+	[self fetchPrivateAccountsForFirstOfBankIDs: bankIDs];
+}
+
+- (void)fetchPrivateAccountsForFirstOfBankIDs:(NSMutableArray*)bankIDs
+{
+	if (![bankIDs count])
+		return;
+	AccountsViewController __weak* self_ifStillHere = self;
+	OBPSession*				session = [OBPSession currentSession];
+	NSString*				APIBase = session.serverInfo.APIBase;
+	NSString*				bankID = bankIDs[0]; [bankIDs removeObjectAtIndex: 0];
+	NSString*				path = [NSString stringWithFormat: @"banks/%@/accounts/private", bankID];
+	HandleOBPMarshalError	handleError =
+		^(NSError* error, NSString* path)
+		{
+			OBP_LOG(@"Request for resource at path %@ served by %@ got error %@", path, APIBase, error);
+			if (error.code == 404 || error.code == 204)
+				[self_ifStillHere fetchPrivateAccountsForFirstOfBankIDs: bankIDs];
+		};
+
+	[session.marshal getResourceAtAPIPath: path
+							  withOptions: @{OBPMarshalOptionExpectClass : [NSDictionary class],
+											 OBPMarshalOptionErrorHandler : handleError}
+							   forHandler:
+		^(id deserializedJSONObject, NSString* body)
+		{
+			AccountsViewController*	avc = self_ifStillHere;
+			if (avc == nil)
+				return;
+			NSDictionary*		accountsDict = deserializedJSONObject;
+			NSArray*			accounts = accountsDict[@"accounts"];
+			if ([accounts count])
+			{
+				NSArray*		array = avc.accountsDict[@"accounts"] ?: @[];
+				accounts = [array arrayByAddingObjectsFromArray: accounts];
+				avc.accountsDict = @{@"accounts" : accounts};
+			}
+			[avc fetchPrivateAccountsForFirstOfBankIDs: bankIDs];
+        }
+	];
 }
 
 - (void)didReceiveMemoryWarning
@@ -154,48 +225,44 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return account.count;
+    return _accountsList.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"cell";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    
-    NSString *idAccount= [[[accounts objectForKey: @"accounts"]objectAtIndex:indexPath.row] objectForKey:@"id"];
-    cell.textLabel.text = idAccount;
-    //[[cell textLabel]setText:idAccount];
-    return cell;
+	UITableViewCell*	cell = [tableView dequeueReusableCellWithIdentifier: @"cell" forIndexPath: indexPath];
+	NSDictionary*		account = _accountsList[indexPath.row];
+	NSString*			accountID = account[@"id"];
+	NSString*			bankID = account[@"bank_id"];
+	NSDictionary*		bank = _banksDict[@"banksByID"][bankID];
+	cell.textLabel.text = accountID;
+	cell.detailTextLabel.text = [bank[@"short_name"] description];
+	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    accountSelected= [[[accounts objectForKey: @"accounts"]objectAtIndex:indexPath.row] objectForKey:@"id"];
-    
-    NSString *lURL = [NSString stringWithFormat: @"banks/%@/accounts/%@/owner/transactions", OAUTH_CONSUMER_BANK_ID, accountSelected];
-    [self getTransactionsAtPath: lURL];
-    
-    
-}
+	NSDictionary*		account = _accountsList[indexPath.row];
+	NSString*			bank_id = account[@"bank_id"];
+	NSString*			account_id = account[@"id"];
+	NSArray*			views = account[@"views_available"];
+	NSUInteger			viewIndex = 0;
+	NSDictionary*		viewOfAccount = viewIndex < [views count] ? views[viewIndex] : nil;
+	NSString*			view_id = viewOfAccount[@"id"];
 
+	if (![bank_id length] || ![account_id length] || ![view_id length])
+		return;
 
-- (void)getTransactionsAtPath:(NSString*)transactionPath  {
-    //NSLog(@"getResourceWithString says Hi");
-    
-	[[OBPSession currentSession].marshal getResourceAtAPIPath: transactionPath
-												  withOptions: @{OBPMarshalOptionDeserializeJSON : @NO}
+	NSString*			path = [NSString stringWithFormat: @"banks/%@/accounts/%@/%@/transactions", bank_id, account_id, view_id];
+
+	[[OBPSession currentSession].marshal getResourceAtAPIPath: path
+												  withOptions: @{OBPMarshalOptionExpectClass : [NSDictionary class]}
 												   forHandler:
 		^(id deserializedJSONObject, NSString* body) {
-            //store into user defaults for later access
-            //NSLog(@"in getResourceWithString json=%@", body);
-            
             DetailsViewController *dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
-            dvc.JSON = body;
-            dvc.accountSelected = accountSelected;
+            [dvc setAccount: account viewOfAccount: viewOfAccount transactionsDict: deserializedJSONObject];
             [self.navigationController pushViewController:dvc animated:YES];
-
         }
 	];
 }

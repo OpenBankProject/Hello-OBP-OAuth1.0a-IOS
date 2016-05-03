@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import <OBPKit/OBPKit.h>
 #import <STHTTPRequest/STHTTPRequest.h>
+#import "AccountsViewController.h"
 #import "LoginViewController.h"
 #import "DefaultServerDetails.h"
 
@@ -17,6 +18,7 @@
 @implementation MainViewController
 {
 	OBPSession*			_session;
+	NSDictionary*		_banks;
 }
 
 @synthesize rightNavButton;
@@ -80,7 +82,7 @@
 	}
 	//check for OBP and authorize
     if([_session valid]){
-		[self fetchAccounts];
+		[self fetchBanks];
         self.navigationItem.rightBarButtonItem = self.rightNavButton;
         [self.viewConnect setHidden:YES];
         [self.viewLogin setHidden:NO];
@@ -112,7 +114,7 @@
 			{
 				BOOL connected = !error && _session.valid;
 				if (connected)
-					[self fetchAccounts];
+					[self fetchBanks];
 				self.navigationItem.rightBarButtonItem = connected ? self.rightNavButton : nil;
 				[self.viewConnect setHidden: connected];
 				[self.viewLogin setHidden: !connected];
@@ -191,21 +193,37 @@
     }
 }
 
-- (void)fetchAccounts {
-
-    NSString *path = [NSString stringWithFormat: @"banks/%@/accounts/private", OAUTH_CONSUMER_BANK_ID]; //Privates
-
-	[_session.marshal getResourceAtAPIPath: path
-							   withOptions: @{OBPMarshalOptionDeserializeJSON : @NO}
+- (void)fetchBanks
+{
+	[_session.marshal getResourceAtAPIPath: @"banks"
+							   withOptions: @{OBPMarshalOptionExpectClass : [NSDictionary class]}
 								forHandler:
-		^(id deserializedJSONObject, NSString* body) {
-            //NSLog(@"body = %@",body);
-            //store into user defaults for later access
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:body forKey:kAccountsJSON];
-            [defaults synchronize];
+		^(id deserializedJSONObject, NSString* body)
+		{
+			NSDictionary*			banksDict = deserializedJSONObject;
+			NSMutableDictionary*	banksByID = [NSMutableDictionary dictionary];
+			NSArray*				banks = banksDict[@"banks"];
+			NSString*				bankID;
+			NSDictionary*			bank;
+			for (bank in banks)
+			{
+				bankID = bank[@"id"];
+				banksByID[bankID] = bank;
+			}
+			NSMutableDictionary*	md = [banksDict mutableCopy];
+			md[@"banksByID"] = banksByID;
+			_banks = [md copy];
         }
 	];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(nullable id)sender
+{
+	if ([segue.destinationViewController isKindOfClass: [AccountsViewController class]])
+	{
+		AccountsViewController*	acv = (AccountsViewController*)segue.destinationViewController;
+		acv.banksDict = _banks;
+	}
 }
 
 @end

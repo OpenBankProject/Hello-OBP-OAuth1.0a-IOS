@@ -11,11 +11,7 @@
 @interface DetailsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableViewTransactions;
-
-@property (nonatomic, strong) NSString *JSON;
-@property (nonatomic, strong) NSString *accountSelected;
-
-
+- (void)setAccount:(NSDictionary*)account viewOfAccount:(NSDictionary*)viewOfAccount transactionsDict:(NSDictionary*)transactionsDict;
 
 @property (weak, nonatomic) IBOutlet UILabel *AccountID;
 @property (weak, nonatomic) IBOutlet UITextView *transactionsJSON;
@@ -27,5 +23,8 @@
 -(IBAction)segmentedTransactionsTypeToShow:(UISegmentedControl*)sender;
 
 - (IBAction)linkToOBPwebsite:(id)sender;
+@property (nonatomic, strong, readonly) NSDictionary* account;
+@property (nonatomic, strong, readonly) NSDictionary* viewOfAccount;
+@property (nonatomic, strong, readonly) NSDictionary* transactionsDict;
 
 @end

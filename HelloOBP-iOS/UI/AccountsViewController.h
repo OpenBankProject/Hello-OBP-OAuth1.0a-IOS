@@ -22,5 +22,6 @@
 -(IBAction)segmentedAccountsTypeToShow:(UISegmentedControl*)sender;
 
 - (IBAction)linkToOBPwebsite:(id)sender;
+@property (nonatomic, strong) NSDictionary* banksDict;
 
 @end

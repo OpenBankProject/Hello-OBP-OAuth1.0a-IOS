@@ -8,11 +8,13 @@
 
 #import "DetailsViewController.h"
 
-@interface DetailsViewController (){
-    
-    NSDictionary *transactionsForAccount;
-    NSArray *transactionForID;
-}
+@interface DetailsViewController ()
+
+@property (nonatomic, strong, readwrite) NSDictionary* account;
+@property (nonatomic, strong, readwrite) NSDictionary* viewOfAccount;
+@property (nonatomic, strong, readwrite) NSDictionary* transactionsDict;
+@property (nonatomic, strong, readwrite) NSArray* transactionsList;
+
 @end
 
 @implementation DetailsViewController
@@ -24,6 +26,16 @@
         // Custom initialization
             }
     return self;
+}
+
+- (void)setAccount:(NSDictionary*)account viewOfAccount:(NSDictionary*)viewOfAccount transactionsDict:(NSDictionary*)transactionsDict
+{
+	_account = account;
+	_viewOfAccount = viewOfAccount;
+	_transactionsDict = transactionsDict;
+	_transactionsList = transactionsDict[@"transactions"];
+    self.AccountID.text = _account[@"id"];
+    self.transactionsJSON.text = [_transactionsDict description];
 }
 
 - (void)viewDidLoad
@@ -41,22 +53,9 @@
     [self.linkOBPwebsite setTitle:@"Hello-OBP-OAuth1.0a is demo for app designers.\nTo find out more visit the Open Bank Project." forState:UIControlStateNormal];
     }
     
-    NSString *jsonTransactions = self.JSON;
-    NSData *data = [jsonTransactions dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    
-    transactionsForAccount = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-    transactionForID = [transactionsForAccount objectForKey:@"transactions"];
-    
-    if (transactionForID.count == 0){
-       //NSLog(@"There aren't any transactions");
+    if (_transactionsList.count == 0){
         _transactionsTypeToShow.selectedSegmentIndex = 1;
-        [self.viewTable setHidden:NO];
-        [self.viewJSON setHidden:YES];
     }
-    
-    self.AccountID.text = self.accountSelected;
-    self.transactionsJSON.text = [transactionsForAccount description];
     
     if (_transactionsTypeToShow.selectedSegmentIndex == 0 ){
         [self.viewTable setHidden:NO];
@@ -133,20 +132,19 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return transactionForID.count;
+    return _transactionsList.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"cell";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    
-    [[cell textLabel]setText:[[[[[transactionsForAccount objectForKey:@"transactions"] objectAtIndex:indexPath.row] objectForKey:@"other_account"] objectForKey:@"holder"] objectForKey:@"name"]];
-    
-    [[cell detailTextLabel] setText:[[[[transactionsForAccount objectForKey:@"transactions"] objectAtIndex:indexPath.row] objectForKey:@"details"] objectForKey:@"completed" ]];
-    
-    return cell;
+	UITableViewCell*	cell = [tableView dequeueReusableCellWithIdentifier: @"cell" forIndexPath: indexPath];
+	NSDictionary*		transaction = _transactionsList[indexPath.row];
+	NSString*			counterParty = [transaction valueForKeyPath: @"other_account.holder.name"];
+	NSString*			completed = [transaction valueForKeyPath: @"details.completed"];
+	cell.textLabel.text = counterParty;
+	cell.detailTextLabel.text = completed;
+	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

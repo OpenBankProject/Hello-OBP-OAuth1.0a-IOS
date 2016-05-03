@@ -64,7 +64,7 @@
 
 - (NSString*)callbackScheme
 {
-	return OAUTH_URL_SCHEME;
+	return [OBPDefaultWebViewProvider callbackSchemeWithName: @"callback"];
 }
 
 - (void)showURL:(NSURL*)url filterNavWith:(OBPWebNavigationFilter)onwardNavigationFilter notifyCancelBy:(OBPWebCancelNotifier)cancelNotifier
