@@ -34,4 +34,6 @@
 
 - (IBAction)about:(id)sender;
 
++ (void)linkToOBPwebsite:(UIViewController*)vc;
+
 @end

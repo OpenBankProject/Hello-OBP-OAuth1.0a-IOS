@@ -7,6 +7,7 @@
 //
 
 #import "DetailsViewController.h"
+#import "MainViewController.h"
 
 @interface DetailsViewController ()
 
@@ -77,37 +78,7 @@
 
 - (IBAction)linkToOBPwebsite:(id)sender {
     
-    UIAlertView *message1 = [[UIAlertView alloc] initWithTitle:@"Open Bank Project"
-                                                       message:@"You are leaving the app demo to go the OBP websites."
-                                                      delegate:self
-                                             cancelButtonTitle:@"Cancel"
-                                             otherButtonTitles:@"www.openbankproject.com", @"www.tesobe.com", @"github/openbankproject", @"Readme (with users)", nil];
-    [message1 show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex {
-    
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if([title isEqualToString:@"www.openbankproject.com"])
-    {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://openbankproject.com/en/about/"]];
-    }
-    else if
-        ([title isEqualToString:@"www.tesobe.com"])
-    {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://tesobe.com/en/projects/open-bank-project/"]];
-    }
-    else if
-        ([title isEqualToString:@"github/openbankproject"])
-    {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.github.com/OpenBankProject"]];
-    }
-    else if
-        ([title isEqualToString:@"Readme (with users)"])
-    {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/blob/master/README.md#login-credentials"]];
-    }
-    
+    [MainViewController linkToOBPwebsite: self];
 }
 
 - (IBAction)segmentedTransactionsTypeToShow:(UISegmentedControl*)sender{

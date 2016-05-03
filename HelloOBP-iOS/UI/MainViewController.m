@@ -140,57 +140,56 @@
 
 - (IBAction)logOut:(id)sender {
     if ([_session valid]) {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Log out"
-                                                          message:@"Are you sure you want to clear Data?"
-                                                         delegate:self
-                                                cancelButtonTitle:@"Cancel"
-                                                otherButtonTitles:@"OK", nil];
-        [message show];
+		UIAlertController* ac =
+			[UIAlertController alertControllerWithTitle: @"Log out"
+												message: @"Are you sure you want to clear Data?"
+										 preferredStyle: UIAlertControllerStyleAlert];
+		[ac addAction: [UIAlertAction actionWithTitle: @"Cancel" style: UIAlertActionStyleCancel
+											  handler: ^(UIAlertAction * _Nonnull action) {}]];
+		[ac addAction: [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+											  handler:
+			^(UIAlertAction* action)
+			{
+				[_session invalidate];
+				self.navigationItem.rightBarButtonItem = nil;
+				[self.viewConnect setHidden:NO];
+				[self.viewLogin setHidden:YES];
+			}
+		]];
+		[self presentViewController: ac animated: YES completion: nil];
     }
 }
 
 - (IBAction)linkToOBPwebsite:(id)sender {
-    
-        UIAlertView *message1 = [[UIAlertView alloc] initWithTitle:@"Open Bank Project"
-                                                          message:@"You are leaving the app demo to go the OBP websites."
-                                                         delegate:self
-                                                cancelButtonTitle:@"Cancel"
-                                                otherButtonTitles:@"www.openbankproject.com", @"www.tesobe.com", @"github/openbankproject", @"Readme (with users)", nil];
-        [message1 show];
+	[[self class] linkToOBPwebsite: self];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex {
-    
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if([title isEqualToString:@"OK"])
-    {
-        [_session invalidate];
-        self.navigationItem.rightBarButtonItem = nil;
-        [self.viewConnect setHidden:NO];
-        [self.viewLogin setHidden:YES];
-    }
-    else if([title isEqualToString:@"www.openbankproject.com"])
-    {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://openbankproject.com/en/about/"]];
++ (void)linkToOBPwebsite:(UIViewController*)vc
+{
 
-    }
-    else if
-        ([title isEqualToString:@"www.tesobe.com"])
-    {
+	UIAlertController* ac =
+		[UIAlertController alertControllerWithTitle: @"Open Bank Project"
+											message: @"You are leaving the app demo to go the OBP websites."
+									 preferredStyle: UIAlertControllerStyleAlert];
+	[ac addAction: [UIAlertAction actionWithTitle: @"Cancel" style: UIAlertActionStyleCancel
+										  handler: ^(UIAlertAction * _Nonnull action) {}]];
+	[ac addAction: [UIAlertAction actionWithTitle: @"www.openbankproject.com" style: UIAlertActionStyleDefault
+										  handler: ^(UIAlertAction* action) {
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://openbankproject.com"]];
+	}]];
+	[ac addAction: [UIAlertAction actionWithTitle: @"www.tesobe.com" style: UIAlertActionStyleDefault
+										  handler: ^(UIAlertAction* action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://tesobe.com/en/projects/open-bank-project/"]];
-        
-    }
-    else if
-        ([title isEqualToString:@"github/openbankproject"])
-    {
+	}]];
+	[ac addAction: [UIAlertAction actionWithTitle: @"github/openbankproject" style: UIAlertActionStyleDefault
+										  handler: ^(UIAlertAction* action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.github.com/OpenBankProject"]];
-        
-    }
-    else if
-        ([title isEqualToString:@"Readme (with users)"])
-    {
+	}]];
+	[ac addAction: [UIAlertAction actionWithTitle: @"Readme (with example user accounts)" style: UIAlertActionStyleDefault
+										  handler: ^(UIAlertAction* action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/blob/master/README.md#login-credentials"]];
-    }
+	}]];
+	[vc presentViewController: ac animated: YES completion: nil];
 }
 
 - (void)fetchBanks
