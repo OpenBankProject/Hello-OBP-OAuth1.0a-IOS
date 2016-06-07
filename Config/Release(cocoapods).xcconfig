@@ -7,11 +7,3 @@
 //
 
 #include "Pods/Target Support Files/Pods-HelloOBP-iOS/Pods-HelloOBP-iOS.release.xcconfig"
-
-// override PODS_FRAMEWORK_BUILD_PATH
-PODS_FRAMEWORK_BUILD_PATH = $(BUILT_PRODUCTS_DIR)
-
-DEPENDENCY_MANAGER = COCOAPODS
-COCOAPODS_BUILD_PLATFORM_DIR = $(PODS_FRAMEWORK_BUILD_PATH)
-
-#include "Common.xcconfig"

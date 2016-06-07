@@ -61,7 +61,7 @@ $ carthage update --no-build --no-use-binaries
 $ open HelloOBP-iOS-Cart.xcworkspace -a Xcode.app
 ```
 
-...or use CocoaPods...
+...and then build and run, or use CocoaPods...
 
 ```sh
 $ cd HelloOBP-iOS
@@ -83,7 +83,9 @@ Pod installation complete! There are 2 dependencies from the Podfile and 4 total
 $ open HelloOBP-iOS-Pods.xcworkspace -a Xcode.app
 ```
 
-...then build and run. 
+...then one extra, not-yet-automated step that is needed with the latest CocoaPods (`pod --version` >= 1.0.0): in the navigator pane, click on the blue HelloOBP-iOS project icon, select HelloOBP-iOS under TARGETS, select Build Phases, clieck the 'x' to the right of the "Embed Frameworks (4 items)" build phase, as CocoaPods has installed it own "[CP] Embed Pods Frameworks" build phase further down (commiting this change now will allow you to easily revert it should you wish to try out using carthage later), and then...
+
+...build and run. 
 
 You can ignore the two pod warnings starting "CocoaPods did not set the base configuration of your project because...etc", because HelloOBP-iOS.xcodeproj configures for carthage or cocoapods whenever you build: a script sets the build configuration files Debug(dynamic).xcconfig and Release(dynamic).xcconfig to be copies of Debug(carthage).xcconfig and Release(carthage).xcconfig or Debug(cocoapods).xcconfig and Release(cocoapods).xcconfig, as appropriate. This sometimes goes under Xcode's radar, and you get a warning, but this clears after you clean, close and reopen the project.
 

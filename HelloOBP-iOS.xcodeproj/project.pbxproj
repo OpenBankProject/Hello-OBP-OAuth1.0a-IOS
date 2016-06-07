@@ -324,8 +324,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "Scripts/CCPScripts/copy-carthage-built-frameworks-to-built-products.sh";
+			shellPath = /bin/sh;
+			shellScript = "if [[ -n \"${CARTHAGE_BUILD_PLATFORM_DIR}\" ]]; then\n    Scripts/CCPScripts/copy-carthage-built-frameworks-to-built-products.sh\nfi";
 		};
 		AE85F24D1CB59C3400FAC628 /* Make Carthage Build Directory */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -339,7 +339,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if ! [[ -e \"${CARTHAGE_BUILD_PLATFORM_DIR}\" ]] ; then\n    mkdir -p \"${CARTHAGE_BUILD_PLATFORM_DIR}\"\nfi";
+			shellScript = "if ! [[ -z \"${CARTHAGE_BUILD_PLATFORM_DIR}\" || -e \"${CARTHAGE_BUILD_PLATFORM_DIR}\" ]] ; then\n    mkdir -p \"${CARTHAGE_BUILD_PLATFORM_DIR}\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
