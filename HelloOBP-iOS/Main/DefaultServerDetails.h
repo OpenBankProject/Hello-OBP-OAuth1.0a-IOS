@@ -24,6 +24,7 @@
 
 
 
+#define USE_DIRECT_LOGIN 0
 #define USE_EXTERNAL_WEBVIEW 0
 
 

@@ -104,6 +104,22 @@
 
 - (IBAction)connectToBankAPI:(id)sender {
    
+	if (USE_DIRECT_LOGIN)
+	{
+		_session.authMethod = OBPAuthMethod_DirectLogin;
+		[_session validate:
+			^(NSError * error)
+			{
+				BOOL connected = !error && _session.valid;
+				if (connected)
+					[self fetchBanks];
+				self.navigationItem.rightBarButtonItem = connected ? self.rightNavButton : nil;
+				[self.viewConnect setHidden: connected];
+				[self.viewLogin setHidden: !connected];
+			}
+		];
+	}
+	else
 	if (USE_EXTERNAL_WEBVIEW)
 	{
 		//	Test auth with default web view provider...
