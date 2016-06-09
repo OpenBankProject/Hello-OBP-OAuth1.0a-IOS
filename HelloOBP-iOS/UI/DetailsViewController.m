@@ -8,7 +8,24 @@
 
 #import "DetailsViewController.h"
 #import "MainViewController.h"
+#import "TransactionDetailViewController.h"
+#import <OBPKit/OBPDateFormatter.h>
 
+
+
+@interface TransactionTableCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel* transactionValue;
+@property (nonatomic, weak) IBOutlet UILabel* transactionCurrency;
+@property (nonatomic, weak) IBOutlet UILabel* transactionType;
+@property (nonatomic, weak) IBOutlet UILabel* otherAccountHolder;
+@property (nonatomic, weak) IBOutlet UILabel* completionDate;
+@end
+@implementation TransactionTableCell
+@end
+
+
+
+#pragma mark -
 @interface DetailsViewController ()
 
 @property (nonatomic, strong, readwrite) NSDictionary* account;
@@ -16,9 +33,25 @@
 @property (nonatomic, strong, readwrite) NSDictionary* transactionsDict;
 @property (nonatomic, strong, readwrite) NSArray* transactionsList;
 
+@property (strong, nonatomic) IBOutlet UITableView *tableViewTransactions;
+@property (weak, nonatomic) IBOutlet UILabel *AccountID;
+@property (weak, nonatomic) IBOutlet UITextView *transactionsJSON;
+@property (strong, nonatomic) IBOutlet UIButton *linkOBPwebsite;
+@property (weak, nonatomic) IBOutlet UIView *viewTable;
+@property (weak, nonatomic) IBOutlet UIView *viewJSON;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *transactionsTypeToShow;
+
+- (IBAction)segmentedTransactionsTypeToShow:(UISegmentedControl*)sender;
+- (IBAction)linkToOBPwebsite:(id)sender;
+
 @end
 
+
+
 @implementation DetailsViewController
+{
+	NSDictionary*	_transactionToEdit;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,8 +68,11 @@
 	_viewOfAccount = viewOfAccount;
 	_transactionsDict = transactionsDict;
 	_transactionsList = transactionsDict[@"transactions"];
-    self.AccountID.text = _account[@"id"];
-    self.transactionsJSON.text = [_transactionsDict description];
+	if (self.isViewLoaded)
+	{
+		self.AccountID.text = _account[@"id"];
+		self.transactionsJSON.text = [_transactionsDict description];
+	}
 }
 
 - (void)viewDidLoad
@@ -54,6 +90,9 @@
     [self.linkOBPwebsite setTitle:@"Hello-OBP-OAuth1.0a is demo for app designers.\nTo find out more visit the Open Bank Project." forState:UIControlStateNormal];
     }
     
+	self.AccountID.text = _account[@"id"];
+	self.transactionsJSON.text = [_transactionsDict description];
+
     if (_transactionsList.count == 0){
         _transactionsTypeToShow.selectedSegmentIndex = 1;
     }
@@ -109,29 +148,45 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell*	cell = [tableView dequeueReusableCellWithIdentifier: @"cell" forIndexPath: indexPath];
-	NSDictionary*		transaction = _transactionsList[indexPath.row];
-	NSString*			counterParty = [transaction valueForKeyPath: @"other_account.holder.name"];
-	NSString*			completed = [transaction valueForKeyPath: @"details.completed"];
-	cell.textLabel.text = counterParty;
-	cell.detailTextLabel.text = completed;
-	return cell;
+	TransactionTableCell*	ttc = [tableView dequeueReusableCellWithIdentifier: @"cell" forIndexPath: indexPath];
+	NSDictionary*			transaction = _transactionsList[indexPath.row];
+	NSString*				s;
+	NSDate*					d;
+	ttc.transactionValue.text = [(s = [transaction valueForKeyPath: @"details.value.amount"]) length] ? s : @"-";
+	ttc.transactionCurrency.text = [(s = [transaction valueForKeyPath: @"details.value.currency"]) length] ? s : @"";
+	if (![(s = [transaction valueForKeyPath: @"details.type"]) length])
+	if (![(s = [transaction valueForKeyPath: @"details.label"]) length])
+	if (![(s = [transaction valueForKeyPath: @"details.description"]) length])
+		s = @"-";
+	ttc.transactionType.text = s;
+	ttc.otherAccountHolder.text = [(s = [transaction valueForKeyPath: @"other_account.holder.name"]) length] ? s : @"-";
+	s = [transaction valueForKeyPath: @"details.completed"];
+	if (nil != (d = [OBPDateFormatter dateFromString: s]))
+		s = [NSDateFormatter localizedStringFromDate: d
+										   dateStyle: NSDateFormatterMediumStyle
+										   timeStyle: NSDateFormatterShortStyle];
+	ttc.completionDate.text = [s length] ? s : @"-";
+	return ttc;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Selected row: %li", (long)indexPath.row);
+	NSDictionary*		transaction = _transactionsList[indexPath.row];
+	_transactionToEdit = transaction;
+    [self performSegueWithIdentifier: @"TransactionDetail" sender: self];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+	if ([segue.destinationViewController isKindOfClass: [TransactionDetailViewController class]])
+	{
+		TransactionDetailViewController* tdvc = (TransactionDetailViewController*)segue.destinationViewController;
+		[tdvc setAccount: _account viewOfAccount: _viewOfAccount transaction: _transactionToEdit];
+	}
 }
-*/
+
+- (IBAction)unwindToDetailsViewController:(UIStoryboardSegue *)segue
+{
+}
 
 @end

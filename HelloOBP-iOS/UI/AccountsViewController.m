@@ -15,12 +15,26 @@
 #import "MainViewController.h"
 #import "DetailsViewController.h"
 
+
+
 @interface AccountsViewController ()
 {
     NSArray*		_accountsList;
 }
 @property (nonatomic, strong) NSDictionary* accountsDict;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableViewAccounts;
+@property (strong, nonatomic) IBOutlet UIButton *linkOBPwebsite;
+@property (strong, nonatomic) IBOutlet UIView *viewTable;
+@property (strong, nonatomic) IBOutlet UIView *viewJSON;
+@property (weak, nonatomic) IBOutlet UITextView *accountsJSON;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *accountsTypeToShow;
+- (IBAction)segmentedAccountsTypeToShow:(UISegmentedControl*)sender;
+- (IBAction)linkToOBPwebsite:(id)sender;
+
 @end
+
+
 
 @implementation AccountsViewController
 
@@ -199,11 +213,21 @@
 {
 	UITableViewCell*	cell = [tableView dequeueReusableCellWithIdentifier: @"cell" forIndexPath: indexPath];
 	NSDictionary*		account = _accountsList[indexPath.row];
-	NSString*			accountID = account[@"id"];
+	NSString*			accountDesc;
 	NSString*			bankID = account[@"bank_id"];
 	NSDictionary*		bank = _banksDict[@"banksByID"][bankID];
-	cell.textLabel.text = accountID;
-	cell.detailTextLabel.text = [bank[@"short_name"] description];
+	NSString*			s;
+	NSString*			sep = @"";
+
+	accountDesc = @"";
+	if ([(s = [account valueForKeyPath: @"label"]) isKindOfClass: [NSString class]] && [s length])
+		accountDesc = s, sep = @" — ";
+	if ([(s = [account valueForKeyPath: @"number"]) isKindOfClass: [NSString class]] && [s length])
+		accountDesc = [accountDesc stringByAppendingFormat: @"%@%@", sep, s];
+	cell.textLabel.text = accountDesc;
+
+	s = [bank[@"short_name"] description];
+	cell.detailTextLabel.text = [s length] ? s : @"";
 	return cell;
 }
 
@@ -213,9 +237,22 @@
 	NSString*			bank_id = account[@"bank_id"];
 	NSString*			account_id = account[@"id"];
 	NSArray*			views = account[@"views_available"];
+	NSDictionary*		viewOfAccount;
+	NSDictionary*		bestView = nil;
 	NSUInteger			viewIndex = 0;
-	NSDictionary*		viewOfAccount = viewIndex < [views count] ? views[viewIndex] : nil;
-	NSString*			view_id = viewOfAccount[@"id"];
+	NSUInteger			bestViewIndex = -1;
+	for (viewOfAccount in views)
+	{
+		if (bestView == nil
+		 || [viewOfAccount[@"id"] isEqualToString: @"owner"]
+		 || ([bestView[@"is_public"] boolValue] && ![viewOfAccount[@"is_public"] boolValue]))
+		{
+			bestView = viewOfAccount;
+			bestViewIndex = viewIndex;
+		}
+		viewIndex++;
+	}
+	NSString*			view_id = bestView[@"id"];
 
 	if (![bank_id length] || ![account_id length] || ![view_id length])
 		return;
@@ -225,7 +262,7 @@
 	HandleOBPMarshalData	resultHandler =
 		^(id deserializedObject, NSString* body) {
             DetailsViewController *dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
-            [dvc setAccount: account viewOfAccount: viewOfAccount transactionsDict: deserializedObject];
+            [dvc setAccount: account viewOfAccount: bestView transactionsDict: deserializedObject];
             [self.navigationController pushViewController:dvc animated:YES];
         };
 

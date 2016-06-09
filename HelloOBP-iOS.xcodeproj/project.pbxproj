@@ -28,6 +28,7 @@
 		AEBAD2E01C8EE66D00165DB0 /* STHTTPRequest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD2001C8EE34D00165DB0 /* STHTTPRequest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AEBAD2E21C8EE66D00165DB0 /* UICKeyChainStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD2021C8EE34D00165DB0 /* UICKeyChainStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AEC08DED1C57DBE5002E2AA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC08DEC1C57DBE5002E2AA7 /* Security.framework */; };
+		AEFCD84E1CD8E352000113DB /* TransactionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCD84D1CD8E352000113DB /* TransactionDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -94,6 +95,8 @@
 		AEBAD2021C8EE34D00165DB0 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC08DEC1C57DBE5002E2AA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AEC15E581C57FC3200E5FA59 /* DefaultServerDetails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultServerDetails.h; sourceTree = "<group>"; };
+		AEFCD84C1CD8E352000113DB /* TransactionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionDetailViewController.h; sourceTree = "<group>"; };
+		AEFCD84D1CD8E352000113DB /* TransactionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +229,8 @@
 				744B412C199E91C300EBDA6D /* DetailsViewController.m */,
 				746A94A319A2871000C935BC /* AboutViewController.h */,
 				746A94A419A2871000C935BC /* AboutViewController.m */,
+				AEFCD84C1CD8E352000113DB /* TransactionDetailViewController.h */,
+				AEFCD84D1CD8E352000113DB /* TransactionDetailViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 				744B412D199E91C300EBDA6D /* DetailsViewController.m in Sources */,
 				7414C8F91923B78200084BC3 /* AppDelegate.m in Sources */,
 				7414C8F51923B78200084BC3 /* main.m in Sources */,
+				AEFCD84E1CD8E352000113DB /* TransactionDetailViewController.m in Sources */,
 				7414C9601923C13400084BC3 /* MainViewController.m in Sources */,
 				7414C95F1923C13400084BC3 /* LoginViewController.m in Sources */,
 				746A94A519A2871000C935BC /* AboutViewController.m in Sources */,
