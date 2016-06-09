@@ -58,7 +58,7 @@
 	{
 		OBPServerInfo*	serverInfo;
 		serverInfo = [OBPServerInfo addEntryForAPIServer: kDefaultServer_APIBase];
-		serverInfo.data = DefaultServerDetails();
+		serverInfo.accessData = DefaultServerDetails();
 	}
 
     return YES;

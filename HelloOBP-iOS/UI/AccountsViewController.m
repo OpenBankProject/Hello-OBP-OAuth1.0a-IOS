@@ -89,9 +89,9 @@
 
 - (void)fetchAccounts
 {
-	OBPSession*		session = [OBPSession currentSession];
-	NSString*		APIBase = session.serverInfo.APIBase;
-	HandleOBPMarshalError errorHandler =
+	OBPSession*				session = [OBPSession currentSession];
+	NSString*				APIBase = session.serverInfo.APIBase;
+	HandleOBPMarshalError	errorHandler =
 		^(NSError* error, NSString* path)
 		{
 			if (error.code == 404) // => optional call "accounts/private" is not supported on this server
@@ -99,17 +99,16 @@
 			else
 				OBP_LOG(@"Request for resource at path %@ served by %@ got error %@", path, APIBase, error);
 		};
+	HandleOBPMarshalData	resultHandler =
+		^(id deserializedObject, NSString* body)
+		{
+			self.accountsDict = deserializedObject;
+        };
 
 	self.accountsDict = nil;
 
-	[session.marshal getResourceAtAPIPath: @"accounts/private"
-							  withOptions: @{OBPMarshalOptionExpectClass : [NSDictionary class],
-											OBPMarshalOptionErrorHandler : errorHandler}
-							   forHandler:
-		^(id deserializedJSONObject, NSString* body) {
-			self.accountsDict = deserializedJSONObject;
-        }
-	];
+	[session.marshal getResourceAtAPIPath: @"accounts/private" withOptions: nil
+						 forResultHandler: resultHandler orErrorHandler: errorHandler];
 }
 
 - (void)fetchAccountsByBank
@@ -127,24 +126,20 @@
 	NSString*				APIBase = session.serverInfo.APIBase;
 	NSString*				bankID = bankIDs[0]; [bankIDs removeObjectAtIndex: 0];
 	NSString*				path = [NSString stringWithFormat: @"banks/%@/accounts/private", bankID];
-	HandleOBPMarshalError	handleError =
+	HandleOBPMarshalError	errorHandler =
 		^(NSError* error, NSString* path)
 		{
 			OBP_LOG(@"Request for resource at path %@ served by %@ got error %@", path, APIBase, error);
 			if (error.code == 404 || error.code == 204)
 				[self_ifStillHere fetchPrivateAccountsForFirstOfBankIDs: bankIDs];
 		};
-
-	[session.marshal getResourceAtAPIPath: path
-							  withOptions: @{OBPMarshalOptionExpectClass : [NSDictionary class],
-											 OBPMarshalOptionErrorHandler : handleError}
-							   forHandler:
-		^(id deserializedJSONObject, NSString* body)
+	HandleOBPMarshalData	resultHandler =
+		^(id deserializedObject, NSString* body)
 		{
 			AccountsViewController*	avc = self_ifStillHere;
 			if (avc == nil)
 				return;
-			NSDictionary*		accountsDict = deserializedJSONObject;
+			NSDictionary*		accountsDict = deserializedObject;
 			NSArray*			accounts = accountsDict[@"accounts"];
 			if ([accounts count])
 			{
@@ -153,8 +148,10 @@
 				avc.accountsDict = @{@"accounts" : accounts};
 			}
 			[avc fetchPrivateAccountsForFirstOfBankIDs: bankIDs];
-        }
-	];
+        };
+
+	[session.marshal getResourceAtAPIPath: path withOptions: nil
+						 forResultHandler: resultHandler orErrorHandler: errorHandler];
 }
 
 - (void)didReceiveMemoryWarning
@@ -223,17 +220,17 @@
 	if (![bank_id length] || ![account_id length] || ![view_id length])
 		return;
 
-	NSString*			path = [NSString stringWithFormat: @"banks/%@/accounts/%@/%@/transactions", bank_id, account_id, view_id];
-
-	[[OBPSession currentSession].marshal getResourceAtAPIPath: path
-												  withOptions: @{OBPMarshalOptionExpectClass : [NSDictionary class]}
-												   forHandler:
-		^(id deserializedJSONObject, NSString* body) {
+	NSString*				path = [NSString stringWithFormat: @"banks/%@/accounts/%@/%@/transactions", bank_id, account_id, view_id];
+	OBPSession*				session = [OBPSession currentSession];
+	HandleOBPMarshalData	resultHandler =
+		^(id deserializedObject, NSString* body) {
             DetailsViewController *dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
-            [dvc setAccount: account viewOfAccount: viewOfAccount transactionsDict: deserializedJSONObject];
+            [dvc setAccount: account viewOfAccount: viewOfAccount transactionsDict: deserializedObject];
             [self.navigationController pushViewController:dvc animated:YES];
-        }
-	];
+        };
+
+	[session.marshal getResourceAtAPIPath: path withOptions: nil
+						 forResultHandler: resultHandler orErrorHandler: nil];
 }
 
 

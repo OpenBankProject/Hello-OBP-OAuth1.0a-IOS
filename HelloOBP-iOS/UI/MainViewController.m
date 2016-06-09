@@ -195,11 +195,11 @@
 - (void)fetchBanks
 {
 	[_session.marshal getResourceAtAPIPath: @"banks"
-							   withOptions: @{OBPMarshalOptionExpectClass : [NSDictionary class]}
-								forHandler:
-		^(id deserializedJSONObject, NSString* body)
+							   withOptions: nil
+						  forResultHandler:
+		^(id deserializedObject, NSString* body)
 		{
-			NSDictionary*			banksDict = deserializedJSONObject;
+			NSDictionary*			banksDict = deserializedObject;
 			NSMutableDictionary*	banksByID = [NSMutableDictionary dictionary];
 			NSArray*				banks = banksDict[@"banks"];
 			NSString*				bankID;
@@ -213,6 +213,7 @@
 			md[@"banksByID"] = banksByID;
 			_banks = [md copy];
         }
+						   orErrorHandler: nil
 	];
 }
 
