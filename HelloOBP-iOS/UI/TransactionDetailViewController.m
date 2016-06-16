@@ -25,6 +25,7 @@ LabelTextFrom(NSDictionary* dict, NSString* path, FieldType ft, NSString* dflt)
 	NSString*		valueString = @"";
 	const char*		sep = "";
 	NSDate*			date;
+	BOOL			includeTime;
 	if ([value isKindOfClass: [NSArray class]])
 	{
 		for (obj in value)
@@ -42,9 +43,13 @@ LabelTextFrom(NSDictionary* dict, NSString* path, FieldType ft, NSString* dflt)
 			break;
 		case eFieldType_Date:
 			if (nil != (date = [OBPDateFormatter dateFromString: valueString]))
+			{
+				includeTime = 0 != fmod([date timeIntervalSinceReferenceDate], 1);
 				valueString = [NSDateFormatter localizedStringFromDate: date
 															 dateStyle: NSDateFormatterMediumStyle
-															 timeStyle: NSDateFormatterShortStyle];
+															 timeStyle: includeTime ? NSDateFormatterShortStyle
+																					: NSDateFormatterNoStyle];
+			}
 			labelText = [valueString length] ? valueString : dflt;
 			break;
 	}

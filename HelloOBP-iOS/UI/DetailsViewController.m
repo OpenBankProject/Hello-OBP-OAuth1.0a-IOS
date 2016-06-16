@@ -162,9 +162,13 @@
 	ttc.otherAccountHolder.text = [(s = [transaction valueForKeyPath: @"other_account.holder.name"]) length] ? s : @"-";
 	s = [transaction valueForKeyPath: @"details.completed"];
 	if (nil != (d = [OBPDateFormatter dateFromString: s]))
+	{
+		BOOL includeTime = 0 != fmod([d timeIntervalSinceReferenceDate], 1);
 		s = [NSDateFormatter localizedStringFromDate: d
 										   dateStyle: NSDateFormatterMediumStyle
-										   timeStyle: NSDateFormatterShortStyle];
+										   timeStyle: includeTime ? NSDateFormatterShortStyle
+																  : NSDateFormatterNoStyle];
+	}
 	ttc.completionDate.text = [s length] ? s : @"-";
 	return ttc;
 }

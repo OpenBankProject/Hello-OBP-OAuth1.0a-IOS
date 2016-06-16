@@ -230,13 +230,16 @@
 	NSString*			bankID = account[@"bank_id"];
 	NSDictionary*		bank = _banksDict[@"banksByID"][bankID];
 	NSString*			s;
-	NSString*			sep = @"";
 
 	accountDesc = @"";
 	if ([(s = [account valueForKeyPath: @"label"]) isKindOfClass: [NSString class]] && [s length])
-		accountDesc = s, sep = @" — ";
+		accountDesc = s;
+	else
 	if ([(s = [account valueForKeyPath: @"number"]) isKindOfClass: [NSString class]] && [s length])
-		accountDesc = [accountDesc stringByAppendingFormat: @"%@%@", sep, s];
+		accountDesc = s;
+	else
+	if ([(s = [account valueForKeyPath: @"id"]) isKindOfClass: [NSString class]] && [s length])
+		accountDesc = s;
 	cell.textLabel.text = accountDesc;
 
 	s = [bank[@"short_name"] description];
