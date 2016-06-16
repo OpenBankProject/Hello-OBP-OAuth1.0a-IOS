@@ -128,10 +128,10 @@
 - (void)fetchAccountsByBank
 {
 	NSMutableArray*	bankIDs = [[_banksDict valueForKeyPath: @"banks.id"] mutableCopy];
-	[self fetchPrivateAccountsForFirstOfBankIDs: bankIDs];
+	[self fetchAccountsWithQualifier: @"/private" forFirstOfBankIDs: bankIDs];
 }
 
-- (void)fetchPrivateAccountsForFirstOfBankIDs:(NSMutableArray*)bankIDs
+- (void)fetchAccountsWithQualifier:(NSString*)qualifier forFirstOfBankIDs:(NSMutableArray*)bankIDs
 {
 	if (![bankIDs count])
 		return;
@@ -139,13 +139,16 @@
 	OBPSession*				session = [OBPSession currentSession];
 	NSString*				APIBase = session.serverInfo.APIBase;
 	NSString*				bankID = bankIDs[0]; [bankIDs removeObjectAtIndex: 0];
-	NSString*				path = [NSString stringWithFormat: @"banks/%@/accounts/private", bankID];
+	NSString*				path = [NSString stringWithFormat: @"banks/%@/accounts%@", bankID, qualifier?:@""];
 	HandleOBPMarshalError	errorHandler =
 		^(NSError* error, NSString* path)
 		{
-			OBP_LOG(@"Request for resource at path %@ served by %@ got error %@", path, APIBase, error);
+			OBP_LOG(@"Request for resource at %@/%@ got error %@", APIBase, path, error);
 			if (error.code == 404 || error.code == 204)
-				[self_ifStillHere fetchPrivateAccountsForFirstOfBankIDs: bankIDs];
+			{
+				[bankIDs insertObject: bankID atIndex: 0];
+				[self_ifStillHere fetchAccountsWithQualifier: nil forFirstOfBankIDs: bankIDs];
+			}
 		};
 	HandleOBPMarshalData	resultHandler =
 		^(id deserializedObject, NSString* body)
@@ -153,18 +156,28 @@
 			AccountsViewController*	avc = self_ifStillHere;
 			if (avc == nil)
 				return;
-			NSDictionary*		accountsDict = deserializedObject;
-			NSArray*			accounts = accountsDict[@"accounts"];
+			NSDictionary*		accountsDict = nil;
+			NSArray*			accounts = nil;
+			if ([deserializedObject isKindOfClass: [NSDictionary class]])
+				accountsDict = deserializedObject, accounts = accountsDict[@"accounts"];
+			else
+			if ([deserializedObject isKindOfClass: [NSArray class]])
+				accounts = deserializedObject, accountsDict = @{@"accounts" : accounts};
 			if ([accounts count])
 			{
 				NSArray*		array = avc.accountsDict[@"accounts"] ?: @[];
 				accounts = [array arrayByAddingObjectsFromArray: accounts];
 				avc.accountsDict = @{@"accounts" : accounts};
 			}
-			[avc fetchPrivateAccountsForFirstOfBankIDs: bankIDs];
+			[avc fetchAccountsWithQualifier: qualifier forFirstOfBankIDs: bankIDs];
         };
 
-	[session.marshal getResourceAtAPIPath: path withOptions: nil
+	NSDictionary*			options = @{
+		OBPMarshalOptionExpectClass : [NSNull null]
+		// ...v2.0.0 breaks with past and returns an array instead of a dictionary so compatibility with both we can't assume the container class
+	};
+
+	[session.marshal getResourceAtAPIPath: path withOptions: options
 						 forResultHandler: resultHandler orErrorHandler: errorHandler];
 }
 
