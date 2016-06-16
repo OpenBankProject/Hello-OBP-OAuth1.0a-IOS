@@ -13,15 +13,24 @@
 #import <OBPKit/OBPServerInfo.h>
 
 
+#if 1
 
 #define OAUTH_AUTHENTICATE_URL @"https://apisandbox.openbankproject.com/"
 #define OAUTH_BASE_URL @"https://apisandbox.openbankproject.com/obp/v1.2/"
-
-// To get the values for the following fields, please register your client here:
-// https://apisandbox.openbankproject.com/consumer-registration
 #define OAUTH_CONSUMER_KEY @"tzecy5lgatsbrvbt2ttfrxlelertfxywt3whes4q"
 #define OAUTH_CONSUMER_SECRET_KEY @"eusfvy3oizylx11dr420nhxluv1rdan5qjjkgmkh"
 
+#else
+
+// Try with a different server - fill in details here:
+#define ANOTHER_OBP_SERVER_HOST @"https://api-anotherserver.openbankproject.com/"
+#define OAUTH_AUTHENTICATE_URL ANOTHER_OBP_SERVER_HOST
+#define OAUTH_BASE_URL ANOTHER_OBP_SERVER_HOST @"obp/v1.3.0/"
+// Get key and secret by registering your client at: ANOTHER_OBP_SERVER_HOST/consumer-registration
+#define OAUTH_CONSUMER_KEY @"paste-your-consumer-key-here"
+#define OAUTH_CONSUMER_SECRET_KEY @"paste-your-consumer-secret-here"
+
+#endif
 
 
 #define USE_DIRECT_LOGIN 0

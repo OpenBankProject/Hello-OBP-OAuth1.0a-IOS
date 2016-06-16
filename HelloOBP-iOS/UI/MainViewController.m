@@ -75,7 +75,7 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     
-    if (_session == nil)
+    if (nil == (_session = [OBPSession currentSession]))
 	{
 		OBPServerInfo*	serverInfo = [OBPServerInfo defaultEntry];
 		_session = [OBPSession sessionWithServerInfo: serverInfo];

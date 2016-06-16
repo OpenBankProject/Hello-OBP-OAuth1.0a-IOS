@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 //
 #import <OBPKit/OBPServerInfo.h>
+#import <OBPKit/OBPSession.h>
 #import <OBPKit/OBPWebViewProvider.h>
 // prj
 #import "DefaultServerDetails.h"
@@ -54,12 +55,15 @@
 											withCallbackSchemeName: @"callback"
 											andInstallCallbackHook: YES];
 
-	if (nil == [OBPServerInfo firstEntryForAPIServer: kDefaultServer_APIBase])
+	NSDictionary*	details = DefaultServerDetails();
+	NSString*		serverBase = details[OBPServerInfo_APIBase];
+	OBPServerInfo*	serverInfo = [OBPServerInfo firstEntryForAPIServer: serverBase];
+	if (serverInfo == nil)
 	{
-		OBPServerInfo*	serverInfo;
-		serverInfo = [OBPServerInfo addEntryForAPIServer: kDefaultServer_APIBase];
-		serverInfo.accessData = DefaultServerDetails();
+		serverInfo = [OBPServerInfo addEntryForAPIServer: serverBase];
+		serverInfo.accessData = details;
 	}
+	[OBPSession setCurrentSession: [OBPSession sessionWithServerInfo: serverInfo]];
 
     return YES;
 }
