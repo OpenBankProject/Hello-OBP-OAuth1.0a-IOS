@@ -38,9 +38,9 @@
     
     self.title = @"Open Bank Project";
 
-	// 2. Get the default server info, and make a corresponding session to access it
-	_serverInfo = [OBPServerInfo defaultEntry];
-	_session = [OBPSession sessionWithServerInfo: _serverInfo];
+	// 2. Get the current session if already set, otherwise a session with the default server info
+	_session = [OBPSession currentSession] ?: [OBPSession sessionWithServerInfo: [OBPServerInfo defaultEntry]];
+	_serverInfo = _session.serverInfo;
 	_APIBase = _serverInfo.APIBase;
 
     // 3. initialize the webview and add it to the view

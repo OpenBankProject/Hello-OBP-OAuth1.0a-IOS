@@ -1,4 +1,4 @@
+github "OpenBankProject/OBPKit-iOSX" "1.1.2"
+github "kishikawakatsumi/UICKeyChainStore" "v2.1.1"
+github "nst/STHTTPRequest" "1.1.3"
 github "t0rst/OAuthCore" "0.0.2"
-github "nst/STHTTPRequest" "1.1.1"
-github "kishikawakatsumi/UICKeyChainStore" "v2.1.0"
-github "OpenBankProject/OBPKit-iOSX" "1.0.0"
