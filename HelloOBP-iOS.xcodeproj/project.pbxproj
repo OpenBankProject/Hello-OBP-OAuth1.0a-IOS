@@ -461,7 +461,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tesobe.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F6A61B20-D6BD-46E2-B610-3F92B6E2A881";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -478,7 +477,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tesobe.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F6A61B20-D6BD-46E2-B610-3F92B6E2A881";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
