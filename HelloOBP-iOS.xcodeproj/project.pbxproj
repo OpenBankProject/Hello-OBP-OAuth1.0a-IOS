@@ -17,12 +17,12 @@
 		7414C8FB1923B78300084BC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7414C8FA1923B78300084BC3 /* Images.xcassets */; };
 		7414C95F1923C13400084BC3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95B1923C13400084BC3 /* LoginViewController.m */; };
 		7414C9601923C13400084BC3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414C95C1923C13400084BC3 /* MainViewController.m */; };
-		7414C9781923C22F00084BC3 /* logo-obp.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 7414C9761923C22F00084BC3 /* logo-obp.JPG */; };
 		744B412D199E91C300EBDA6D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744B412C199E91C300EBDA6D /* DetailsViewController.m */; };
 		744B412F199F76A500EBDA6D /* Logo_Text_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 744B412E199F76A500EBDA6D /* Logo_Text_small.png */; };
 		746A94A519A2871000C935BC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A94A419A2871000C935BC /* AboutViewController.m */; };
 		AE87F3811C5673F700D09FBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3801C5673F700D09FBC /* Main.storyboard */; };
 		AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */; };
+		AE901D9A1EEEE8BF00AEE0DD /* OBP_full_stack_web.png in Resources */ = {isa = PBXBuildFile; fileRef = AE901D991EEEE8BF00AEE0DD /* OBP_full_stack_web.png */; };
 		AEBAD2DC1C8EE66D00165DB0 /* OAuthCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD1FC1C8EE34C00165DB0 /* OAuthCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AEBAD2DE1C8EE66D00165DB0 /* OBPKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD1FE1C8EE34C00165DB0 /* OBPKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AEBAD2E01C8EE66D00165DB0 /* STHTTPRequest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD2001C8EE34D00165DB0 /* STHTTPRequest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -66,7 +66,6 @@
 		7414C95C1923C13400084BC3 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7414C95D1923C13400084BC3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		7414C95E1923C13400084BC3 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		7414C9761923C22F00084BC3 /* logo-obp.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-obp.JPG"; sourceTree = "<group>"; };
 		744B412B199E91C300EBDA6D /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		744B412C199E91C300EBDA6D /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		744B412E199F76A500EBDA6D /* Logo_Text_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_Text_small.png; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		AE3B29521CB5913C0012E56E /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		AE87F3801C5673F700D09FBC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		AE901D991EEEE8BF00AEE0DD /* OBP_full_stack_web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OBP_full_stack_web.png; sourceTree = "<group>"; };
 		AE982B231CB78EB40020D935 /* Debug(carthage).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug(carthage).xcconfig"; sourceTree = "<group>"; };
 		AE982B241CB78EB50020D935 /* Release(carthage).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release(carthage).xcconfig"; sourceTree = "<group>"; };
 		AE982B251CB78EC30020D935 /* Debug(cocoapods).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug(cocoapods).xcconfig"; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 				AE87F3801C5673F700D09FBC /* Main.storyboard */,
 				7414C8FA1923B78300084BC3 /* Images.xcassets */,
 				744B412E199F76A500EBDA6D /* Logo_Text_small.png */,
-				7414C9761923C22F00084BC3 /* logo-obp.JPG */,
+				AE901D991EEEE8BF00AEE0DD /* OBP_full_stack_web.png */,
 			);
 			path = Res;
 			sourceTree = "<group>";
@@ -307,7 +307,7 @@
 				AE87F3811C5673F700D09FBC /* Main.storyboard in Resources */,
 				7414C8FB1923B78300084BC3 /* Images.xcassets in Resources */,
 				AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */,
-				7414C9781923C22F00084BC3 /* logo-obp.JPG in Resources */,
+				AE901D9A1EEEE8BF00AEE0DD /* OBP_full_stack_web.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
