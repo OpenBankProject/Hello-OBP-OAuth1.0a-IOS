@@ -1,7 +1,7 @@
 Hello-OBP-OAuth1.0a-iOS
 ========================
 
-This is a basic app to demonstrate the integration of the OpenBankProject with an iOS application. 
+This is a basic iOS app that talks to Open Bank Project's API sandbox, demonstrates authorization and retrieves banks, accounts and transactions. (If you just need a simple OBP starter app to copy and modify, try [OBP-iOS-Starter](https://github.com/OpenBankProject/OBP-iOS-Starter).)
 
 The app will proceed through OAuth1 authentication, and then make signed API requests that retrieve the list of [private accounts](https://github.com/OpenBankProject/OBP-API/wiki/REST-API-V1.2#accounts-private) on the sandbox API and show their details in the UI (see below for example accounts to log in). 
 
