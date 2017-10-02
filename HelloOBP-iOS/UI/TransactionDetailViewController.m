@@ -153,11 +153,6 @@ LabelTextFrom(NSDictionary* dict, NSString* path, FieldType ft, NSString* dflt)
 	}
 }
 
-- (IBAction)linkToWebsites:(id)sender
-{
-    [MainViewController linkToOBPwebsite: self];
-}
-
 @end
 
 

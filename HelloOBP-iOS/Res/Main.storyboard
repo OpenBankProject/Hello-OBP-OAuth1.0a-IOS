@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="aYR-RD-AcP">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="aYR-RD-AcP">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
+        </array>
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Connect-->
         <scene sceneID="ufC-wZ-h7g">
@@ -20,25 +29,25 @@
                         <viewControllerLayoutGuide type="bottom" id="J6C-KR-Y3w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LKH-Gg-5yK" userLabel="Spacer 0">
-                                <rect key="frame" x="0.0" y="0.0" width="40" height="51"/>
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="26.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="FHu-Ad-S7Q"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8GF-xP-NSX" userLabel="Spacer 1">
-                                <rect key="frame" x="0.0" y="193" width="40" height="51"/>
+                                <rect key="frame" x="0.0" y="168.5" width="40" height="26"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="JSi-QL-8fE"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="13" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="266" translatesAutoresizingMaskIntoConstraints="NO" id="0RE-Cl-3Ox" userLabel="Intro Text">
-                                <rect key="frame" x="20" y="244" width="335" height="82"/>
+                                <rect key="frame" x="20" y="194.5" width="280" height="82"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="82" id="Mdp-WQ-nug"/>
                                 </constraints>
@@ -50,14 +59,14 @@ You must log into Open Bank Project with a connected account to see your bank da
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD4-Lv-eGe" userLabel="Spacer 2">
-                                <rect key="frame" x="0.0" y="326" width="40" height="51"/>
+                                <rect key="frame" x="0.0" y="276.5" width="40" height="26.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="Oug-Cx-vm0"/>
                                 </constraints>
                             </view>
                             <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEj-NG-THa" userLabel="InOrOut">
-                                <rect key="frame" x="37.5" y="377" width="300" height="114"/>
+                                <rect key="frame" x="10" y="303" width="300" height="114"/>
                                 <subviews>
                                     <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKX-BY-Eqh" userLabel="LoggedIn View">
                                         <rect key="frame" x="10" y="0.0" width="280" height="114"/>
@@ -181,56 +190,40 @@ You must log into Open Bank Project with a connected account to see your bank da
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3RQ-C9-4if" userLabel="Spacer 3">
-                                <rect key="frame" x="0.0" y="491" width="40" height="51"/>
+                                <rect key="frame" x="0.0" y="417" width="40" height="26"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="bYL-gZ-1bR"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHg-Zg-g3f" userLabel="Footer View">
-                                <rect key="frame" x="0.0" y="542" width="375" height="61"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="dAF-et-1kU">
-                                        <rect key="frame" x="6" y="6" width="363" height="49"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal">
-                                            <string key="title">Hello-OBP-OAuth1.0a is demo for app designers.
-To find out more visit the openbankproject.</string>
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="linkToOBPwebsite:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="edo-m2-CMd"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.2853081226348877" green="0.65510040521621704" blue="0.56348258256912231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="dAF-et-1kU" firstAttribute="centerX" secondItem="gHg-Zg-g3f" secondAttribute="centerX" id="0mh-8l-8Qj"/>
-                                    <constraint firstItem="dAF-et-1kU" firstAttribute="height" secondItem="gHg-Zg-g3f" secondAttribute="height" constant="-12" id="4Ac-5V-6Fo"/>
-                                    <constraint firstItem="dAF-et-1kU" firstAttribute="width" secondItem="gHg-Zg-g3f" secondAttribute="width" constant="-12" id="BwD-5j-6uB"/>
-                                    <constraint firstAttribute="height" constant="61" id="FEe-FE-tOU"/>
-                                    <constraint firstItem="dAF-et-1kU" firstAttribute="centerY" secondItem="gHg-Zg-g3f" secondAttribute="centerY" id="b8C-4f-zBw"/>
-                                </constraints>
-                            </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="OBP_full_stack_web.png" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-Te-fBa" userLabel="OBP Logo">
-                                <rect key="frame" x="51.5" y="51" width="272" height="142"/>
+                                <rect key="frame" x="24" y="26.5" width="272" height="142"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="142" id="8jd-Z0-xuL"/>
                                     <constraint firstAttribute="width" constant="272" id="jql-wp-AdB"/>
                                 </constraints>
                             </imageView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xEA-4B-R2m" userLabel="Footer Embed">
+                                <rect key="frame" x="0.0" y="443" width="320" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="61" id="Z2X-KI-nvU"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="iNL-h7-25g" kind="embed" id="Odo-Jn-4X6"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hEj-NG-THa" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="1k0-8b-ibA"/>
-                            <constraint firstItem="J6C-KR-Y3w" firstAttribute="top" secondItem="gHg-Zg-g3f" secondAttribute="bottom" id="7HF-6j-N32"/>
                             <constraint firstItem="LKH-Gg-5yK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Akw-aH-K3j"/>
-                            <constraint firstItem="gHg-Zg-g3f" firstAttribute="top" secondItem="3RQ-C9-4if" secondAttribute="bottom" id="BKb-Yj-jm5"/>
-                            <constraint firstItem="gHg-Zg-g3f" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="BYn-RD-llJ"/>
-                            <constraint firstItem="gHg-Zg-g3f" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="EVB-gi-Tep"/>
                             <constraint firstItem="8GF-xP-NSX" firstAttribute="height" secondItem="LKH-Gg-5yK" secondAttribute="height" id="KbC-pb-3Lr"/>
+                            <constraint firstItem="J6C-KR-Y3w" firstAttribute="top" secondItem="xEA-4B-R2m" secondAttribute="bottom" id="MCW-AP-J9U"/>
                             <constraint firstItem="LD4-Lv-eGe" firstAttribute="height" secondItem="8GF-xP-NSX" secondAttribute="height" id="QM4-aC-ArG"/>
+                            <constraint firstItem="xEA-4B-R2m" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Qn8-4t-ANu"/>
                             <constraint firstItem="Szc-Te-fBa" firstAttribute="top" secondItem="LKH-Gg-5yK" secondAttribute="bottom" id="S1r-gb-SAx"/>
+                            <constraint firstItem="xEA-4B-R2m" firstAttribute="top" secondItem="3RQ-C9-4if" secondAttribute="bottom" id="UaU-d6-vs6"/>
+                            <constraint firstAttribute="trailing" secondItem="xEA-4B-R2m" secondAttribute="trailing" id="Vnk-vz-7Tm"/>
                             <constraint firstItem="LD4-Lv-eGe" firstAttribute="top" secondItem="0RE-Cl-3Ox" secondAttribute="bottom" id="W9T-7q-gfB"/>
                             <constraint firstAttribute="trailing" secondItem="0RE-Cl-3Ox" secondAttribute="trailing" constant="20" symbolic="YES" id="X14-u5-J8X"/>
                             <constraint firstItem="3RQ-C9-4if" firstAttribute="top" secondItem="hEj-NG-THa" secondAttribute="bottom" id="dNb-06-rLT"/>
@@ -239,7 +232,6 @@ To find out more visit the openbankproject.</string>
                             <constraint firstItem="3RQ-C9-4if" firstAttribute="height" secondItem="8GF-xP-NSX" secondAttribute="height" id="f9T-f2-yDW"/>
                             <constraint firstItem="Szc-Te-fBa" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="fdA-wZ-Lhs"/>
                             <constraint firstItem="hEj-NG-THa" firstAttribute="top" secondItem="LD4-Lv-eGe" secondAttribute="bottom" id="fxZ-YP-vt2"/>
-                            <constraint firstItem="J6C-KR-Y3w" firstAttribute="top" secondItem="gHg-Zg-g3f" secondAttribute="bottom" id="iQE-0a-6bM"/>
                             <constraint firstItem="0RE-Cl-3Ox" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="keh-IY-ETo"/>
                             <constraint firstItem="LD4-Lv-eGe" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="kvh-mf-724"/>
                             <constraint firstItem="8GF-xP-NSX" firstAttribute="top" secondItem="Szc-Te-fBa" secondAttribute="bottom" id="lrk-JU-MIS"/>
@@ -264,7 +256,6 @@ To find out more visit the openbankproject.</string>
                     <connections>
                         <outlet property="connectBankAPI" destination="ZqO-Ax-6gw" id="n6S-Rk-VFD"/>
                         <outlet property="leftNavButton" destination="f29-56-w3T" id="xAb-aM-Wfw"/>
-                        <outlet property="linkOBPwebsite" destination="dAF-et-1kU" id="JlB-vB-IXP"/>
                         <outlet property="linkReadme" destination="GI2-Sc-oZV" id="XWi-5b-kdT"/>
                         <outlet property="rightNavButton" destination="mi7-Up-dCe" id="n8O-PV-kWx"/>
                         <outlet property="viewConnect" destination="TSC-LO-VDF" id="V1x-se-NI6"/>
@@ -286,20 +277,20 @@ To find out more visit the openbankproject.</string>
                         <viewControllerLayoutGuide type="bottom" id="80h-aT-6cU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="klq-g9-jgO">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AjO-8S-1tN" userLabel="Header">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bank Accounts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSO-GQ-S4X">
-                                        <rect key="frame" x="12" y="0.0" width="175.5" height="36"/>
+                                        <rect key="frame" x="12" y="0.0" width="148" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.2853081226348877" green="0.65510040521621704" blue="0.56348258256912231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Kdh-Jx-XpH">
-                                        <rect key="frame" x="264" y="4" width="99" height="29"/>
+                                        <rect key="frame" x="209" y="4" width="99" height="29"/>
                                         <segments>
                                             <segment title="Table"/>
                                             <segment title="JSON"/>
@@ -322,20 +313,20 @@ To find out more visit the openbankproject.</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NY-ea-ANy" userLabel="Content">
-                                <rect key="frame" x="0.0" y="36" width="375" height="506"/>
+                                <rect key="frame" x="0.0" y="36" width="320" height="407"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GB-VJ-Pjp">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="407"/>
                                         <subviews>
                                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="36" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KDd-3X-rLS">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="407"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <prototypes>
                                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="fBP-7r-JLY" detailTextLabel="Hkl-eD-BRH" style="IBUITableViewCellStyleSubtitle" id="tIa-gb-myF">
-                                                        <rect key="frame" x="0.0" y="22" width="375" height="36"/>
+                                                        <rect key="frame" x="0.0" y="22" width="320" height="36"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tIa-gb-myF" id="TFf-Na-StI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="342" height="35.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="287" height="35.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fBP-7r-JLY">
@@ -367,10 +358,10 @@ To find out more visit the openbankproject.</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IUt-em-btt">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="407"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="JSON" translatesAutoresizingMaskIntoConstraints="NO" id="eqj-Ws-KOT">
-                                                <rect key="frame" x="6" y="6" width="363" height="500"/>
+                                                <rect key="frame" x="6" y="6" width="308" height="401"/>
                                                 <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -397,43 +388,27 @@ To find out more visit the openbankproject.</string>
                                     <constraint firstAttribute="bottom" secondItem="IUt-em-btt" secondAttribute="bottom" id="vgY-aH-tBp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kg2-Iy-X5J" userLabel="Footer">
-                                <rect key="frame" x="0.0" y="542" width="375" height="61"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="XaW-wX-uUE">
-                                        <rect key="frame" x="6" y="6" width="363" height="49"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal">
-                                            <string key="title">Hello-OBP-OAuth1.0a is demo for app designers.
-To find out more visit the openbankproject.</string>
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="linkToOBPwebsite:" destination="Any-l3-vdI" eventType="touchUpInside" id="O4y-8z-njG"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.2853081226348877" green="0.65510040521621704" blue="0.56348258256912231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oS1-tN-keF" userLabel="Footer Embed">
+                                <rect key="frame" x="0.0" y="443" width="320" height="61"/>
                                 <constraints>
-                                    <constraint firstItem="XaW-wX-uUE" firstAttribute="height" secondItem="kg2-Iy-X5J" secondAttribute="height" constant="-12" id="FNE-NK-203"/>
-                                    <constraint firstAttribute="height" constant="61" id="Ws8-7f-NY4"/>
-                                    <constraint firstItem="XaW-wX-uUE" firstAttribute="width" secondItem="kg2-Iy-X5J" secondAttribute="width" constant="-12" id="hvV-B6-u2F"/>
-                                    <constraint firstItem="XaW-wX-uUE" firstAttribute="centerY" secondItem="kg2-Iy-X5J" secondAttribute="centerY" id="tsy-Xp-Tz9"/>
-                                    <constraint firstItem="XaW-wX-uUE" firstAttribute="centerX" secondItem="kg2-Iy-X5J" secondAttribute="centerX" id="zqs-sb-4Ua"/>
+                                    <constraint firstAttribute="height" constant="61" id="5zI-nq-4of"/>
                                 </constraints>
-                            </view>
+                                <connections>
+                                    <segue destination="iNL-h7-25g" kind="embed" id="IG0-xZ-hdP"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="AjO-8S-1tN" firstAttribute="leading" secondItem="klq-g9-jgO" secondAttribute="leading" id="5gH-Ze-SpL"/>
                             <constraint firstAttribute="trailing" secondItem="AjO-8S-1tN" secondAttribute="trailing" id="Cuu-bd-QrY"/>
                             <constraint firstAttribute="trailing" secondItem="1NY-ea-ANy" secondAttribute="trailing" id="O8F-6m-ffV"/>
-                            <constraint firstAttribute="trailing" secondItem="kg2-Iy-X5J" secondAttribute="trailing" id="U44-6b-ObH"/>
+                            <constraint firstItem="80h-aT-6cU" firstAttribute="top" secondItem="oS1-tN-keF" secondAttribute="bottom" id="YWa-O7-Bpb"/>
+                            <constraint firstItem="oS1-tN-keF" firstAttribute="top" secondItem="1NY-ea-ANy" secondAttribute="bottom" id="am6-po-pR7"/>
                             <constraint firstItem="1NY-ea-ANy" firstAttribute="leading" secondItem="klq-g9-jgO" secondAttribute="leading" id="b3t-1r-XaO"/>
-                            <constraint firstItem="80h-aT-6cU" firstAttribute="top" secondItem="kg2-Iy-X5J" secondAttribute="bottom" id="boZ-xc-Prh"/>
                             <constraint firstItem="1NY-ea-ANy" firstAttribute="top" secondItem="AjO-8S-1tN" secondAttribute="bottom" id="fLd-4x-oGR"/>
-                            <constraint firstItem="kg2-Iy-X5J" firstAttribute="top" secondItem="1NY-ea-ANy" secondAttribute="bottom" id="hcz-gU-I9f"/>
-                            <constraint firstItem="kg2-Iy-X5J" firstAttribute="leading" secondItem="klq-g9-jgO" secondAttribute="leading" id="rQQ-y3-KbG"/>
+                            <constraint firstAttribute="trailing" secondItem="oS1-tN-keF" secondAttribute="trailing" id="mFx-FT-hbx"/>
+                            <constraint firstItem="oS1-tN-keF" firstAttribute="leading" secondItem="klq-g9-jgO" secondAttribute="leading" id="oF6-Ip-Ubd"/>
                             <constraint firstItem="AjO-8S-1tN" firstAttribute="top" secondItem="l3p-uS-9rC" secondAttribute="bottom" id="yAG-UF-ic7"/>
                         </constraints>
                     </view>
@@ -442,7 +417,6 @@ To find out more visit the openbankproject.</string>
                     <connections>
                         <outlet property="accountsJSON" destination="eqj-Ws-KOT" id="wCI-c9-KU1"/>
                         <outlet property="accountsTypeToShow" destination="Kdh-Jx-XpH" id="i3b-pg-2md"/>
-                        <outlet property="linkOBPwebsite" destination="XaW-wX-uUE" id="Poz-S4-6Pt"/>
                         <outlet property="tableViewAccounts" destination="KDd-3X-rLS" id="FOL-ER-u2t"/>
                         <outlet property="viewJSON" destination="IUt-em-btt" id="a88-Cb-ufG"/>
                         <outlet property="viewTable" destination="0GB-VJ-Pjp" id="XX3-tI-CfU"/>
@@ -451,7 +425,7 @@ To find out more visit the openbankproject.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzb-W8-Iuv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="-255"/>
+            <point key="canvasLocation" x="1131" y="-254"/>
         </scene>
         <!--Transactions-->
         <scene sceneID="ztS-YN-OF2">
@@ -462,20 +436,20 @@ To find out more visit the openbankproject.</string>
                         <viewControllerLayoutGuide type="bottom" id="EP5-9X-39O"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="cse-ZG-ATk">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aWn-sn-xcg" userLabel="Header">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hZ-qx-pbj">
-                                        <rect key="frame" x="12" y="0.0" width="175.5" height="36"/>
+                                        <rect key="frame" x="12" y="0.0" width="148" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.2853081226348877" green="0.65510040521621704" blue="0.56348258256912231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ClT-se-ID7">
-                                        <rect key="frame" x="264" y="4" width="99" height="29"/>
+                                        <rect key="frame" x="209" y="4" width="99" height="29"/>
                                         <segments>
                                             <segment title="Table"/>
                                             <segment title="JSON"/>
@@ -498,13 +472,13 @@ To find out more visit the openbankproject.</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lK2-Tz-gRU" userLabel="Content">
-                                <rect key="frame" x="0.0" y="36" width="375" height="506"/>
+                                <rect key="frame" x="0.0" y="36" width="320" height="407"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwg-66-c5a">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="407"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="JSON" translatesAutoresizingMaskIntoConstraints="NO" id="HWL-NG-yOt">
-                                                <rect key="frame" x="6" y="6" width="363" height="500"/>
+                                                <rect key="frame" x="6" y="6" width="308" height="401"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -518,17 +492,17 @@ To find out more visit the openbankproject.</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCY-zc-Rcq">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="407"/>
                                         <subviews>
                                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="36" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bUV-nu-bkY">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="407"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <prototypes>
                                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="qxv-La-iFN" customClass="TransactionTableCell">
-                                                        <rect key="frame" x="0.0" y="22" width="375" height="36"/>
+                                                        <rect key="frame" x="0.0" y="22" width="320" height="36"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qxv-La-iFN" id="gYC-pR-786">
-                                                            <rect key="frame" x="0.0" y="0.0" width="342" height="35.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="287" height="35.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZzY-dh-RqV" userLabel="Value">
@@ -550,13 +524,13 @@ To find out more visit the openbankproject.</string>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Someone Else" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3R-Vx-FD4" userLabel="Other">
-                                                                    <rect key="frame" x="253" y="4.5" width="81" height="15.5"/>
+                                                                    <rect key="frame" x="198" y="4.5" width="81" height="15.5"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgR-wA-9fX" userLabel="Completed">
-                                                                    <rect key="frame" x="308" y="20" width="26" height="12"/>
+                                                                    <rect key="frame" x="253" y="20" width="26" height="12"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
                                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -608,51 +582,34 @@ To find out more visit the openbankproject.</string>
                                     <constraint firstItem="hwg-66-c5a" firstAttribute="leading" secondItem="lK2-Tz-gRU" secondAttribute="leading" id="zkq-XC-HfV"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdV-Bs-HnB" userLabel="Footer">
-                                <rect key="frame" x="0.0" y="542" width="375" height="61"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="LPU-Cd-xzi">
-                                        <rect key="frame" x="6" y="6" width="363" height="49"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal">
-                                            <string key="title">Hello-OBP-OAuth1.0a is demo for app designers.
-To find out more visit the openbankproject.</string>
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="linkToOBPwebsite:" destination="dKW-Ju-yv1" eventType="touchUpInside" id="FtD-pH-3Kw"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.2853081226348877" green="0.65510040521621704" blue="0.56348258256912231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INl-kx-TRp" userLabel="Footer Embed">
+                                <rect key="frame" x="0.0" y="443" width="320" height="61"/>
                                 <constraints>
-                                    <constraint firstItem="LPU-Cd-xzi" firstAttribute="height" secondItem="OdV-Bs-HnB" secondAttribute="height" constant="-12" id="Jda-ub-YSg"/>
-                                    <constraint firstAttribute="height" constant="61" id="Q3u-mr-mD6"/>
-                                    <constraint firstItem="LPU-Cd-xzi" firstAttribute="centerX" secondItem="OdV-Bs-HnB" secondAttribute="centerX" id="hXp-Yh-943"/>
-                                    <constraint firstItem="LPU-Cd-xzi" firstAttribute="centerY" secondItem="OdV-Bs-HnB" secondAttribute="centerY" id="pqm-1s-0mJ"/>
-                                    <constraint firstItem="LPU-Cd-xzi" firstAttribute="width" secondItem="OdV-Bs-HnB" secondAttribute="width" constant="-12" id="vyl-Ee-uDj"/>
+                                    <constraint firstAttribute="height" constant="61" id="k77-S3-RCl"/>
                                 </constraints>
-                            </view>
+                                <connections>
+                                    <segue destination="iNL-h7-25g" kind="embed" id="k3K-j3-mqO"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="OdV-Bs-HnB" secondAttribute="trailing" id="03u-OO-TP0"/>
+                            <constraint firstItem="EP5-9X-39O" firstAttribute="top" secondItem="INl-kx-TRp" secondAttribute="bottom" id="07n-pt-hxA"/>
                             <constraint firstItem="aWn-sn-xcg" firstAttribute="leading" secondItem="cse-ZG-ATk" secondAttribute="leading" id="Gc0-zJ-a0q"/>
                             <constraint firstItem="aWn-sn-xcg" firstAttribute="top" secondItem="tGl-5A-Mbr" secondAttribute="bottom" id="NMu-cw-fxZ"/>
                             <constraint firstItem="lK2-Tz-gRU" firstAttribute="leading" secondItem="cse-ZG-ATk" secondAttribute="leading" id="ZmO-KI-SFO"/>
                             <constraint firstAttribute="trailing" secondItem="aWn-sn-xcg" secondAttribute="trailing" id="dcu-th-rW0"/>
-                            <constraint firstItem="OdV-Bs-HnB" firstAttribute="leading" secondItem="cse-ZG-ATk" secondAttribute="leading" id="exp-pZ-WTK"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="OdV-Bs-HnB" secondAttribute="bottom" id="jpK-pO-a2e"/>
                             <constraint firstItem="lK2-Tz-gRU" firstAttribute="top" secondItem="aWn-sn-xcg" secondAttribute="bottom" id="lNc-G8-0YA"/>
+                            <constraint firstAttribute="trailing" secondItem="INl-kx-TRp" secondAttribute="trailing" id="qlK-Pn-FjX"/>
                             <constraint firstAttribute="trailing" secondItem="lK2-Tz-gRU" secondAttribute="trailing" id="qmT-sy-08I"/>
-                            <constraint firstItem="OdV-Bs-HnB" firstAttribute="top" secondItem="lK2-Tz-gRU" secondAttribute="bottom" id="zk1-h3-50c"/>
+                            <constraint firstItem="INl-kx-TRp" firstAttribute="leading" secondItem="cse-ZG-ATk" secondAttribute="leading" id="sZS-xo-22S"/>
+                            <constraint firstItem="INl-kx-TRp" firstAttribute="top" secondItem="lK2-Tz-gRU" secondAttribute="bottom" id="yR5-Cp-e1t"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Transactions" id="dSH-ZD-Pxc"/>
                     <connections>
                         <outlet property="AccountID" destination="2hZ-qx-pbj" id="xD3-Ug-8Qu"/>
-                        <outlet property="linkOBPwebsite" destination="LPU-Cd-xzi" id="6Sv-vB-K6P"/>
                         <outlet property="tableViewTransactions" destination="bUV-nu-bkY" id="56Z-Vq-xtk"/>
                         <outlet property="transactionsJSON" destination="HWL-NG-yOt" id="dcv-fn-M4A"/>
                         <outlet property="transactionsTypeToShow" destination="ClT-se-ID7" id="GeC-ZB-orp"/>
@@ -663,7 +620,7 @@ To find out more visit the openbankproject.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mzg-5V-SH6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1247" y="-254"/>
+            <point key="canvasLocation" x="1578" y="-255"/>
         </scene>
         <!--Detail-->
         <scene sceneID="Zdt-ie-oqh">
@@ -674,14 +631,14 @@ To find out more visit the openbankproject.</string>
                         <viewControllerLayoutGuide type="bottom" id="KSB-69-6J5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iEY-QV-9k4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DI-qs-pUU" userLabel="Content">
-                                <rect key="frame" x="0.0" y="64" width="375" height="341"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="341"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="YGa-Gu-53W" userLabel="this a/c">
-                                        <rect key="frame" x="12" y="12" width="126.5" height="75.5"/>
+                                        <rect key="frame" x="12" y="12" width="127" height="75.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsc-Jt-2y9">
                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="13.5"/>
@@ -690,31 +647,31 @@ To find out more visit the openbankproject.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0es-xN-4hR" userLabel="this a/c fields">
-                                                <rect key="frame" x="0.0" y="15.5" width="126.5" height="60"/>
+                                                <rect key="frame" x="0.0" y="15.5" width="127" height="60"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" axis="vertical" alignment="bottom" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="EsW-bp-3sL" userLabel="this a/c labels">
-                                                        <rect key="frame" x="0.0" y="0.0" width="51" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="51.5" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number:" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTA-1E-ZVr">
-                                                                <rect key="frame" x="7.5" y="0.0" width="43.5" height="13.5"/>
+                                                                <rect key="frame" x="8" y="0.0" width="43.5" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="holder(s):" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iq2-IK-gpF">
-                                                                <rect key="frame" x="0.0" y="15.5" width="51" height="13.5"/>
+                                                                <rect key="frame" x="0.0" y="15.5" width="51.5" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bank:" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3j-Xf-EOI">
-                                                                <rect key="frame" x="22" y="31" width="29" height="13.5"/>
+                                                                <rect key="frame" x="22.5" y="31" width="29" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="id:" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmI-W7-8OP">
-                                                                <rect key="frame" x="38" y="46.5" width="13" height="13.5"/>
+                                                                <rect key="frame" x="38.5" y="46.5" width="13" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -722,7 +679,7 @@ To find out more visit the openbankproject.</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iTv-eh-YVA" userLabel="this a/c values">
-                                                        <rect key="frame" x="55" y="0.0" width="71.5" height="60"/>
+                                                        <rect key="frame" x="55.5" y="0.0" width="71.5" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this ac nbr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhC-NE-TKK">
                                                                 <rect key="frame" x="0.0" y="0.0" width="55.5" height="13.5"/>
@@ -754,7 +711,7 @@ To find out more visit the openbankproject.</string>
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="dyB-0O-zE1" userLabel="Detail stack">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="dyB-0O-zE1" userLabel="Detail stack">
                                         <rect key="frame" x="97" y="100" width="125" height="97"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="detail desc" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJy-6y-eIe">
@@ -807,7 +764,7 @@ To find out more visit the openbankproject.</string>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="nWt-xw-dJZ" userLabel="other a/c">
-                                        <rect key="frame" x="12" y="200" width="130" height="75.5"/>
+                                        <rect key="frame" x="12" y="200" width="130.5" height="75.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="other account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EoR-T8-FUX">
                                                 <rect key="frame" x="0.0" y="0.0" width="73.5" height="13.5"/>
@@ -816,31 +773,31 @@ To find out more visit the openbankproject.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="SHN-eO-C79" userLabel="other a/c fields">
-                                                <rect key="frame" x="0.0" y="15.5" width="130" height="60"/>
+                                                <rect key="frame" x="0.0" y="15.5" width="130.5" height="60"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6Pc-64-Gxb" userLabel="other a/c labels">
-                                                        <rect key="frame" x="0.0" y="0.0" width="51" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="51.5" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number:" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmZ-DU-HJy">
-                                                                <rect key="frame" x="7.5" y="0.0" width="43.5" height="13.5"/>
+                                                                <rect key="frame" x="8" y="0.0" width="43.5" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="holder(s):" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRe-XN-wTJ">
-                                                                <rect key="frame" x="0.0" y="15.5" width="51" height="13.5"/>
+                                                                <rect key="frame" x="0.0" y="15.5" width="51.5" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bank:" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkD-za-Dsc">
-                                                                <rect key="frame" x="22" y="31" width="29" height="13.5"/>
+                                                                <rect key="frame" x="22.5" y="31" width="29" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="id:" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRf-TV-lf3">
-                                                                <rect key="frame" x="38" y="46.5" width="13" height="13.5"/>
+                                                                <rect key="frame" x="38.5" y="46.5" width="13" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -848,7 +805,7 @@ To find out more visit the openbankproject.</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="e8y-pU-r6I" userLabel="other a/c values">
-                                                        <rect key="frame" x="56" y="0.0" width="74" height="60"/>
+                                                        <rect key="frame" x="56.5" y="0.0" width="74" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="othr ac nbr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rN-0k-8se">
                                                                 <rect key="frame" x="0.0" y="0.0" width="58" height="13.5"/>
@@ -881,7 +838,7 @@ To find out more visit the openbankproject.</string>
                                         </subviews>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="TV6-vm-aXw" userLabel="Narrative stack">
-                                        <rect key="frame" x="12" y="287" width="351" height="30"/>
+                                        <rect key="frame" x="12" y="287" width="296" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="narrative" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEN-Go-RnM">
                                                 <rect key="frame" x="0.0" y="0.0" width="46.5" height="13.5"/>
@@ -890,7 +847,7 @@ To find out more visit the openbankproject.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="narrative" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbY-k7-H0o">
-                                                <rect key="frame" x="0.0" y="15.5" width="351" height="14.5"/>
+                                                <rect key="frame" x="0.0" y="15.5" width="296" height="14.5"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -917,40 +874,24 @@ To find out more visit the openbankproject.</string>
                                     <constraint firstItem="YGa-Gu-53W" firstAttribute="leading" secondItem="4DI-qs-pUU" secondAttribute="leading" constant="12" id="ssu-B6-C9j"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9c-WS-vn3" userLabel="Footer">
-                                <rect key="frame" x="0.0" y="606" width="375" height="61"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="B6E-E2-2kj" userLabel="OBPLink">
-                                        <rect key="frame" x="6" y="6" width="363" height="49"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal">
-                                            <string key="title">Hello-OBP-OAuth1.0a is demo for app designers.
-To find out more visit the openbankproject.</string>
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="linkToWebsites:" destination="EPE-2X-mQh" eventType="touchUpInside" id="lcc-RN-FVl"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.2853081226348877" green="0.65510040521621704" blue="0.56348258256912231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cv0-Tc-UJP" userLabel="Footer Embed">
+                                <rect key="frame" x="0.0" y="507" width="320" height="61"/>
                                 <constraints>
-                                    <constraint firstItem="B6E-E2-2kj" firstAttribute="centerX" secondItem="e9c-WS-vn3" secondAttribute="centerX" id="5ua-1e-vzQ"/>
-                                    <constraint firstItem="B6E-E2-2kj" firstAttribute="height" secondItem="e9c-WS-vn3" secondAttribute="height" constant="-12" id="9gD-vg-FGs"/>
-                                    <constraint firstItem="B6E-E2-2kj" firstAttribute="width" secondItem="e9c-WS-vn3" secondAttribute="width" constant="-12" id="bJi-ON-wN6"/>
-                                    <constraint firstItem="B6E-E2-2kj" firstAttribute="centerY" secondItem="e9c-WS-vn3" secondAttribute="centerY" id="o5O-mh-1ey"/>
-                                    <constraint firstAttribute="height" constant="61" id="rno-No-bgu"/>
+                                    <constraint firstAttribute="height" constant="61" id="NPx-Fm-E3O"/>
                                 </constraints>
-                            </view>
+                                <connections>
+                                    <segue destination="iNL-h7-25g" kind="embed" id="1nW-XZ-2p3"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="4DI-qs-pUU" firstAttribute="leading" secondItem="iEY-QV-9k4" secondAttribute="leading" id="4oZ-js-21I"/>
+                            <constraint firstAttribute="trailing" secondItem="Cv0-Tc-UJP" secondAttribute="trailing" id="Eod-ph-PwT"/>
                             <constraint firstItem="4DI-qs-pUU" firstAttribute="top" secondItem="OQI-rn-QDg" secondAttribute="bottom" id="a3D-XR-dVv"/>
-                            <constraint firstItem="e9c-WS-vn3" firstAttribute="bottom" secondItem="KSB-69-6J5" secondAttribute="top" id="bWb-gA-rGQ"/>
-                            <constraint firstItem="e9c-WS-vn3" firstAttribute="trailing" secondItem="iEY-QV-9k4" secondAttribute="trailing" id="fw4-fK-DEJ"/>
+                            <constraint firstItem="KSB-69-6J5" firstAttribute="top" secondItem="Cv0-Tc-UJP" secondAttribute="bottom" id="req-yN-2vF"/>
                             <constraint firstItem="4DI-qs-pUU" firstAttribute="trailing" secondItem="iEY-QV-9k4" secondAttribute="trailing" id="sT7-wi-mnZ"/>
-                            <constraint firstItem="e9c-WS-vn3" firstAttribute="leading" secondItem="iEY-QV-9k4" secondAttribute="leading" id="yVo-YT-Hc4"/>
+                            <constraint firstItem="Cv0-Tc-UJP" firstAttribute="leading" secondItem="iEY-QV-9k4" secondAttribute="leading" id="td3-H5-UeQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="9NL-bj-ynn"/>
@@ -975,7 +916,7 @@ To find out more visit the openbankproject.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mKc-A9-Z3i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1661" y="-254"/>
+            <point key="canvasLocation" x="2027" y="-254"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="Qpf-RB-Q5C">
@@ -986,17 +927,17 @@ To find out more visit the openbankproject.</string>
                         <viewControllerLayoutGuide type="bottom" id="FIZ-z1-T29"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3DM-aQ-qgH">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNh-Wx-cKC" userLabel="Content">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="443"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQm-oM-cuC" userLabel="AboutHeader">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Hello-OBP-OAuth" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqh-TR-T3W">
-                                                <rect key="frame" x="12" y="0.0" width="351" height="36"/>
+                                                <rect key="frame" x="12" y="0.0" width="296" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.2853081226348877" green="0.65510040521621704" blue="0.56348258256912231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1012,7 +953,7 @@ To find out more visit the openbankproject.</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="13" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="301" translatesAutoresizingMaskIntoConstraints="NO" id="00c-mx-a8c" userLabel="AboutText">
-                                        <rect key="frame" x="12" y="42" width="351" height="114"/>
+                                        <rect key="frame" x="12" y="42" width="296" height="114"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="114" id="ayX-jd-DJr"/>
@@ -1025,7 +966,7 @@ This demo is connected to sandboxapi.openbankproject.com as a demo, but this can
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="13" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="301" translatesAutoresizingMaskIntoConstraints="NO" id="Rcd-vR-Sio" userLabel="InfoText">
-                                        <rect key="frame" x="12" y="204" width="351" height="52"/>
+                                        <rect key="frame" x="12" y="204" width="296" height="52"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="fn6-kL-XEF"/>
@@ -1039,10 +980,10 @@ Licensed under the Apache License, Version 2.0.
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3QJ-tt-PJ3" userLabel="ContactHeader">
-                                        <rect key="frame" x="0.0" y="262" width="375" height="36"/>
+                                        <rect key="frame" x="0.0" y="262" width="320" height="36"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m26-um-3fP">
-                                                <rect key="frame" x="12" y="0.0" width="351" height="36"/>
+                                                <rect key="frame" x="12" y="0.0" width="296" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.2853081226348877" green="0.65510040521621704" blue="0.56348258256912231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1058,7 +999,7 @@ Licensed under the Apache License, Version 2.0.
                                         </constraints>
                                     </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="13" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="296" translatesAutoresizingMaskIntoConstraints="NO" id="6uE-7X-pyb" userLabel="ContactText">
-                                        <rect key="frame" x="12" y="304" width="351" height="39"/>
+                                        <rect key="frame" x="12" y="304" width="296" height="39"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="39" id="0pu-Qa-J10"/>
@@ -1070,10 +1011,10 @@ See the link below for more information:</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MR1-zg-oZj" userLabel="InfoHeader">
-                                        <rect key="frame" x="0.0" y="162" width="375" height="36"/>
+                                        <rect key="frame" x="0.0" y="162" width="320" height="36"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Info" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhd-Ox-Yzb">
-                                                <rect key="frame" x="12" y="0.0" width="351" height="36"/>
+                                                <rect key="frame" x="12" y="0.0" width="296" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.2853081226348877" green="0.65510040521621704" blue="0.56348258256912231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1111,11 +1052,50 @@ See the link below for more information:</string>
                                     <constraint firstItem="3QJ-tt-PJ3" firstAttribute="leading" secondItem="dNh-Wx-cKC" secondAttribute="leading" id="uq6-Lr-Yxp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ud5-dh-jUu" userLabel="Footer">
-                                <rect key="frame" x="0.0" y="542" width="375" height="61"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VbY-JY-7UF" userLabel="Footer Embed">
+                                <rect key="frame" x="0.0" y="443" width="320" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="61" id="tZ7-2S-ObN"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="iNL-h7-25g" kind="embed" id="6yz-1M-HFX"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="VbY-JY-7UF" firstAttribute="leading" secondItem="3DM-aQ-qgH" secondAttribute="leading" id="7D6-7k-6lU"/>
+                            <constraint firstItem="dNh-Wx-cKC" firstAttribute="leading" secondItem="3DM-aQ-qgH" secondAttribute="leading" id="IyJ-G6-iW5"/>
+                            <constraint firstItem="VbY-JY-7UF" firstAttribute="top" secondItem="dNh-Wx-cKC" secondAttribute="bottom" id="N6b-ne-AdL"/>
+                            <constraint firstAttribute="trailing" secondItem="dNh-Wx-cKC" secondAttribute="trailing" id="QpF-jL-lEc"/>
+                            <constraint firstItem="FIZ-z1-T29" firstAttribute="top" secondItem="VbY-JY-7UF" secondAttribute="bottom" id="bkM-gk-82s"/>
+                            <constraint firstItem="dNh-Wx-cKC" firstAttribute="top" secondItem="pEE-I8-iV5" secondAttribute="bottom" id="nET-EL-tHg"/>
+                            <constraint firstAttribute="trailing" secondItem="VbY-JY-7UF" secondAttribute="trailing" id="yqL-y5-8MN"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="tih-zB-o8g"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbt-FC-Okf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="744" y="-967"/>
+        </scene>
+        <!--FooterVC-->
+        <scene sceneID="lCT-cL-Ddc">
+            <objects>
+                <viewController storyboardIdentifier="FooterVC" id="iNL-h7-25g" userLabel="FooterVC" customClass="FooterVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x4q-rY-lsl"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZMe-Rr-1PD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h5W-10-JEG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="byx-KK-Fw4" userLabel="Footer">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="XdK-kC-6V6">
-                                        <rect key="frame" x="6" y="6" width="363" height="49"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="idn-Q4-fLj">
+                                        <rect key="frame" x="6" y="6" width="308" height="49"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <state key="normal">
                                             <string key="title">Hello-OBP-OAuth1.0a is demo for app designers.
@@ -1123,40 +1103,39 @@ To find out more visit the openbankproject.</string>
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="linkToOBPwebsite:" destination="lQs-n9-e2K" eventType="touchUpInside" id="rIN-Uk-esj"/>
-                                            <action selector="linkToOBPwebsite:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ybC-BM-qCy"/>
+                                            <action selector="footerLinkAction:" destination="iNL-h7-25g" eventType="touchUpInside" id="mC3-JP-j83"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.2853081226348877" green="0.65510040521621704" blue="0.56348258256912231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.28530812259999999" green="0.65510040520000001" blue="0.56348258259999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="61" id="3Zy-uc-juV"/>
-                                    <constraint firstItem="XdK-kC-6V6" firstAttribute="width" secondItem="Ud5-dh-jUu" secondAttribute="width" constant="-12" id="XmU-J4-M1U"/>
-                                    <constraint firstItem="XdK-kC-6V6" firstAttribute="centerY" secondItem="Ud5-dh-jUu" secondAttribute="centerY" id="aGY-L0-fol"/>
-                                    <constraint firstItem="XdK-kC-6V6" firstAttribute="height" secondItem="Ud5-dh-jUu" secondAttribute="height" constant="-12" id="uod-Rl-nUo"/>
-                                    <constraint firstItem="XdK-kC-6V6" firstAttribute="centerX" secondItem="Ud5-dh-jUu" secondAttribute="centerX" id="xvY-RJ-ghb"/>
+                                    <constraint firstItem="idn-Q4-fLj" firstAttribute="centerY" secondItem="byx-KK-Fw4" secondAttribute="centerY" id="9mH-eK-oel"/>
+                                    <constraint firstItem="idn-Q4-fLj" firstAttribute="height" secondItem="byx-KK-Fw4" secondAttribute="height" constant="-12" id="I61-2x-s0S"/>
+                                    <constraint firstAttribute="height" constant="61" id="N9I-Ac-qhN"/>
+                                    <constraint firstItem="idn-Q4-fLj" firstAttribute="centerX" secondItem="byx-KK-Fw4" secondAttribute="centerX" id="tN6-bO-8EO"/>
+                                    <constraint firstItem="idn-Q4-fLj" firstAttribute="width" secondItem="byx-KK-Fw4" secondAttribute="width" constant="-12" id="wnj-Kg-3hx"/>
                                 </constraints>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FIZ-z1-T29" firstAttribute="top" secondItem="Ud5-dh-jUu" secondAttribute="bottom" id="9Wl-68-62b"/>
-                            <constraint firstItem="dNh-Wx-cKC" firstAttribute="leading" secondItem="3DM-aQ-qgH" secondAttribute="leading" id="IyJ-G6-iW5"/>
-                            <constraint firstItem="Ud5-dh-jUu" firstAttribute="leading" secondItem="3DM-aQ-qgH" secondAttribute="leading" id="QI1-XS-OqJ"/>
-                            <constraint firstAttribute="trailing" secondItem="dNh-Wx-cKC" secondAttribute="trailing" id="QpF-jL-lEc"/>
-                            <constraint firstAttribute="trailing" secondItem="Ud5-dh-jUu" secondAttribute="trailing" id="mrD-Y0-wtH"/>
-                            <constraint firstItem="dNh-Wx-cKC" firstAttribute="top" secondItem="pEE-I8-iV5" secondAttribute="bottom" id="nET-EL-tHg"/>
-                            <constraint firstItem="Ud5-dh-jUu" firstAttribute="top" secondItem="dNh-Wx-cKC" secondAttribute="bottom" id="sAK-hH-HRp"/>
+                            <constraint firstAttribute="trailing" secondItem="byx-KK-Fw4" secondAttribute="trailing" id="7dG-3c-u0q"/>
+                            <constraint firstItem="byx-KK-Fw4" firstAttribute="leading" secondItem="h5W-10-JEG" secondAttribute="leading" id="ZjJ-sI-Gae"/>
+                            <constraint firstItem="ZMe-Rr-1PD" firstAttribute="top" secondItem="byx-KK-Fw4" secondAttribute="bottom" id="rPD-Om-Wds"/>
+                            <constraint firstItem="byx-KK-Fw4" firstAttribute="top" secondItem="x4q-rY-lsl" secondAttribute="bottom" id="y3X-nK-Qq6"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="tih-zB-o8g"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="61"/>
                     <connections>
-                        <outlet property="linkOBPwebsite" destination="XdK-kC-6V6" id="4E0-Td-jjm"/>
+                        <outlet property="linkButton" destination="idn-Q4-fLj" id="ReN-G4-TFf"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nbt-FC-Okf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HPr-JX-RzZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="-835"/>
+            <point key="canvasLocation" x="744" y="380"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="7K9-Rn-2eK">
@@ -1167,11 +1146,11 @@ To find out more visit the openbankproject.</string>
                         <viewControllerLayoutGuide type="bottom" id="FuB-nW-Aex"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fbV-dJ-7KL">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Jlg-Jo-ntH">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
@@ -1191,7 +1170,7 @@ To find out more visit the openbankproject.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxP-Df-DJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="403"/>
+            <point key="canvasLocation" x="357" y="633"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JrP-FC-v6R">
@@ -1199,11 +1178,10 @@ To find out more visit the openbankproject.</string>
                 <navigationController definesPresentationContext="YES" id="aYR-RD-AcP" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="aEv-sk-YTB">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="irg-rz-KX2">
-                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </toolbar>
@@ -1213,16 +1191,14 @@ To find out more visit the openbankproject.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YSt-mb-euX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-123" y="131"/>
+            <point key="canvasLocation" x="-156" y="-254"/>
         </scene>
     </scenes>
     <resources>
         <image name="OBP_full_stack_web.png" width="554" height="284"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="1nW-XZ-2p3"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

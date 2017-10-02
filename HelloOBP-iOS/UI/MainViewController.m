@@ -61,10 +61,7 @@
 
     
     [self.navigationItem setRightBarButtonItem:nil];
-    self.linkOBPwebsite.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    self.linkOBPwebsite.titleLabel.numberOfLines = 2;
     self.navigationController.navigationBar.translucent = NO;
-    [self.linkOBPwebsite setTitle:@"Hello-OBP-OAuth1.0a is demo for app designers.\nTo find out more visit the Open Bank Project." forState:UIControlStateNormal];
     }
 }
 
@@ -174,10 +171,6 @@
 		]];
 		[self presentViewController: ac animated: YES completion: nil];
     }
-}
-
-- (IBAction)linkToOBPwebsite:(id)sender {
-	[[self class] linkToOBPwebsite: self];
 }
 
 + (void)linkToOBPwebsite:(UIViewController*)vc

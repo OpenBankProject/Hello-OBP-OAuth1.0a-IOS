@@ -42,10 +42,7 @@
     self.navigationItem.title = @"About";
     
     if (![[[UIDevice currentDevice] systemVersion] isEqualToString: @"6.1"]) {
-    self.linkOBPwebsite.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    self.linkOBPwebsite.titleLabel.numberOfLines = 2;
     self.navigationController.navigationBar.translucent = NO;
-    [self.linkOBPwebsite setTitle:@"Hello-OBP-OAuth1.0a is demo for app designers.\nTo find out more visit the Open Bank Project." forState:UIControlStateNormal];
     }
 }
 
@@ -64,10 +61,6 @@
     // Return YES for supported orientations
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }*/
-
-- (IBAction)linkToOBPwebsite:(id)sender {
-    [MainViewController linkToOBPwebsite: self];
-}
 
 
 /*

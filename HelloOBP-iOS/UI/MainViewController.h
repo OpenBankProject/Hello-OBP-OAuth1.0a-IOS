@@ -19,7 +19,6 @@
 @property (strong, nonatomic) IBOutlet UIView *viewLogin;
 @property (strong, nonatomic) IBOutlet UIButton *connectBankAPI;
 @property (strong, nonatomic) IBOutlet UIButton *linkReadme;
-@property (strong, nonatomic) IBOutlet UIButton *linkOBPwebsite;
 
 
 - (IBAction)accountsTableView:(id)sender;
@@ -27,8 +26,6 @@
 - (IBAction)connectToBankAPI:(id)sender;
 
 - (IBAction)linkToReadme:(id)sender;
-
-- (IBAction)linkToOBPwebsite:(id)sender;
 
 - (IBAction)logOut:(id)sender;
 

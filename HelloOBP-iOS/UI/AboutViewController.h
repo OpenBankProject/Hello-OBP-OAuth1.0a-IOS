@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 @interface AboutViewController : UIViewController
-
-@property (strong, nonatomic) IBOutlet UIButton *linkOBPwebsite;
-
-
-- (IBAction)linkToOBPwebsite:(id)sender;
-
 @end

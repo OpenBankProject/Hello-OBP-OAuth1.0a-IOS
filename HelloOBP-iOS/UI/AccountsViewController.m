@@ -24,13 +24,11 @@
 @property (nonatomic, strong) NSDictionary* accountsDict;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableViewAccounts;
-@property (strong, nonatomic) IBOutlet UIButton *linkOBPwebsite;
 @property (strong, nonatomic) IBOutlet UIView *viewTable;
 @property (strong, nonatomic) IBOutlet UIView *viewJSON;
 @property (weak, nonatomic) IBOutlet UITextView *accountsJSON;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *accountsTypeToShow;
 - (IBAction)segmentedAccountsTypeToShow:(UISegmentedControl*)sender;
-- (IBAction)linkToOBPwebsite:(id)sender;
 
 @end
 
@@ -56,9 +54,6 @@
     
     self.navigationItem.title = @"Accounts";
     if (![[[UIDevice currentDevice] systemVersion] isEqualToString: @"6.1"]) {
-    self.linkOBPwebsite.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    self.linkOBPwebsite.titleLabel.numberOfLines = 2;
-    [self.linkOBPwebsite setTitle:@"Hello-OBP-OAuth1.0a is demo for app designers.\nTo find out more visit the Open Bank Project." forState:UIControlStateNormal];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationItem.backBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                     [UIFont fontWithName:@"STHeitiJ-Medium" size:12.0], NSFontAttributeName,
@@ -187,10 +182,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (IBAction)linkToOBPwebsite:(id)sender {
-    [MainViewController linkToOBPwebsite: self];
-}
 
 - (IBAction)segmentedAccountsTypeToShow:(UISegmentedControl*)sender{
     

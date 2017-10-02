@@ -36,13 +36,11 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableViewTransactions;
 @property (weak, nonatomic) IBOutlet UILabel *AccountID;
 @property (weak, nonatomic) IBOutlet UITextView *transactionsJSON;
-@property (strong, nonatomic) IBOutlet UIButton *linkOBPwebsite;
 @property (weak, nonatomic) IBOutlet UIView *viewTable;
 @property (weak, nonatomic) IBOutlet UIView *viewJSON;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *transactionsTypeToShow;
 
 - (IBAction)segmentedTransactionsTypeToShow:(UISegmentedControl*)sender;
-- (IBAction)linkToOBPwebsite:(id)sender;
 
 @end
 
@@ -84,12 +82,6 @@
     
     self.navigationItem.title = @"Transactions";
 
-    if (![[[UIDevice currentDevice] systemVersion] isEqualToString: @"6.1"]) {
-    self.linkOBPwebsite.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    self.linkOBPwebsite.titleLabel.numberOfLines = 2;
-    [self.linkOBPwebsite setTitle:@"Hello-OBP-OAuth1.0a is demo for app designers.\nTo find out more visit the Open Bank Project." forState:UIControlStateNormal];
-    }
-    
 	self.AccountID.text = _account[@"id"];
 	self.transactionsJSON.text = [_transactionsDict description];
 
@@ -113,11 +105,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)linkToOBPwebsite:(id)sender {
-    
-    [MainViewController linkToOBPwebsite: self];
 }
 
 - (IBAction)segmentedTransactionsTypeToShow:(UISegmentedControl*)sender{

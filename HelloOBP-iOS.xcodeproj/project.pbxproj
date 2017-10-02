@@ -22,6 +22,7 @@
 		746A94A519A2871000C935BC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A94A419A2871000C935BC /* AboutViewController.m */; };
 		AE87F3811C5673F700D09FBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3801C5673F700D09FBC /* Main.storyboard */; };
 		AE87F3831C567C1B00D09FBC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */; };
+		AE8FBEA61F82D317000D4913 /* FooterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FBEA51F82D317000D4913 /* FooterVC.m */; };
 		AE901D9A1EEEE8BF00AEE0DD /* OBP_full_stack_web.png in Resources */ = {isa = PBXBuildFile; fileRef = AE901D991EEEE8BF00AEE0DD /* OBP_full_stack_web.png */; };
 		AEBAD2DC1C8EE66D00165DB0 /* OAuthCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD1FC1C8EE34C00165DB0 /* OAuthCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AEBAD2DE1C8EE66D00165DB0 /* OBPKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEBAD1FE1C8EE34C00165DB0 /* OBPKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -84,6 +85,8 @@
 		AE3B29521CB5913C0012E56E /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		AE87F3801C5673F700D09FBC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AE87F3821C567C1B00D09FBC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		AE8FBEA41F82D317000D4913 /* FooterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FooterVC.h; sourceTree = "<group>"; };
+		AE8FBEA51F82D317000D4913 /* FooterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FooterVC.m; sourceTree = "<group>"; };
 		AE901D991EEEE8BF00AEE0DD /* OBP_full_stack_web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OBP_full_stack_web.png; sourceTree = "<group>"; };
 		AE982B231CB78EB40020D935 /* Debug(carthage).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug(carthage).xcconfig"; sourceTree = "<group>"; };
 		AE982B241CB78EB50020D935 /* Release(carthage).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release(carthage).xcconfig"; sourceTree = "<group>"; };
@@ -219,18 +222,20 @@
 		AE87F3721C56503B00D09FBC /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				7414C95D1923C13400084BC3 /* LoginViewController.h */,
-				7414C95B1923C13400084BC3 /* LoginViewController.m */,
 				7414C95E1923C13400084BC3 /* MainViewController.h */,
 				7414C95C1923C13400084BC3 /* MainViewController.m */,
+				746A94A319A2871000C935BC /* AboutViewController.h */,
+				746A94A419A2871000C935BC /* AboutViewController.m */,
+				7414C95D1923C13400084BC3 /* LoginViewController.h */,
+				7414C95B1923C13400084BC3 /* LoginViewController.m */,
 				740692E919A0EF7C0036CB61 /* AccountsViewController.h */,
 				740692EA19A0EF7C0036CB61 /* AccountsViewController.m */,
 				744B412B199E91C300EBDA6D /* DetailsViewController.h */,
 				744B412C199E91C300EBDA6D /* DetailsViewController.m */,
-				746A94A319A2871000C935BC /* AboutViewController.h */,
-				746A94A419A2871000C935BC /* AboutViewController.m */,
 				AEFCD84C1CD8E352000113DB /* TransactionDetailViewController.h */,
 				AEFCD84D1CD8E352000113DB /* TransactionDetailViewController.m */,
+				AE8FBEA41F82D317000D4913 /* FooterVC.h */,
+				AE8FBEA51F82D317000D4913 /* FooterVC.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				7414C8F51923B78200084BC3 /* main.m in Sources */,
 				AEFCD84E1CD8E352000113DB /* TransactionDetailViewController.m in Sources */,
 				7414C9601923C13400084BC3 /* MainViewController.m in Sources */,
+				AE8FBEA61F82D317000D4913 /* FooterVC.m in Sources */,
 				7414C95F1923C13400084BC3 /* LoginViewController.m in Sources */,
 				746A94A519A2871000C935BC /* AboutViewController.m in Sources */,
 				740692EB19A0EF7C0036CB61 /* AccountsViewController.m in Sources */,
