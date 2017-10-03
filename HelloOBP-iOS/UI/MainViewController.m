@@ -31,7 +31,7 @@
         self.rightNavButton.title = @"Accounts";
     }
     [rightNavButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                            [UIFont fontWithName:@"STHeitiJ-Medium" size:12.0], NSFontAttributeName,
+                                            [UIFont fontWithName:@"HeveticaNeue-Medium" size:12.0], NSFontAttributeName,
                                             [UIColor whiteColor], NSForegroundColorAttributeName,
                                             nil] forState:UIControlStateNormal];
     return rightNavButton;
@@ -48,14 +48,14 @@
                                                                 target:nil
                                                                 action:nil];
     [backItem setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [UIFont fontWithName:@"STHeitiJ-Medium" size:13.0], NSFontAttributeName,
+                                        [UIFont fontWithName:@"HeveticaNeue-Medium" size:13.0], NSFontAttributeName,
                                         [UIColor whiteColor], NSForegroundColorAttributeName,
                                         nil] forState:UIControlStateNormal];
     
     [self.navigationItem setBackBarButtonItem:backItem];
     
     [self.leftNavButton setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                              [UIFont fontWithName:@"STHeitiJ-Medium" size:13.0], NSFontAttributeName,
+                                                              [UIFont fontWithName:@"HeveticaNeue-Medium" size:13.0], NSFontAttributeName,
                                                               [UIColor whiteColor], NSForegroundColorAttributeName,
                                                               nil] forState:UIControlStateNormal];
 

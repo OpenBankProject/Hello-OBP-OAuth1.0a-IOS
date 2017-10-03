@@ -40,7 +40,7 @@
 
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName, nil, NSShadowAttributeName,
-                                                           [UIFont fontWithName:@"STHeitiTC-Light" size:14.0], NSFontAttributeName, nil]];
+                                                           [UIFont fontWithName:@"HeveticaNeue-Light" size:14.0], NSFontAttributeName, nil]];
      }
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
