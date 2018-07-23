@@ -95,7 +95,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (BOOL)application:(UIApplication*)a openURL:(NSURL*)u sourceApplication:(NSString*)s annotation:(id)n
+- (BOOL)application:(UIApplication*)a openURL:(NSURL*)u options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
 {
 	return [OBPDefaultWebViewProvider handleCallbackURL: u];
 }

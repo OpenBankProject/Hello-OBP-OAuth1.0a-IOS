@@ -65,11 +65,6 @@
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return NO;
-}
-
 -(void) viewWillAppear:(BOOL)animated{
     
     if (nil == (_session = [OBPSession currentSession]))
@@ -107,7 +102,7 @@
 		[_session validate:
 			^(NSError * error)
 			{
-				BOOL connected = !error && _session.valid;
+				BOOL connected = !error && self->_session.valid;
 				if (connected)
 					[self fetchBanks];
 				self.navigationItem.rightBarButtonItem = connected ? self.rightNavButton : nil;
@@ -125,7 +120,7 @@
 		[_session validate:
 			^(NSError * error)
 			{
-				BOOL connected = !error && _session.valid;
+				BOOL connected = !error && self->_session.valid;
 				if (connected)
 					[self fetchBanks];
 				self.navigationItem.rightBarButtonItem = connected ? self.rightNavButton : nil;
@@ -163,7 +158,7 @@
 											  handler:
 			^(UIAlertAction* action)
 			{
-				[_session invalidate];
+				[self->_session invalidate];
 				self.navigationItem.rightBarButtonItem = nil;
 				[self.viewConnect setHidden:NO];
 				[self.viewLogin setHidden:YES];
@@ -220,7 +215,7 @@
 			}
 			NSMutableDictionary*	md = [banksDict mutableCopy];
 			md[@"banksByID"] = banksByID;
-			_banks = [md copy];
+			self->_banks = [md copy];
         }
 						   orErrorHandler: nil
 	];
