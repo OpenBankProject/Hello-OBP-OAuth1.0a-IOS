@@ -12,25 +12,32 @@
 #import <Foundation/Foundation.h>
 #import <OBPKit/OBPServerInfo.h>
 
-
-#if 1
-
-#define OAUTH_AUTHENTICATE_URL		@"https://apisandbox.openbankproject.com"
-#define OAUTH_BASE_URL				@"https://apisandbox.openbankproject.com/obp/v2.0.0/"
-#define OAUTH_CONSUMER_KEY			@"tzecy5lgatsbrvbt2ttfrxlelertfxywt3whes4q"
-#define OAUTH_CONSUMER_SECRET_KEY	@"eusfvy3oizylx11dr420nhxluv1rdan5qjjkgmkh"
+//          •••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+//          •••••••• To configure for use with a different server or as a different app... ••••••••
+//          •••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+//          •••• 1) Change the bundle identifier of this app in the Project > General settings
+//          •••• 2a) Read https://github.com/OpenBankProject/OBPKit-iOSX#callback-schemes
+//          •••• 2b) Get your API Keys from the GET API KEY link on the home page of the OBP server
+//          •• you want to use, and composing your redirect URL in the way described in the link in
+//          •• just above. Save the result of the key request to a PDF - you will likely need other
+//          •• info from it later.
+//          •••• 3) Change the following `#if 0` to `#if 1`
+#if 0
+//          •••• 4) Set the two domains here to the that of the server you will use
+#define OAUTH_AUTHENTICATE_URL		@"https://some_other_obp_server.openbankproject.com"
+#define OAUTH_BASE_URL				@"https://some_other_obp_server.openbankproject.com/obp/v3.0.0/"
+//          •••• 5) Paste in your consumer key and secret
+#define OAUTH_CONSUMER_KEY			@"paste-your-consumer-key-here"
+#define OAUTH_CONSUMER_SECRET_KEY	@"paste-your-consumer-secret-here"
+//          •••• 6) build, run and try it out!
 
 #else
 
-// Try with a different server - fill in the details here:
-#define ANOTHER_OBP_SERVER_HOST		@"https://api-anotherserver.openbankproject.com/"
-
-#define OAUTH_AUTHENTICATE_URL		ANOTHER_OBP_SERVER_HOST
-#define OAUTH_BASE_URL				ANOTHER_OBP_SERVER_HOST @"obp/v3.0.0/"
-
-// Get key and secret by registering your client at: ANOTHER_OBP_SERVER_HOST/consumer-registration
-#define OAUTH_CONSUMER_KEY			@"paste-your-consumer-key-here"
-#define OAUTH_CONSUMER_SECRET_KEY	@"paste-your-consumer-secret-here"
+// These default settings will connect to the default OBP sandbox:
+#define OAUTH_AUTHENTICATE_URL		@"https://apisandbox.openbankproject.com"
+#define OAUTH_BASE_URL				@"https://apisandbox.openbankproject.com/obp/v3.0.0/"
+#define OAUTH_CONSUMER_KEY			@"bmxc0hsg5u0z5qbaabd25uf1z5o5a1l0jh1wge1s"
+#define OAUTH_CONSUMER_SECRET_KEY	@"lgqbdta4yu50o2iv4bjaevogo4vo3nffbas5cvsc"
 
 #endif
 
