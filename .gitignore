@@ -12,3 +12,6 @@ Pods/
 
 Config/*(dynamic).xcconfig
 # ...duplicate either carthage or cocoapods versions from repo, according to script choice at start of build
+
+# more annoying noise from xcode:
+IDEWorkspaceChecks.plist
