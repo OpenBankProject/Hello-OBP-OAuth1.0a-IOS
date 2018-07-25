@@ -10,6 +10,7 @@
 //
 #include <OBPKit/OBPKit.h>
 #include "MainViewController.h"
+#import "JSONUnpackUtils.h"
 
 
 
@@ -115,21 +116,25 @@ LabelTextFrom(NSDictionary* dict, NSString* path, FieldType ft, NSString* dflt)
 
 - (void)loadLabels
 {
-	NSString		*s1, *s2, *keyPath;
-	CGFloat			minorVersion;
+	NSString		*s1, *s2;
 
-	s1 = [OBPSession currentSession].serverInfo.APIVersion; // v1.1, v1.2, v1.2.1, v1.3, etc
-	s1 = [s1 substringFromIndex: [s1 rangeOfString: @"."].location]; // strip off v1
-	minorVersion = [s1 floatValue];
+	// banks/BANK_ID/accounts/ACCOUNT_ID/VIEW_ID/transactions
+	// gives account with "this_account" and "other_account" subdictionaries, while
+	// my/banks/BANK_ID/accounts/ACCOUNT_ID/transactions
+	// gives account with "account" and "counterparty" subdictionaries.
+	// Cater for both.
+	NSDictionary* home = _transaction[@"this_account"] ?: _transaction[@"account"];
+	NSDictionary* away = _transaction[@"other_account"] ?: _transaction[@"counterparty"];
 
-	self.this_account_id_label.text = LabelTextFrom(_transaction, @"this_account.id", eFieldType_Text, @"-");
-	self.this_account_number_label.text = LabelTextFrom(_transaction, @"this_account.number", eFieldType_Text, @"-");
-	self.this_account_holder_names_label.text = LabelTextFrom(_transaction, @"this_account.holders.name", eFieldType_Text, @"-");
-	self.this_account_bank_name_label.text = LabelTextFrom(_transaction, @"this_account.bank.name", eFieldType_Text, @"-");
+	self.this_account_id_label.text = LabelTextFrom(home, @"id", eFieldType_Text, @"-");
+	self.this_account_number_label.text = LabelTextFrom(home, @"number", eFieldType_Text, @"-");
+	self.this_account_holder_names_label.text = LabelTextFrom(home, @"holders.name", eFieldType_Text, @"-");
+	self.this_account_bank_name_label.text = LabelTextFrom(home, @"bank.name", eFieldType_Text, @"-");
 
 	self.details_type_label.text = LabelTextFrom(_transaction, @"details.type", eFieldType_Text, nil);
-	keyPath = minorVersion >= 2.1 ? @"details.description" :  @"details.label";
-	self.details_description_label.text = LabelTextFrom(_transaction, keyPath, eFieldType_Text, nil);
+	self.details_description_label.text = [_transaction salientStringAtKeyPath: @"details.description"]
+									   ?: [_transaction salientStringAtKeyPath: @"details.lable"]
+									   ?: @"-";
 	self.details_posted_label.text = s1 = LabelTextFrom(_transaction, @"details.posted", eFieldType_Date, nil);
 	self.details_completed_label.text = s2 = LabelTextFrom(_transaction, @"details.completed", eFieldType_Date, nil);
 	if (s1 && s2 && [s1 isEqualToString: s2])
@@ -138,10 +143,11 @@ LabelTextFrom(NSDictionary* dict, NSString* path, FieldType ft, NSString* dflt)
 	self.details_value_amount_label.text = LabelTextFrom(_transaction, @"details.value.amount", eFieldType_Amount, nil);
 	self.details_value_currency_label.text = LabelTextFrom(_transaction, @"details.value.currency", eFieldType_Text, nil);
 
-	self.other_account_id_label.text = LabelTextFrom(_transaction, @"other_account.id", eFieldType_Text, @"-");
-	self.other_account_number_label.text = LabelTextFrom(_transaction, @"other_account.number", eFieldType_Text, @"-");
-	self.other_account_holder_name_label.text = LabelTextFrom(_transaction, @"other_account.holder.name", eFieldType_Text, @"-");
-	self.other_account_bank_name_label.text = LabelTextFrom(_transaction, @"other_account.bank.name", eFieldType_Text, @"-");
+
+	self.other_account_id_label.text = LabelTextFrom(away, @"id", eFieldType_Text, @"-");
+	self.other_account_number_label.text = LabelTextFrom(away, @"number", eFieldType_Text, @"-");
+	self.other_account_holder_name_label.text = LabelTextFrom(away, @"holder.name", eFieldType_Text, @"-");
+	self.other_account_bank_name_label.text = LabelTextFrom(away, @"bank.name", eFieldType_Text, @"-");
 
 	self.metadata_narrative_label.text = LabelTextFrom(_transaction, @"metadata.narrative", eFieldType_Text, @"-");
 }

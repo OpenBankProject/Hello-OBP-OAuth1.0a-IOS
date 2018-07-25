@@ -10,10 +10,12 @@
 
 @interface DetailsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-- (void)setAccount:(NSDictionary*)account viewOfAccount:(NSDictionary*)viewOfAccount transactionsDict:(NSDictionary*)transactionsDict;
+- (void)setAccount:(NSDictionary*)account viewOfAccount:(NSDictionary*)viewOfAccount otherAccounts:(NSArray*)otherAccounts;
+@property (nonatomic, copy) NSDictionary* banks;
 
 @property (nonatomic, strong, readonly) NSDictionary* account;
 @property (nonatomic, strong, readonly) NSDictionary* viewOfAccount;
 @property (nonatomic, strong, readonly) NSDictionary* transactionsDict;
+@property (nonatomic, strong, readonly) NSArray* otherAccounts;
 
 @end

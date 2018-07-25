@@ -40,7 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"Hello-OBP-OAuth1.0a";
+    self.navigationItem.title = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
     
     if (![[[UIDevice currentDevice] systemVersion] isEqualToString: @"6.1"]) {
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"Home"
@@ -226,7 +226,7 @@
 	if ([segue.destinationViewController isKindOfClass: [AccountsViewController class]])
 	{
 		AccountsViewController*	acv = (AccountsViewController*)segue.destinationViewController;
-		acv.banksDict = _banks;
+		acv.banks = _banks;
 	}
 }
 

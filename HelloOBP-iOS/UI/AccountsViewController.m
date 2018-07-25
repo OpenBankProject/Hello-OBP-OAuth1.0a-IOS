@@ -14,14 +14,30 @@
 
 #import "MainViewController.h"
 #import "DetailsViewController.h"
+#import "JSONUnpackUtils.h"
+
+
+
+@interface AccountCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UILabel *sub;
+@property (weak, nonatomic) IBOutlet UILabel *balance;
+@property (weak, nonatomic) IBOutlet UILabel *currency;
+@end
+
+
+
+@implementation AccountCell
+@end
+
 
 
 
 @interface AccountsViewController ()
 {
-    NSArray*		_accountsList;
+	NSArray*		_accountIDs;
+	NSDictionary*	_accountByID;
 }
-@property (nonatomic, strong) NSDictionary* accountsDict;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableViewAccounts;
 @property (strong, nonatomic) IBOutlet UIView *viewTable;
@@ -85,14 +101,18 @@
 	[self fetchAccounts];
 }
 
-- (void)setAccountsDict:(NSDictionary*)accountsDict
+- (void)addAccount:(NSDictionary*)account
 {
-	if (_accountsDict ? ![accountsDict isEqualToDictionary: _accountsDict] : !!accountsDict)
+	NSMutableArray*			ma = [(_accountIDs ?: @[]) mutableCopy];
+	NSMutableDictionary*	md = [(_accountByID ?: @{}) mutableCopy];
+	NSString*				accID = account[@"id"];
+	if (accID.length && ![ma containsObject: accID])
 	{
-		_accountsDict = accountsDict;
-		_accountsList = accountsDict[@"accounts"];
+		[ma addObject: accID];
+		md[accID] = account;
+		_accountIDs = [ma copy];
+		_accountByID = [md copy];
 		[self.tableViewAccounts reloadData];
-		self.accountsJSON.text = [_accountsDict description];
 	}
 }
 
@@ -111,18 +131,47 @@
 	HandleOBPMarshalData	resultHandler =
 		^(id deserializedObject, NSString* body)
 		{
-			self.accountsDict = deserializedObject;
+//	old accounts/private result...
+//			NSDictionary* accounts = deserializedObject;
+//			self.accountsDict = @{@"accounts" : accounts};
+		//	Fix: [
+			/*	Originally there used to be a JSON Object (i.e. dictionary) at the root of all responses, and in the case of fetch accounts, it would contain a single key "accounts" with an array of account entries as its value - all good. At some point, the server started returning the array as athe root object, so we adapted. Now that original behaviour has been restored, we have to cater for both. */
+		//	NSArray* accounts = deserializedObject;
+			NSArray*	accounts = @[];
+			NSObject*	obj = deserializedObject;
+			if ([obj isKindOfClass: [NSDictionary class]])
+			{
+				NSDictionary* dict = (NSDictionary*)obj;
+				obj = dict[@"accounts"];
+			}
+			if ([obj isKindOfClass: [NSArray class]])
+				accounts = (NSArray*)obj;
+		//  ]
+			self.accountsJSON.text = [accounts description];
+			[self fetchDetailsForFirstOfAccounts: [accounts mutableCopy]];
         };
 
-	self.accountsDict = nil;
+	_accountByID = nil;
+	_accountIDs = nil;
+	[self.tableViewAccounts reloadData];
 
-	[session.marshal getResourceAtAPIPath: @"accounts/private" withOptions: nil
+//	old...
+//	NSString*		path = @"accounts/private";
+//	NSDictionary*	options = nil;
+	NSString*		path = @"my/accounts";
+//	Fix: [
+	// Originally we expected a dictionary (default, => options=nil), then we expect an array...
+//	NSDictionary*	options = @{OBPMarshalOptionExpectClass : [NSArray class]};
+	// ...but now it could be either, so indicate no expectation:
+	NSDictionary*	options = @{OBPMarshalOptionExpectClass : [NSNull null]};
+//	]
+	[session.marshal getResourceAtAPIPath: path withOptions: options
 						 forResultHandler: resultHandler orErrorHandler: errorHandler];
 }
 
 - (void)fetchAccountsByBank
 {
-	NSMutableArray*	bankIDs = [[_banksDict valueForKeyPath: @"banks.id"] mutableCopy];
+	NSMutableArray*	bankIDs = [[_banks valueForKeyPath: @"banks.id"] mutableCopy];
 	[self fetchAccountsWithQualifier: @"/private" forFirstOfBankIDs: bankIDs];
 }
 
@@ -135,6 +184,7 @@
 	NSString*				APIBase = session.serverInfo.APIBase;
 	NSString*				bankID = bankIDs[0]; [bankIDs removeObjectAtIndex: 0];
 	NSString*				path = [NSString stringWithFormat: @"banks/%@/accounts%@", bankID, qualifier?:@""];
+	path = [path stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLPathAllowedCharacterSet]];
 	HandleOBPMarshalError	errorHandler =
 		^(NSError* error, NSString* path)
 		{
@@ -158,12 +208,7 @@
 			else
 			if ([deserializedObject isKindOfClass: [NSArray class]])
 				accounts = deserializedObject, accountsDict = @{@"accounts" : accounts};
-			if ([accounts count])
-			{
-				NSArray*		array = avc.accountsDict[@"accounts"] ?: @[];
-				accounts = [array arrayByAddingObjectsFromArray: accounts];
-				avc.accountsDict = @{@"accounts" : accounts};
-			}
+			[avc fetchDetailsForFirstOfAccounts: [accounts mutableCopy]];
 			[avc fetchAccountsWithQualifier: qualifier forFirstOfBankIDs: bankIDs];
         };
 
@@ -173,6 +218,45 @@
 	};
 
 	[session.marshal getResourceAtAPIPath: path withOptions: options
+						 forResultHandler: resultHandler orErrorHandler: errorHandler];
+}
+
+- (void)fetchDetailsForFirstOfAccounts:(NSMutableArray*)accounts
+{
+	if (![accounts count])
+		return;
+	AccountsViewController __weak* self_ifStillHere = self;
+	OBPSession*				session = [OBPSession currentSession];
+	NSString*				APIBase = session.serverInfo.APIBase;
+	NSDictionary*			account = accounts[0]; [accounts removeObjectAtIndex: 0];
+	NSString*				bankID = account[@"bank_id"];
+	NSString*				accountID = account[@"id"];
+	NSString*				path = [NSString stringWithFormat: @"my/banks/%@/accounts/%@/account", bankID, accountID];
+//	...is equivalent to using "owner" view in any endpoint that relates to accounts...
+//	NSString*				path = [NSString stringWithFormat: @"banks/%@/accounts/%@/owner/account", bankID, accountID];
+	path = [path stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLPathAllowedCharacterSet]];
+	HandleOBPMarshalError	errorHandler =
+		^(NSError* error, NSString* path)
+		{
+			OBP_LOG(@"Request for resource at %@/%@ got error %@", APIBase, path, error);
+			[self_ifStillHere fetchDetailsForFirstOfAccounts: accounts];
+		};
+	HandleOBPMarshalData	resultHandler =
+		^(id deserializedObject, NSString* body)
+		{
+			AccountsViewController*	avc = self_ifStillHere;
+			if (avc == nil)
+				return;
+			NSDictionary*		accountDict = nil;
+			if ([deserializedObject isKindOfClass: [NSDictionary class]])
+			{
+				accountDict = deserializedObject;
+				[self addAccount: accountDict];
+			}
+			[avc fetchDetailsForFirstOfAccounts: accounts];
+        };
+
+	[session.marshal getResourceAtAPIPath: path withOptions: nil
 						 forResultHandler: resultHandler orErrorHandler: errorHandler];
 }
 
@@ -209,45 +293,49 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return _accountsList.count;
+    return _accountByID.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell*	cell = [tableView dequeueReusableCellWithIdentifier: @"cell" forIndexPath: indexPath];
-	NSDictionary*		account = _accountsList[indexPath.row];
-	NSString*			accountDesc;
+	AccountCell*		cell = [tableView dequeueReusableCellWithIdentifier: @"accountCell" forIndexPath: indexPath];
+	NSString*			accountID = _accountIDs[indexPath.row];
+	NSDictionary*		account = _accountByID[accountID];
 	NSString*			bankID = account[@"bank_id"];
-	NSDictionary*		bank = _banksDict[@"banksByID"][bankID];
-	NSString*			s;
+	NSDictionary*		bank = _banks[@"banksByID"][bankID];
 
-	accountDesc = @"";
-	if ([(s = [account valueForKeyPath: @"label"]) isKindOfClass: [NSString class]] && [s length])
-		accountDesc = s;
-	else
-	if ([(s = [account valueForKeyPath: @"number"]) isKindOfClass: [NSString class]] && [s length])
-		accountDesc = s;
-	else
-	if ([(s = [account valueForKeyPath: @"id"]) isKindOfClass: [NSString class]] && [s length])
-		accountDesc = s;
-	cell.textLabel.text = accountDesc;
+	NSArray*			a = @[];
+	for (NSString* k in @[@"label", @"number", @"id"]) {
+		NSString* s = [account salientStringAtKeyPath: k];
+		if (nil != s) a = [a arrayByAddingObject: s];
+	}
 
-	s = [bank[@"short_name"] description];
-	cell.detailTextLabel.text = [s length] ? s : @"";
+	cell.title.text  = [a firstObject] ?: @"-";
+	NSString* s0 = [a count] > 1 ? a[1] : nil;
+	NSString* s1 = [bank salientStringAtKeyPath: @"full_name"];
+	cell.sub.text = s0 && s1 ? [s0 stringByAppendingFormat: @" @ %@", s1]
+				  : s0 ? s0
+				  : s1 ? s1
+				  : @"";
+	cell.balance.text = [account salientStringAtKeyPath: @"balance.amount"] ?: @"";
+	cell.currency.text = [account salientStringAtKeyPath: @"balance.currency"] ?: @"EUR";
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSDictionary*		account = _accountsList[indexPath.row];
+	NSString*			account_id = _accountIDs[indexPath.row];
+	NSDictionary*		account = _accountByID[account_id];
 	NSString*			bank_id = account[@"bank_id"];
-	NSString*			account_id = account[@"id"];
+	if (![bank_id length] || ![account_id length])
+		return;
 	NSArray*			views = account[@"views_available"];
 	NSDictionary*		viewOfAccount;
 	NSDictionary*		bestView = nil;
 	NSUInteger			viewIndex = 0;
 	NSUInteger			bestViewIndex = -1;
+
 	for (viewOfAccount in views)
 	{
 		if (bestView == nil
@@ -259,22 +347,20 @@
 		}
 		viewIndex++;
 	}
-	NSString*			view_id = bestView[@"id"];
 
-	if (![bank_id length] || ![account_id length] || ![view_id length])
-		return;
+	NSMutableArray* ma = [NSMutableArray array];
+	for (NSString* otherAccountID in _accountByID) {
+		NSDictionary* otherAccount = _accountByID[otherAccountID];
+		if (!otherAccount || [otherAccountID isEqualToString: account_id])
+			continue;
+		[ma addObject: otherAccount];
+	}
+	NSArray* others = [ma copy];
 
-	NSString*				path = [NSString stringWithFormat: @"banks/%@/accounts/%@/%@/transactions", bank_id, account_id, view_id];
-	OBPSession*				session = [OBPSession currentSession];
-	HandleOBPMarshalData	resultHandler =
-		^(id deserializedObject, NSString* body) {
-            DetailsViewController *dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
-            [dvc setAccount: account viewOfAccount: bestView transactionsDict: deserializedObject];
-            [self.navigationController pushViewController:dvc animated:YES];
-        };
-
-	[session.marshal getResourceAtAPIPath: path withOptions: nil
-						 forResultHandler: resultHandler orErrorHandler: nil];
+	DetailsViewController *dvc = [self.storyboard instantiateViewControllerWithIdentifier: @"DetailsViewController"];
+	[dvc setAccount: account viewOfAccount: bestView otherAccounts: others];
+	dvc.banks = _banks;
+	[self.navigationController pushViewController:dvc animated:YES];
 }
 
 

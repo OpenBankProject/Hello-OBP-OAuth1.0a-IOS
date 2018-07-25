@@ -10,6 +10,6 @@
 
 @interface AccountsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) NSDictionary* banksDict;
+@property (nonatomic, copy) NSDictionary* banks;
 
 @end

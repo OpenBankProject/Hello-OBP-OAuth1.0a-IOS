@@ -24,7 +24,9 @@
 
 	self.linkButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 	self.linkButton.titleLabel.numberOfLines = 2;
-	[self.linkButton setTitle: @"Hello-OBP-iOS is demo for app designers.\nTo find out more visit the Open Bank Project." forState:UIControlStateNormal];
+	NSString* appName = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
+	NSString* linkTitle = [NSString stringWithFormat: @"%@ is demo for app designers.\nTo find out more visit the Open Bank Project.", appName];
+	[self.linkButton setTitle: linkTitle forState:UIControlStateNormal];
 }
 
 - (IBAction)footerLinkAction:(id)sender {
