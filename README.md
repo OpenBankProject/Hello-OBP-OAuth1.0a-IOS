@@ -1,31 +1,24 @@
 Hello-OBP-OAuth1.0a-iOS
 ========================
 
-This is a basic iOS app that talks to Open Bank Project's API sandbox, demonstrates authorization and retrieves banks, accounts and transactions. (If you just need a simple OBP starter app to copy and modify, try [OBP-iOS-Starter](https://github.com/OpenBankProject/OBP-iOS-Starter).)
+This demonstration app...
 
-The app will proceed through OAuth1 authentication, and then make signed API requests that retrieve the list of [private accounts](https://github.com/OpenBankProject/OBP-API/wiki/REST-API-V1.2#accounts-private) on the sandbox API and show their details in the UI (see below for example accounts to log in). 
+* talks to Open Bank Project's API sandbox
+* handles authorization
+* retrieves banks, accounts and transactions 
+* allows you to make simple transfers between accounts.
 
-You can then use this demonstration as an example of how to use the Open Bank Project (OBP) API to create apps that allow user to access to their bank data, and create Banking, Accounting, ERM, or other financial applications utilizing this OBP JSON API. You can find the latest API specifications on the [OBP API Wiki](https://github.com/OpenBankProject/OBP-API/wiki).
+**Note 1:** if you are attending a Hackathon and reading this, you can easily modify this app to talk to the OBP server at the hackathon by following the instructions in the `DefaultServerDetails.h` header file; then you can build and use it to look at the data available at the hackathon.
 
-The OBI API does not require OAuth, but this project uses it. However, all the heavy lifting is done for you by [OBPKit](https://github.com/OpenBankProject/OBPKit-iOSX).
+**Note 2:** to start your own app, the [OBP-iOS-Starter](https://github.com/OpenBankProject/OBP-iOS-Starter), written in Swift, is ready for you to copy and extend. It contains the necessary calls to handle authorisation, and a minimal sample query of the API (get banks).
+
+Both this and the starter app use [OBPKit](https://github.com/OpenBankProject/OBPKit-iOSX), which does the authorisation heavy lifting for you and offers easy calls for interacting with the API. Get to know the entire API using the [API Explorer][], and discover more about the sandbox at the [Sandbox Overview][].
 
 ## Login credentials
 
-You will need to login to the OBP Sandbox API when running the app (which talks to the server apisandbox.openbankproject.com), just download install and click login. Then you can use following test login credentials:
+The sandbox overview page has sample login credentials at [Customer Logins][] which allow you to view a variety of test data — try, for example, jaakko.fi.29@example.com (password: 8132cf) or ellie.de.29@example.com (password: 2efb1f).
 
-username: joe.bloggs@example.com
-password: qwerty
-(contains various bank accounts including blank accounts, and accounts with errors) 
-
-username: jane.bloggs@example.com
-password: qwerty
-(contains two bank accounts)
-
-username: john.bloggs@example.com
-password: qwerty
-(contains one bank account)
-
-You can also setup your own instance of the API and point this app to your instance in this demo, instructions to do this below.
+Also follow the [Create Bank Account][] link on the sandbox home page, create a few test accounts with your own OBP credentials, and then launch the app, login and experiment with transfers.
 
 ## Installation
 
@@ -55,9 +48,9 @@ $ carthage update --no-build --no-use-binaries
 *** Fetching STHTTPRequest
 *** Fetching OAuthCore
 *** Checking out OAuthCore at "0.0.2"
-*** Checking out STHTTPRequest at "1.1.1"
-*** Checking out UICKeyChainStore at "v2.1.0"
-*** Checking out OBPKit-iOSX at "1.0.0"
+*** Checking out STHTTPRequest at "1.1.4"
+*** Checking out UICKeyChainStore at "v2.1.1"
+*** Checking out OBPKit-iOSX at "1.1.3"
 $ open HelloOBP-iOS-Cart.xcworkspace -a Xcode.app
 ```
 
@@ -83,35 +76,23 @@ Pod installation complete! There are 2 dependencies from the Podfile and 4 total
 $ open HelloOBP-iOS-Pods.xcworkspace -a Xcode.app
 ```
 
-...then one extra, not-yet-automated step that is needed with the latest CocoaPods (`pod --version` >= 1.0.0): in the navigator pane, click on the blue HelloOBP-iOS project icon, select HelloOBP-iOS under TARGETS, select Build Phases, clieck the 'x' to the right of the "Embed Frameworks (4 items)" build phase, as CocoaPods has installed it own "[CP] Embed Pods Frameworks" build phase further down (commiting this change now will allow you to easily revert it should you wish to try out using carthage later), and then...
+...then one extra, not-yet-automated step that is needed with the latest CocoaPods (`pod --version` >= 1.0.0): in the navigator pane, click on the blue HelloOBP-iOS project icon, select HelloOBP-iOS under TARGETS, select Build Phases, click the 'x' to the right of the "Embed Frameworks (4 items)" build phase, as CocoaPods has installed it own "[CP] Embed Pods Frameworks" build phase further down (committing this change now will allow you to easily revert it should you wish to try out using carthage later), and then...
 
 ...build and run. 
 
 You can ignore the two pod warnings starting "CocoaPods did not set the base configuration of your project because...etc", because HelloOBP-iOS.xcodeproj configures for carthage or cocoapods whenever you build: a script sets the build configuration files Debug(dynamic).xcconfig and Release(dynamic).xcconfig to be copies of Debug(carthage).xcconfig and Release(carthage).xcconfig or Debug(cocoapods).xcconfig and Release(cocoapods).xcconfig, as appropriate. This sometimes goes under Xcode's radar, and you get a warning, but this clears after you clean, close and reopen the project.
 
+## Support
+
+Questions? Contact `@tesobe_t0rst` on the [Open Bank Project's Slack Team](https://openbankproject.slack.com).
+
 ## Screenshots
 
-Login page
+![HelloOBP Home](images/hello-obp-home.png) ![HelloOBP Login](images/hello-obp-login.png)
 
-<img src="https://raw.githubusercontent.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/master/images/hello-obp-login.png" />
+![HelloOBP Accounts](images/hello-obp-accounts.png) ![HelloOBP Transactions](images/hello-obp-transactions.png)
 
-Accounts page
-
-<img src="https://raw.githubusercontent.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/master/images/hello-obp-accounts.png" />
-
-Transactions page
-
-<img src="https://raw.githubusercontent.com/OpenBankProject/Hello-OBP-OAuth1.0a-IOS/master/images/hello-obp-transactions.png" />
-
-## Setup of API on own server
-
-If you want to work with your own credentials, there are a couple of things you need to do to get this project set up.
-
-1. Get a client key and secret by registering your client at https://apisandbox.openbankproject.com/consumer-registration
-
-2. Put your credentials into DefaultServerDetails.h
-
-Current list of supported banks:  [https://api.openbankproject.com/connectors-status/](https://api.openbankproject.com/connectors-status/)
+![HelloOBP TransactionsJSON](images/hello-obp-transactions-json.png) ![HelloOBP Transfer](images/hello-obp-transfer.png)
 
 ## LICENSE
 
@@ -121,3 +102,8 @@ This demo app is licensed under the [Apache License, Version 2.0](http://www.apa
 [Carthage-install]: https://github.com/Carthage/Carthage/blob/master/README.md#installing-carthage
 [CocoaPods]: https://github.com/CocoaPods/CocoaPods/blob/master/README.md
 [CocoaPods-install]: http://guides.cocoapods.org/using/getting-started.html#installation
+[API Explorer]: https://apiexplorersandbox.openbankproject.com
+[Sandbox Overview]: https://github.com/OpenBankProject/OBP-API/wiki/Sandbox
+[Customer Logins]: https://github.com/OpenBankProject/OBP-API/wiki/Sandbox#customer-logins
+[Create Bank Account]: https://apisandbox.openbankproject.com/create-sandbox-account
+
