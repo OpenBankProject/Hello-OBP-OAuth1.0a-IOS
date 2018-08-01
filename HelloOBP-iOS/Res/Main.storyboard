@@ -1518,25 +1518,10 @@ To find out more visit the openbankproject.</string>
                     <view key="view" contentMode="scaleToFill" id="fbV-dJ-7KL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Jlg-Jo-ntH">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Jlg-Jo-ntH" secondAttribute="trailing" id="Sjp-a5-jTP"/>
-                            <constraint firstItem="Jlg-Jo-ntH" firstAttribute="leading" secondItem="fbV-dJ-7KL" secondAttribute="leading" id="Ws2-NS-Vb0"/>
-                            <constraint firstItem="FuB-nW-Aex" firstAttribute="top" secondItem="Jlg-Jo-ntH" secondAttribute="bottom" id="khW-0G-aRe"/>
-                            <constraint firstItem="Jlg-Jo-ntH" firstAttribute="top" secondItem="81C-s1-VfC" secondAttribute="bottom" id="oR7-uZ-a8r"/>
-                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="ibp-r7-yEf"/>
-                    <connections>
-                        <outlet property="webView" destination="Jlg-Jo-ntH" id="eZ7-W8-6Wy"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxP-Df-DJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

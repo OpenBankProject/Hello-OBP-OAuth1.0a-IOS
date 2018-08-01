@@ -11,19 +11,20 @@
 
 #import "LoginViewController.h"
 
+#import <WebKit/WebKit.h>
 #import <OBPKit/OBPKit.h>
 #import "DefaultServerDetails.h"
 
 
 
-@interface LoginViewController () <UIWebViewDelegate, OBPWebViewProvider>
-@property(nonatomic, retain) IBOutlet UIWebView *webView;
+@interface LoginViewController () <OBPWebViewProvider, WKNavigationDelegate>
 @end
 
 
 
 @implementation LoginViewController
 {
+	WKWebView*				_webView;
 	OBPServerInfo*			_serverInfo;
 	NSString*				_APIBase;
 	OBPSession*				_session;
@@ -44,11 +45,14 @@
 	_APIBase = _serverInfo.APIBase;
 
     // 3. initialize the webview and add it to the view
-    
-    self.webView.delegate = self;
-    self.webView.scalesPageToFit = YES;
-    self.webView.contentMode = UIViewContentModeScaleAspectFit;
-	[self.view addSubview:self.webView];
+    CGRect frame = self.view.bounds;
+	_webView = [[WKWebView alloc] initWithFrame: frame];
+	_webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	_webView.configuration.websiteDataStore = [WKWebsiteDataStore nonPersistentDataStore];
+	_webView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = NO;
+	_webView.navigationDelegate = self;
+	[self.view addSubview: _webView];
+
 	_session.webViewProvider = self;
 
     // 4. Kick off session authentication
@@ -71,7 +75,7 @@
 {
 	_callbackFilter = onwardNavigationFilter;
 	_cancelNotifier = cancelNotifier;
-	[self.webView loadRequest: [NSURLRequest requestWithURL: url]];
+	[_webView loadRequest: [NSURLRequest requestWithURL: url]];
 }
 
 - (void)resetWebViewProvider
@@ -88,14 +92,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request
- navigationType:(UIWebViewNavigationType)navigationType
+#pragma mark - WKNavigationDelegate
+- (void)webView:(WKWebView*)webView decidePolicyForNavigationAction:(WKNavigationAction*)navigationAction decisionHandler:(void(^)(WKNavigationActionPolicy))decisionHandler
 {
-	if (_callbackFilter != nil)
-	if (_callbackFilter(request.URL))
-		return NO;
+	WKNavigationActionPolicy	policy = WKNavigationActionPolicyAllow;
+	WKNavigationType			navType = navigationAction.navigationType;
+	NSURL*						navURL;
 
-    return YES;
+	OBP_LOG_IF(0, @"\nnavigationAction: %@", navigationAction);
+
+	if (navType == WKNavigationTypeLinkActivated
+	 || navType == WKNavigationTypeOther)
+	{
+		navURL = navigationAction.request.URL;
+		if (_callbackFilter != nil)
+		if (_callbackFilter(navURL))
+			policy = WKNavigationActionPolicyCancel;
+	}
+
+	decisionHandler(policy);
 }
 
 @end
